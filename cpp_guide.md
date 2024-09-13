@@ -236,7 +236,7 @@ __const _\<datatype\>_ _\<nome\>_ = _\<espressione\>_;__
 
 Le variabili possono cambiare il loro valore durante l'esecuzione del programma, al contrario delle constanti.
 
-#### ___L'inizializzazione___
+#### ***Inizializzazione***
 
 Si può usare la parola chiave __auto__ al posto del datatype, dove il compilatore proverà a dedurre il tipo dall'espressione, perciò è obbligatorio assegnare un valore, ad esempio è errato scrivere
 
