@@ -1,6 +1,6 @@
 # Guida alla programmazione in C++
 
-## Questa guida è per C++ dalla versione C++11 in poi utilizzando come IDE Visual Studio 2022 e come compilatore MSVC (il compilatore di Visual Studio)
+## ```Questa guida è per C++ dalla versione C++11 in poi utilizzando come IDE Visual Studio 2022 e come compilatore MSVC (il compilatore di Visual Studio)```
 
 ---
 
@@ -1363,6 +1363,23 @@ int main()
 + Per calcolare il logaritmo si possono usare **```std::log2```**, **```std::log10```** e **```std::log```**
 
 + Tra le funzioni trigonometriche ci sono **```std::sin```**, **```std::sinh```**, **```std::cos```**, **```std::cosh```**, **```std::tan```**, **```std::tanh```**, **```std::asin```**, **```std::acos```**, **```std::atan```**, **```std::asinh```**, **```std::acosh```** e **```std::atanh```**
+
+### La complessità temporale di un'operazione
+
+La notazione **O grande** è uno strumento per descrivere il comportamento asintotico di una funzione
+
+$$
+f(n) \leq k \cdot g(n) \quad \forall n \geq n_0 \qquad \Rightarrow \qquad f(n) = O(g(n))
+$$
+
+Esempi di ordini:
+
++ $O(1)$: **tempo costante**, cioè non dipende dalla dimensione dell'input
++ $O(log(n))$: **tempo logaritmico** come la ricerca binaria
++ $O(n)$: **tempo lineare**, il tempo di esecuzione è direttamente proporzionale alla dimensione dell'input, come la ricerca lineare
++ $O(n \cdot log(n))$: **tempo semilogaritmico** come il merge sort
++ $O(n^2)$: **tempo quadratico** come due loop for annidati
++ $O(b^n)$: **tempo esponenziale**.
 
 ---
 ---
@@ -2903,6 +2920,10 @@ La stessa cosa che si fa così con ```erase```:
     part.erase(0, FirstIndex);
 ```
 
+#### ***Altro***
+
+Esistono sono gli operatori ```=``` per assegnare una stringa, e ```==``` per eguagliare due stringhe
+
 ---
 ---
 
@@ -3323,6 +3344,144 @@ std::wregex(L"(abc)|(123)"); // corrisponde a L"123" o L"abc"
 ---
 
 ### I vettori
+
+In C++ la classe **```std::vector```** (necessario includere **```<vector>```**) viene utilizzata per creare degli array che possono essere estesi o contratti.
+
+#### ***Inizializzare un vettore***
+
++ Inizializzazione con **lista di inizializzazione**, esempio completo:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+int main()
+{
+    setlocale(0, "");
+
+    std::vector<int> vect{ 5, 4, 7 };
+    for (int i = 0; i < vect.size(); ++i)
+    {
+        std::wcout << L"elemento " << i + 1 << L" del vettore: ";
+        std::wcout << vect[i] << L'\n';
+    }
+
+    return 0;
+}
+```
+
++ Inizializzazione con un altro vettore:
+
+```cpp
+std::vector<int> vect{ 1, 2, 3, 4 };
+std::vector<int> NewVect{ vect }; // NewVect = { 1, 2, 3, 4 }
+```
+
++ Inizializzazione con l'intervallo di un altro vettore:
+
+```cpp
+std::vector<int> vect{ 1, 2, 3, 4, 5 };
+std::vector<int> part{ vect.begin() + 1, vect.end() - 1 };
+// part = { 2, 3, 4 }
+```
+
++ Inizializzazione con dimensione fissa:
+
+```cpp
+std::vector<int> vect(5); // vect ha 5 elementi non inizializzati
+```
+
++ Inizializzazione con dimensione fissa e valore:
+
+```cpp
+std::vector<int> vect(5, 0) // vect ha 5 elementi di valore 0
+```
+
+#### ***Metodi***
+
+Tra i metodi in comune con le stringhe ci sono:
+
++ **```size```**: restituisce la dimensione (anche la funzione ```size``` va bene)
++ **```empty```**: restituisce un valore vero se e solo se il vettore è vuoto
++ **```at```**: restituisce un'elemento data la posizione (va bene anche l'operatore ```[]```)
++ Gli operatori ```=``` (assegnazione) e ```==``` (uguaglianza)
++ **```insert```**: inserisce un elemento nel vettore
++ **```erase```**: solo il metodo che elimina un elemento dal vettore
++ **```push_back```**: aggiunge un elemento alla **fine** del vettore
++ **```pop_back```**: elimina l'ultimo elemento dal vettore
++ **```clear```**: rende il vettore nullo
+
+Esempio completo:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+int main()
+{
+    setlocale(0, "");
+    std::vector<int> OddNumbers(100);
+    for (int i = 0; i < size(OddNumbers); ++i)     // funzione size
+        OddNumbers.at(i) = 2 * i + 1;              // metodo at
+    
+    // elimina il settimo elemento, cioè 13
+    OddNumbers.erase(OddNumbers.begin() + 6);      // metodo erase
+    // inserisce -1 alla settima posizione
+    OddNumbers.insert(OddNumbers.begin() + 6, -1); // metodo insert
+
+    // elimina l'ultimo elemento di OddNumbers
+    OddNumbers.pop_back();                         // metodo pop_back
+    
+    // size restituisce un size_t
+    size_t size = OddNumbers.size();               // metodo size
+
+    // estensione di OddNumbers
+    for (int i = size; i < 2 * size; ++i)
+        OddNumbers.push_back(2 * i + 1);           // metodo push_back
+    
+    // output
+    for (int i = 0; i < OddNumbers.size(); ++i)
+    {
+        if (i == 6) continue;
+
+        std::wcout << L"numero dispari #" << i + 1;
+        std::wcout << L" = " << OddNumbers[i];     // operatore []
+        std::wcout << L'\n';
+    }
+
+    OddNumbers.clear();                            // metodo clear
+    OddNumbers.empty() ?                           // metodo empty
+        std::wcout << L"il vettore è stato reso nullo\n" :
+        std::wcout << L"qualcosa è andato storto\n";
+
+    // se il vettore è nullo 'return 0' altrimenti 'return 1'
+    return !OddNumbers.empty();
+}
+```
+
+### ```queue``` e ```deque```
+
+Oltre a ```std::vector``` ci sono altre due classi simili in C++:
+**```std::queue```** (includi **```<queue>```**) e **```std::deque```** (includi **```<deque>```**).
+
+#### ***```std::queue```***
+
+```std::queue``` ha tre metodi nuovi oltre a ```size``` ed ```empty```:
+
++ **```push```**: aggiunge un elemento alla fine
++ **```pop```**: rimuove l'elemento all'**inizio**
++ **```front```**: accede all'elemento all'inizio (senza modificarlo)
+
+Non ha metodi per accedere a elementi al centro
+
+#### ***```std::vector``` e ```std::deque```***
+
+```std::deque``` aggiunge questi due metodi a ```std::vector```:
+
++ **```push_front```**: aggiunge un elemento all'inizio
++ **```pop_front```**: rimuove l'elemento all'inizio
+
+Tuttavia è preferibile usare ```std::vector``` quando possibile perché ```std::deque``` utilizza gli **indici circolari** per rendere efficientoi le operazioni all'inizio e alla fine dell'array, ma questo significa utilizzare l'operatore modulo per accedere agli elementi, rallentando l'accesso.
 
 ---
 ---
