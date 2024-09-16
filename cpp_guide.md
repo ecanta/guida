@@ -1499,7 +1499,7 @@ int main()
 }
 ```
 
-Poiché i parametri ```dividend``` e ```divisor``` non sono preceduti dall'**operatore 'indirizzo di' ```&```**, ne viene eseguita una copia, ma i parametri ```quotient``` e ```rest``` vengono modificati.  
+Poiché i parametri ```dividend``` e ```divisor``` non sono preceduti dall'**operatore di indirizzo ```&```**, ne viene eseguita una copia, ma i parametri ```quotient``` e ```rest``` vengono modificati.  
 in questo modo non c'è bisogno di utilizzare il ```return```.
 
 #### ***La firma***
@@ -1841,7 +1841,7 @@ Si può dichiarare un enum:
 ```cpp
 enum Day
 {
- monday   ,
+    monday   ,
     tuesday  ,
     wednesday,
     thursday ,
@@ -1856,7 +1856,7 @@ In un enum ogni parola viene associata implicitamente a un valore da 0 a n, per 
 ```cpp
 enum Day
 {
- monday   ,
+    monday   ,
     tuesday  ,
     wednesday,
     thursday ,
@@ -1883,7 +1883,7 @@ Due enum non possono avere nessun elemento in comune, tuttavia questo si può ri
 ```cpp
 enum class Day
 {
- monday   ,
+    monday   ,
     tuesday  ,
     wednesday,
     thursday ,
@@ -1894,7 +1894,7 @@ enum class Day
 enum class DAY
 {
     sunday   ,
- monday   ,
+    monday   ,
     tuesday  ,
     wednesday,
     thursday ,
@@ -1962,7 +1962,7 @@ int main()
 In C++ gli array sono degli insiemi di lunghezza costante che contengono valori dello stesso datatype, possono essere statici (allocati nella **stack**) oppure dinamici (allocati nell'**heap**), Per ora vedremo solo come creare array statici.  
 ***\<datatype\>* *\<nome\>* [*\<dimensione\>*];**
 
-#### ***Inizializzazione***
+#### ***Inizializzazione di un array***
 
 Esempio: array di 1024 elementi
 
@@ -1976,10 +1976,10 @@ Per riempire un array con dei valori si usa **```std::fill```**, necessario incl
 #include <algorithm>
 int main()
 {
- int Array[1024]{};
- std::fill(Array, Array + 1024, 1);
+    int Array[1024]{};
+    std::fill(Array, Array + 1024, 1);
 
- return 0;
+    return 0;
 }
 ```
 
@@ -1993,13 +1993,12 @@ Per accedere a un elemento di un array si usa l'**operatore ```[]```** (Il primo
 
 int main()
 {
- int Array[1024]{};
- std::fill(Array, Array + 1024, 1);
+    int Array[1024]{};
+    std::fill(Array, Array + 1024, 1);
 
-    for (int i = 0; i < 1024; ++i)
-        std::cout << Array[i] << '\n';
+    for (int i = 0; i < 1024; ++i) std::cout << Array[i] << '\n';
 
- return 0;
+    return 0;
 }
 ```
 
@@ -2013,13 +2012,13 @@ Per calcolare la dimensione di un array si usa **```sizeof```**, che calcola la 
 
 int main()
 {
- int Array[1024]{};
- std::fill(Array, Array + sizeof(Array) / sizeof(Array[0]), 1);
+    int Array[1024]{};
+    std::fill(Array, Array + sizeof(Array) / sizeof(Array[0]), 1);
 
     for (int i = 0; i < sizeof(Array) / sizeof(Array[0]); ++i)
         std::cout << Array[i] << '\n';
 
- return 0;
+    return 0;
 }
 ```
 
@@ -2037,19 +2036,19 @@ Esempio:
 
 static void print(int arr[], int size)
 {
- std::cout << "L'array e' {";
- for (int i = 0; i < size - 1; ++i)
-  std::cout << arr[i] << ' ';
- std::cout << arr[size - 1] << '}';
+    std::cout << "L'array e' {";
+    for (int i = 0; i < size - 1; ++i)
+    std::cout << arr[i] << ' ';
+    std::cout << arr[size - 1] << '}';
 }
 
 int main()
 {
- int Array[16]{}, size = sizeof(Array) / sizeof(Array[0]);
- std::fill(Array, Array + size, 1);
+    int Array[16]{}, size = sizeof(Array) / sizeof(Array[0]);
+    std::fill(Array, Array + size, 1);
 
- print(Array, size);
- return 0;
+    print(Array, size);
+    return 0;
 }
 ```
 
@@ -2065,15 +2064,15 @@ Un ciclo **foreach** è un for che iterà su ogni elemento di un array in ordine
 Esempio:
 
 ```cpp
- int Array[128], i{};
+    int Array[128], i{};
 
- for (auto& el : Array) {
-  el = i;
-  ++i;
- }
+    for (auto& el : Array) {
+        el = i;
+        ++i;
+    }
 ```
 
-Questo ciclo riempie l'array di numeri interi consecutivi a partire da 0, viene usata la parola chiave **```auto```** come datatype, ed è presente l'**operatore 'indirizzo di' ```&```** a indicare che la modificando la variabile, viene modificato anche l'array, in un foreach si può anche usare **```const```**, che indica che la variabile del ciclo non può essere modificata.
+Questo ciclo riempie l'array di numeri interi consecutivi a partire da 0, viene usata la parola chiave **```auto```** come datatype, ed è presente l'**operatore di indirizzo ```&```** a indicare che la modificando la variabile, viene modificato anche l'array, in un foreach si può anche usare **```const```**, che indica che la variabile del ciclo non può essere modificata.
 
 #### ***Array multidimensionali***
 
@@ -2082,7 +2081,6 @@ Un array multidimensionale è un array che ha come elementi degli altri array, l
 ```cpp
 int Array2d[10][3];     // due dimensioni
 int Array3d[16][20][2]; // tre dimensioni
-
 // ecc...
 ```
 
@@ -2092,13 +2090,7 @@ Supponendo di avere un array 2D, Arr:
 int Arr[12][12];
 ```
 
-E due indici i e j, Arr[i] è un array 1D, quindi [Array[i]](j) o più semplicemente
-
-```cpp
-    Arr[i][j]
-```
-
-E' un elemento dell'Array.
+E due indici i e j, Arr[i] è un array 1D, quindi ```(Arr[i])[j]``` o più semplicemente ```Arr[i][j]``` è un elemento dell'Array.
 
 ---
 ---
@@ -2265,7 +2257,7 @@ In C++ un **puntatore** è una variabile il cui valore è l'indirizzo di un'altr
 
 E' possibile dichiarare un puntatore senza inizializzarlo ma per sicurezza si inizializza a ```nullptr```.
 
-Per assegnare un indirizzo a un puntatore si può utilizzare l'**operatore 'indirizzo di' ```&```**:
+Per assegnare un indirizzo a un puntatore si può utilizzare l'**operatore di indirizzo ```&```**:
 
 ```cpp
     int Variable{};
@@ -2298,7 +2290,7 @@ struct point {
     double x;
     double y;
     double z;
-}
+};
 int main()
 {
     point P1{1, -1, 0};
@@ -2341,6 +2333,21 @@ Quando un puntatore non serve più deve essere deallocato:
     Ptr = nullptr
 ```
 
+#### ***Le eccezioni***
+
+E' buona pratica, ogni volta che si crea un puntatore nell'heap, di controllare se il puntatore è nullo, in questo caso si può sollevare un'eccezione, che ferma in automatico il programma quando c'è un errore che non va bene:
+
+```cpp
+    int* ptr = new int;
+    if (!ptr) throw std::bad_alloc();
+```
+
+Esistono altri tipi di eccezioni come ad esempio:
+
++ ```std::invalid_argument```
++ ```std::out_of_range```
++ ```std::overflow_error```
+
 #### ***Puntatori intelligenti***
 
 In C++ l'utilizzo dei puntatori è facilitato dai puntatori intelligenti (necessario includere **```<memory>```**): **```std::unique_ptr```**, **```std::shared_ptr```** e **```std::weak_ptr```**:
@@ -2354,6 +2361,7 @@ Esempio:
 ```cpp
 #include <iostream>
 #include <memory>
+#include <utility> // per std::move
 
 int main()
 {
@@ -2663,7 +2671,7 @@ int main()
 }
 ```
 
-#### ***Accesso agli elementi***
+#### ***Accesso agli elementi di una stringa***
 
 Si usa il metodo **```at```** oppure l'operatore **```[]```**:
 
@@ -3860,15 +3868,622 @@ int main()
 
 ### Le classi
 
+In C++ una classe è una struttura che può contenere dei **metodi**, cioè delle funzioni, oltre alle variabili.
+
+In una classe, si possono definire dei **costruttori** cioè delle funzioni che servono a inizializzare la classe, è anche possibile definire il **distruttore**, una funzione che viene chiamata quando la classe deve essere distrutta.
+
+Variabili (**campi**), metodi, costruttori e distruttore si dicono **membri** della classe, un membro è **pubblico**, se ovunque nel codice si può accedere a esso, o **privato** se ci si può accedere solo dalla classe.
+
+In realtà anche una struttura può contenere dei metodi, la differenza tra una struttura e una classe è il fatto che in una struttura i membri sono pubblici per impostazione predefinita, ed esistono anche dei **costruttori** predefiniti, mentre in una classe i membri sono privati per opzione predefinita.
+
+Per dichiarare una classe si fa così:
+
+```cpp
+class Class1
+{
+    // membri
+};
+```
+
+Esempio completo di una classe:
+
+```cpp
+#define M_PI 3.14159265358979323
+#include <iostream>
+
+class Circle
+{
+public:
+    int radius;
+
+    int Diameter()
+    {
+        return 2 * radius;
+    }
+    double Circumference()
+    {
+        return M_PI * radius;
+    }
+    long double Area()
+    {
+        return M_PI * radius * radius;
+    }
+};
+
+int main()
+{
+    setlocale(0, "");
+
+    Circle c1;
+    std::wcout << L"inserisci il raggio del cerchio: ";
+    std::wcin >> c1.radius;
+
+    std::wcout << L"il diametro è: "        << c1.Diameter();
+    std::wcout << L"\nla circonferenza è: " << c1.Circumference();
+    std::wcout << L"\nl'area è: "           << c1.Area();
+
+    return 0;
+}
+```
+
+In questo caso, la classe ```Circle``` è usata per creare un **oggetto** ```c1```.
+
+La parola chiave **public** denota quali membri sono pubblici, per rendere dei membri privati si usa la parola chiave **private**.
+
 ---
 ---
 
 ### I costruttori e il distruttore
 
+In una classe in C++ un **costruttore** si distingue da un metodo perché ha lo stesso nome della classe, possono esistere più costruttori, ma devono avere firme diverse, anche il **distruttore** ha lo stesso nome della classe, ma deve essere preceduto da un carattere ```~``` (premere ALT + 126 dal tastierino numerico, num lock deve essere disattivato).
+
+#### ***Sintassi dei costruttori***
+
+Esempio:
+
+```cpp
+    Circle(int R)
+    {
+        radius = std::abs(R);
+    }
+```
+
+Che si può riscrivere così:
+
+```cpp
+    Circle(int R) : radius(std::abs(R)) {}
+```
+
+Gli oggetti di una determinata classe devono sempre essere inizializzati con i paramteri di un costruttore, quindi di solito si aggiunge un costruttore di default:
+
+```cpp
+    Circle()      : radius(0)           {}
+    Circle(int R) : radius(std::abs(R)) {}
+```
+
+Grazie a questi costruttori un oggetto può essere inizializzato in questi modi:
+
+```cpp
+int main()
+{
+    Circle c1, c2(1), c3{ 5 };
+
+    // il resto del codice
+
+    return 0;
+}
+```
+
+#### ***Sintassi del distruttore***
+
+Ecco un esempio di come si può implementare il distruttore con la classe ```Circle```:
+
+```cpp
+#define M_PI 3.14159265358979323
+#include <iostream>
+
+class Circle
+{
+public:
+    int radius;
+
+    // costruttore di default
+    Circle()      : radius(0)           {}
+
+    // costruttore con parametro
+    Circle(int R) : radius(std::abs(R)) {}
+
+    // distruttore
+    ~Circle()
+    {
+        setlocale(0, "");
+        std::wcout << L"\nl'oggetto è stato distrutto\n";
+    }
+
+    int Diameter()
+    {
+        return 2 * radius;
+    }
+    double Circumference()
+    {
+        return M_PI * radius;
+    }
+    long double Area()
+    {
+        return M_PI * radius * radius;
+    }
+};
+
+int main()
+{
+    setlocale(0, "");
+
+    Circle c1;
+    std::wcout << L"inserisci il raggio del cerchio: ";
+    std::wcin >> c1.radius;
+
+    std::wcout << L"il diametro è: " << c1.Diameter();
+    std::wcout << L"\nla circonferenza è: " << c1.Circumference();
+    std::wcout << L"\nl'area è: " << c1.Area();
+
+    return 0; // qui viene chiamato il distruttore
+}
+```
+
+#### ***Il costruttore di copia***
+
+Quando un oggetto viene passato a una funzione per valore, una funzione ritorna un oggetto o un oggetto viene inizializzato con un altro oggetto della stessa classe, viene chiamato il **costruttore di copia**:
+
+```cpp
+class Circle
+{
+public:
+    int radius;
+
+    // costruttore di default
+    Circle()              : radius(0)            {}
+
+    // costruttore con parametro
+    Circle(int R)         : radius(std::abs(R))  {}
+
+    // costruttore di copia
+    Circle(Circle& other) : radius(other.radius) {}
+
+    // distruttore
+    ~Circle()
+    {
+        setlocale(0, "");
+        std::wcout << L"\nl'oggetto è stato distrutto\n";
+    }
+
+    int         Diameter()      { return 2 * radius;             }
+    double      Circumference() { return M_PI * radius;          }
+    long double Area()          { return M_PI * radius * radius; }
+};
+```
+
+Esempio in viene chiamato il costruttore di copia:
+
+```cpp
+int main()
+{
+    Circle first = 10;
+
+    // chiamata al costruttore di spostamento
+    // c1 è inizializzato come una copia di first
+    Circle c1 = first;
+
+    return 0;
+}
+```
+
+#### ***Il costruttore di spostamento***
+
+Quando un oggetto viene spostato (con **```std::move```**) si chiama il **costruttore di spostamento**:
+
+```cpp
+class Circle
+{
+public:
+    int radius;
+
+    // costruttore di default
+    Circle()                        : radius(0)            {}
+
+    // costruttore con parametro
+    Circle(int R)                   : radius(std::abs(R))  {}
+
+    // costruttore di copia
+    Circle(Circle& other)           : radius(other.radius) {}
+
+    // costruttore di spostamento
+    Circle(Circle&& other) noexcept : radius(other.radius) {}
+
+    // distruttore
+    ~Circle()
+    {
+        setlocale(0, "");
+        std::wcout << L"\nl'oggetto è stato distrutto\n";
+    }
+
+    int         Diameter()      { return 2 * radius;             }
+    double      Circumference() { return M_PI * radius;          }
+    long double Area()          { return M_PI * radius * radius; }
+};
+```
+
+In un costruttore di spostamento di utilizza **```noexcept```** per non solleverà mai un'eccezione.
+
+Esempio in viene chiamato il costruttore di spostamento:
+
+```cpp
+int main()
+{
+    Circle first = 10;
+
+    // chiamata al costruttore di spostamento
+    // c1 è inizializzato a first e first è distrutto 
+    Circle c1 = std::move(first);
+
+    return 0;
+}
+```
+
+#### ***Costruttore con ```std::initializer_list```***
+
+**```std::initializer_list```** è una classe utilizzata nei costruttori di classi più complesse (come ```std::vector```), ha il metodo ```size```.
+
+Vediamo una classe con un costruttore che accetta una lista di inizializzazione come argomento e inizializza delle variabili con somma e prodotto:
+
+```cpp
+#include <initializer_list>
+#include <iostream>
+
+class DataProcesser
+{
+public:
+    int sum;
+    int prod;
+
+    DataProcesser()                                : sum(0), prod(1) {}
+    DataProcesser(std::initializer_list<int> data) : sum(0), prod(1)
+    {
+        for (const auto& n : data) {
+            sum  += n;
+            prod *= n;
+        }
+    }
+
+    void print() const
+    {
+        setlocale(0, "");
+
+        std::wcout << L"somma:    " << sum  << L'\n';
+        std::wcout << L"prodotto: " << prod << L'\n';
+    }
+};
+
+int main()
+{
+    setlocale(0, "");
+
+    DataProcesser Data{ 2, -3, -1, 9, 4 };
+    Data.print();
+
+    return 0;
+}
+```
+
+Qui si utilizza ```const``` dopo ```print()``` per indicare che il metodo non può modificare i campi della classe, se invece si mette ```const``` prima del nome di un parametro, si indica che è il parametro a non poter essere modificato.
+
 ---
 ---
 
 ### L'ereditarietà
+
+In C++ una classe può **ereditare** da un'altra classe, questo significa che avrà tutti i membri protetti e pubblici della classe base.
+
+#### ***Derivare una classe***
+
+Un membro si dice **protetto** (parola chiave **```protected```**) se è accessibile solo alla classe base e a eventuali classi **derivate** (cioè classi che ereditano dalla classe base).
+
+Ecco un esempio di classe derivata da ```std::vector```:
+
+```cpp
+#include <initializer_list>
+#include <iostream>
+#include <string>
+#include <vector>
+
+class vector_t : std::vector<int>
+{
+public:
+
+    // costruttori
+    vector_t() {}
+    vector_t(std::initializer_list<int> list)
+    {
+        for (const auto& n : list) push_back(n);
+    }
+
+    std::wstring string()
+    {
+        std::wstring output = L"{";
+        for (int i = 0; i < size() - 1; ++i)
+            output += L' ' + at(i);
+
+        output += at(size() - 1);
+        return output;
+    }
+
+    void print()
+    {
+        std::wcout << string();
+    }
+
+    void println()
+    {
+        std::wcout << string() << L'\n';
+    }
+};
+```
+
+Questa classe aggiunge dei metodi a ```std::vector```, ma adesso il codice esterno non riesce ad accedere ai membri di ```std::vector``` da ```vector_t```, questo perché quando una classe eredita da un'altra, tutti i membri ereditati sono **privati**, per risolvere questo problema bisogna aggiungere ```public``` prima del nome della classe base:
+
+```cpp
+#include <initializer_list>
+#include <iostream>
+#include <string>
+#include <vector>
+
+class vector_t : public std::vector<int>
+{
+    // il resto della classe
+};
+```
+
+#### ***Sovrascrivere un metodo***
+
+Una classe derivata può **sovrascrivere** un metodo della classe base con la parola chiave **```override```** solo se la classe base ha dichiarato il metodo come **```virtual```**, in questo modo la classe derivata eseguirà sempre la sua versione sovrascritta del metodo invece di quella originaria:
+
+```cpp
+#include <iostream>
+
+class Base
+{
+public:
+
+    virtual void show() const
+    {
+        setlocale(0, "");
+        std::wcout << L"questa è la classe base\n";
+    }
+};
+
+class Derived : public Base
+{
+    void show() const override
+    {
+        setlocale(0, "");
+        std::wcout << L"questa è la classe derivata\n";
+    }
+};
+```
+
+#### ***Il puntatore ```this```***
+
+Quando un paramtero in una classe ha lo stesso nome di un campo, è possibile usare il **puntatore ```this```** per accedere al campo, esso è un puntatore che viene passato implicitamente a tutti i metodi non statici di una classe, si può dereferenziare ```this``` per ottenere l'oggetto su cui è stato chiamato il metodo.
+
+Esempio d'uso:
+
+```cpp
+#include <iostream>
+#include <string>
+
+class MyClass
+{
+    // campi privati
+    int x;
+    int y;
+
+    // metodi pubblici
+public:
+
+    MyClass(int x, int y)
+    {
+        setlocale(0, "");
+
+        this->x = x;
+        this->y = y;
+
+        // stessa cosa usare this->str()
+        std::wcout << L"oggetto corrente: " << (*this).str() << L'\n';
+    }
+
+    std::wstring str()
+    {
+        return L'{' + std::to_wstring(x) + L", " + std::to_wstring(y) + L'}';
+    }
+};
+```
+
+#### ***Costruttori e distruttori***
+
+Il costruttore della classe base viene chiamato prima di quello della classe derivata, mentre il distruttore della classe derivata viene chiamato prima di quello della classe base.
+
+E' possibile chiamare il costruttore della classe base nel costruttore della classe derivata:
+
+```cpp
+#include <iostream>
+
+class Base
+{
+public:
+    Base() {}
+    Base(const Base&)
+    {
+        setlocale(0, "");
+        std::wcout << L"costruttore di copia della classe base\n";
+    }
+};
+
+class Derived : public Base
+{
+public:
+    Derived() {}
+    Derived(const Derived&) : Base(*this)
+    {
+        setlocale(0, "");
+        std::wcout << L"costruttore di copia della classe derivata\n";
+    }
+};
+```
+
+In questo caso non è stato scritto il nome del parametro del costruttore perché esso non è utilizzato.  
+Se i costruttori presentano dei parametri si può fare così:
+
+```cpp
+#include <iostream>
+
+class Base
+{
+public:
+    Base() {}
+    Base(int x)
+    {
+        setlocale(0, "");
+        std::wcout << L"costruttore Base con parametro ";
+        std::wcout << x << L'\n';
+    }
+};
+
+class Derived : public Base
+{
+public:
+    Derived() {}
+    Derived(int x, int y) : Base(x)
+    {
+        setlocale(0, "");
+        std::wcout << L"costruttore Derived con parametro ";
+        std::wcout << y << L'\n';
+    }
+};
+```
+
+#### ***Distruttore virtuale***
+
+Quando si distrugge con ```delete``` un oggetto di una classe derivata tramite un puntatore alla classe base, se il distruttore non è virtuale verrà chiamato solo quello della classe base, causando potenziali perdite di memoria:
+
+```cpp
+#include <iostream>
+
+class Base {
+public:
+    Base ()    { std::cout << "costruttore Base\n"; }
+    ~Base()    { std::cout << "distruttore Base\n"; }
+};
+
+class Derived : public Base
+{
+public:
+    Derived () { std::cout << "costruttore Derived\n"; }
+    ~Derived() { std::cout << "distruttore Derived\n"; }
+};
+
+int main()
+{
+    Base* obj = new Derived();
+    delete obj; // il distruttore Derived non verrà chiamato
+    return 0;
+}
+```
+
+In questi casi si rende il distruttore virtuale:
+
+```cpp
+#include <iostream>
+
+class Base {
+public:
+            Base () { std::cout << "costruttore Base\n"; }
+    virtual ~Base() { std::cout << "distruttore Base\n"; }
+};
+
+class Derived : public Base
+{
+public:
+    Derived ()      { std::cout << "costruttore Derived\n"; }
+    ~Derived()      { std::cout << "distruttore Derived\n"; }
+};
+```
+
+---
+---
+
+### Il sovraccarico degli operatori
+
+In una classe in C++ si possono definire degli operatori con il **sovraccarico**, si scrive una funzione il cui nome è ```operator``` seguito dall'operatore, qui ne vedremo alcuni.
+
+#### ***sovraccarico dell'operatore ```=```***
+
+Vediamo come si può sovraccaricare l'operatore di assegnazione di questa classe ```coord```:
+
+```cpp
+#include <iostream>
+#include <string>
+
+class coord
+{
+public:
+    int X;
+    int Y;
+
+    coord()                             : X(0)      , Y(0)       {}
+    coord(int x, int y)                 : X(x)      , Y(y)       {}
+    coord(const coord& other)           : X(other.X), Y(other.Y) {}
+    coord(const coord&& other) noexcept : X(other.X), Y(other.Y) {}
+
+    coord& operator=(const coord other)
+    {
+        X = other.X;
+        Y = other.Y;
+        return *this;
+    }
+
+    std::wstring str() const
+    {
+        return L'{' + std::to_wstring(X) + L", " + std::to_wstring(Y) + L'}';
+    }
+};
+```
+
+Con questo operatore ```=``` si può assegnare un ```coord``` a un altro ```coord```, la funzione restituisce un ```coord&```, dove l'operatore di indirizzo indica che viene restituito un riferimento al risultato, questo serve per poter fare delle assegnazioni multiple con una istruzione:
+
+```cpp
+int main()
+{
+    setlocale(0, "");
+
+    coord cone{ 1, 2 }, ctwo, cthree, cfour, cfive;
+    cfive = cfour = cthree = ctwo = cone;
+
+    std::wcout << one.str()   << L'\n';
+    std::wcout << two.str()   << L'\n';
+    std::wcout << three.str() << L'\n';
+    std::wcout << four.str()  << L'\n';
+    std::wcout << five.str()  << L'\n';
+
+    return 0;
+}
+```
+
+Spiegazione: quando si esegue ```ctwo = cone```, a ```ctwo``` viene assegnato il valore di ```cone```, ma l'operatore restituisce ```*this``` cioè il risultato, di conseguenza a ```cthree``` viene assegnato il valore del risultato, e così via.
+
+#### ***sovraccarico degli operatori logici e di confronto***
+
+#### ***sovraccarico degli operatori aritmetici***
+
+#### ***sovraccarico degli operatori speciali***
 
 ---
 ---
@@ -3878,7 +4493,7 @@ int main()
 ---
 ---
 
-### Funzioni e Classi amiche
+### Dichiarare una funzione o una classe come ```friend```
 
 ---
 ---
