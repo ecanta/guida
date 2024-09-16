@@ -3481,22 +3481,375 @@ Non ha metodi per accedere a elementi al centro
 + **```push_front```**: aggiunge un elemento all'inizio
 + **```pop_front```**: rimuove l'elemento all'inizio
 
-Tuttavia è preferibile usare ```std::vector``` quando possibile perché ```std::deque``` utilizza gli **indici circolari** per rendere efficientoi le operazioni all'inizio e alla fine dell'array, ma questo significa utilizzare l'operatore modulo per accedere agli elementi, rallentando l'accesso.
+Tuttavia è preferibile usare ```std::vector``` quando possibile perché ```std::deque``` utilizza gli **indici circolari** per rendere efficienti le operazioni all'inizio e alla fine dell'array, ma questo significa utilizzare l'operatore modulo per accedere agli elementi, rallentando l'accesso.
 
 ---
 ---
 
-### La STL (standard template library)
+### Le mappe
+
+In C++ le classi **```std::map```** e **```std::unordered_map```** servono per creare oggetti che associano a ogni elemento una chiave unica, le chiavi vengono messe in ordine crescente o alfabetico solo in ```std::map```.
+
+#### ***Dichiarazione***
+
+Esempio di dichiarazione di una mappa:
+
+```cpp
+#include <map>
+
+// mappa con una chiave stringa
+std::map<std::wstring, int> Map;
+```
+
+Esempio di dichiarazione di una mappa non ordinata:
+
+```cpp
+#include <unordered_map>
+std::unordered_map<std::wstring, int> Map;
+```
+
+#### ***Inserimento***
+
+Si usa il metodo **```insert```** o l'operatore **```=```**
+
+```cpp
+#include <map>
+#include <string>
+
+int main()
+{
+
+    // le chiavi vengono ordinate in ordine alfabetico
+    std::map<std::wstring, int> ordinals
+    {
+        { L"one"  , 1 },
+        { L"two"  , 2 },
+        { L"three", 3 },
+        { L"four" , 4 },
+        { L"five" , 5 },
+        { L"six"  , 6 },
+        { L"seven", 7 },
+        { L"eight", 8 },
+        { L"nine" , 9 }
+    };
+
+    // primo modo di inserire un elemento
+    map.insert({ L"ten", 10 });
+
+    // secondo modo di inserire un elemento
+    map[L"eleven"] = 11;
+
+    return 0;
+}
+```
+
+#### ***Eliminazione***
+
+Si usa il metodo **```erase```**:
+
+```cpp
+#include <map>
+#include <string>
+
+int main()
+{
+    std::map<std::wstring, int> ordinals
+    {
+        { L"one"  , 1 },
+        { L"two"  , 2 },
+        { L"three", 3 },
+    };
+
+    map.erase(L"one");
+
+    return 0;
+}
+```
+
+#### ***Capire se la mappa contiene l'elemento***
+
+```cpp
+#include <iostream>
+#include <map>
+#include <string>
+
+int main()
+{
+    setlocale(0, "");
+
+    std::map<std::wstring, int> ordinals
+    {
+        { L"one"  , 1 },
+        { L"two"  , 2 },
+        { L"three", 3 },
+        { L"four" , 4 },
+        { L"five" , 5 },
+        { L"six"  , 6 },
+        { L"seven", 7 },
+        { L"eight", 8 },
+        { L"nine" , 9 }
+    };
+
+    std::wstring ordinal;
+    std::wcout << L"Inserisci una stringa\n"
+    std::wcin >> ordinal;
+
+    if (ordinals.find(L"ordinal") == ordinals.end())
+    {
+        std::wcout << L"la stringa non corrisponde a un";
+        std::wcout << L" numero da 1 a 9\n";
+        return 0;
+    }
+
+    std::wcout << L"la stringa corrisponde a " << ordinals[ordinal];
+    return 0;
+}
+```
+
+#### ***Iterare su ogni elemento***
+
+Ogni elemento di una mappa accede alla chiave con **```first```** e al valore con **```second```**.
+
+```cpp
+#include <iostream>
+#include <map>
+#include <string>
+
+int main()
+{
+    setlocale(0, "");
+
+    std::map<std::wstring, int> ordinals
+    {
+        { L"one"  , 1 },
+        { L"two"  , 2 },
+        { L"three", 3 },
+        { L"four" , 4 },
+        { L"five" , 5 },
+        { L"six"  , 6 },
+        { L"seven", 7 },
+        { L"eight", 8 },
+        { L"nine" , 9 }
+    };
+
+    std::wcout << L"numeri da 1 a 9 in ordine alfabetico:\n";
+    for (const auto& ord : ordinals)
+        std::wcout << ord.first << L'(' << ord.second << L")\n";
+
+    return 0;
+}
+```
+
+#### ***Differenze***
+
+```std::unordered_map``` differisce da ```std::map``` perché non ordina le chiavi e usa una **tabella hash** per accedere agli elementi (tempo di $O(1)$)
 
 ---
 ---
 
 ### Misurare il tempo
 
+#### ***Utilizzo di ```std::chrono```***
+
+Ci sono tre tipi di clock:
+
++ ```std::chrono::system_clock```: orologio utilizzato per l'ora corrente, può essere influenzato da cambiamenti manuali dell'ora
++ ```std::chrono::steady_clock```: orologio utilizzato per misurare intervalli di tempo
++ ```std::chrono::high_resolution_clock```: è l'orologio più preciso tra i tre
+
+Esempio d'uso:
+
+```cpp
+#include <iostream>
+#include <chrono>
+
+int main()
+{
+    setlocale(0, "");
+
+    auto start = std::chrono::high_resolution_clock::now();
+
+    // codice...
+    // ...
+
+    auto end = std::chrono::high_resolution_clock::now();
+    std::wcout << L"tempo trascorso: ";
+    std::wcout << std::chrono::duration_cast
+        <std::chrono::nanoseconds>(end - start).count();
+    std::wcout << L" microsecondi\n";
+
+    return 0;
+}
+```
+
+#### ***Utilizzo delle API di Windows***
+
+```cpp
+#include <iostream>
+#include <Windows.h>
+
+int main()
+{
+    setlocale(0, "");
+
+    LARGE_INTEGER frequency, start, end;
+    QueryPerformanceFrequency(&frequency);
+    QueryPerformanceCounter(&start);
+
+    // codice...
+    // ...
+
+    QueryPerformanceCounter(&end);
+    double duration =
+        double(end.QuadPart - start.QuadPart) / frequency.QuadPart;
+    std::wcout << L"tempo trascorso: " << duration << L" secondi\n";
+
+    return 0;
+}
+```
+
+#### ***Utilizzo di ```GetTickCount```***
+
+Queste funzioni contano i millisecondi dall'accensione del sistema, tuttavia la precisione è limitata.
+
+```cpp
+#include <iostream>
+#include <Windows.h>
+
+int main()
+{
+    setlocale(0, "");
+
+    DWORD start = GetTickCount64();
+
+    // codice...
+    // ...
+
+    DWORD end = GetTickCount64();
+    std::wcout << L"tempo trascorso: " << (end - start);
+    std::wcout << L" millisecondi\n";
+
+    return 0;
+}
+```
+
+Viene utilizzato ```GetTickCount64``` al posto di ```GetTickCount``` perché ```GetTickCount``` va in overflow dopo circa 50 giorni.
+
+#### ***Utilizzo di ```clock```***
+
+Questa è una funzione definita nell'header **```<ctime>```**, che su Windows ha una precisione pressoché uguale a ```GetTickCount```, definita dalla macro ```CLOCKS_PER_SEC```. Non è un approccio adatto alla misurazione del tempo reale, perché misura il numero di clock ticks della CPU del computer
+
+Esempio:
+
+```cpp
+#include <ctime>
+#include <iostream>
+
+int main()
+{
+    setlocale(0, "");
+
+    clock_t start = clock();
+
+    // codice...
+    // ...
+
+    clock_t end = clock();
+
+    std::wcout << L"tempo trascorso: ";
+    std::wcout << double(end - start) / CLOCKS_PER_SEC;
+    std::wcout << L" secondi\n";
+
+    return 0;
+}
+```
+
 ---
 ---
 
-### Generatori casuali
+### Generare dei numeri casuali
+
+#### ***Con la funzione ```rand```***
+
+L'utilizzo di ```rand``` è limitato perché il massimo è di solito impostato a 32767.
+
+```cpp
+#include <iostream>
+#include <ctime>
+
+int main()
+{
+    setlocale(0, "");
+
+    std::srand(std::time(NULL)); // impostazione del seme
+    std::wcout << std::rand();
+
+    return 0;
+}
+```
+
+#### ***Con i ```random_device```***
+
+Questo è un metodo che genera numeri casuali di alta qualità, tuttavia è lento, esempio:
+
+```cpp
+#include <iostream>
+#include <random>
+
+int main()
+{
+    setlocale(0, "");
+
+    std::random_device rnd;
+    std::wcout << rnd();
+
+    return 0;
+}
+```
+
+#### ***Con il mersenne twister***
+
+Questo metodo è più veloce rispetto ai ```random_device``` perché il numero casuale viene calcolato una sola volta per impostare il seme, e a partire da esso si usa un generatore pseudo-casuale per generare degli altri numeri casuali.
+
+Esempio:
+
+```cpp
+#include <iostream>
+#include <random>
+
+int main()
+{
+    setlocale(0, "");
+
+    std::random_device rnd;
+    std::mt19937 generator(rnd());
+    std::uniform_int_distribution<> distr(1, 100);
+
+    std::wcout << distr(generator);
+
+    return 0;
+}
+```
+
+Se l'intervallo è molto grande è sufficiente cambiare il template di ```uniform_int_distribution```:
+
+```cpp
+#include <iostream>
+#include <random>
+
+int main()
+{
+    setlocale(0, "");
+
+    std::random_device rnd;
+    std::mt19937 generator(rnd());
+    std::uniform_int_distribution<long long> distr(0, 1e14);
+
+    std::wcout << distr(generator);
+
+    return 0;
+}
+```
 
 ---
 ---
