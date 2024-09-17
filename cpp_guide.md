@@ -740,7 +740,7 @@ int main()
 }
 ```
 
-Per questo bisogna fare attenzione a non confondere gli operatori ```==``` e ```=``` perché non ci sarà nessun errore del compilatore in caso di assegnazione accidentale dentro un if.
+Per questo bisogna fare attenzione a non confondere gli operatori ```==``` e ```=``` perché non ci sarà nessun errore di compilazione in caso di assegnazione accidentale dentro un if.
 Per risolvere ciò può aiutare scrivere
 
 ```cpp
@@ -874,7 +874,7 @@ stop:
 
 In questo caso se il numero è 0, il controllo viene trasferito al punto ```stop``` da cui termina il programma con codice di errore 1, chiaramente questo è un esempio di goto utilizzato in modo errato, ma era giusto per capire come funziona questa istruzione.
 
-Se tra il goto e l'istruzione del goto, viene inizializzata una variabile, si otterrà un errore del compilatore perché se si trasferisce il controllo viene ignorata l'inizializzazione di quella variabile.
+Se tra il goto e l'istruzione del goto, viene inizializzata una variabile, si otterrà un errore di compilazione perché se si trasferisce il controllo viene ignorata l'inizializzazione di quella variabile.
 
 ---
 ---
@@ -1101,7 +1101,7 @@ default:
  *\<istruzioni\>*  
 }**
 
-L'espressione deve essere di tipo integrale (intero, decimale, carattere o bool).  
+L'espressione deve essere di tipo integrale (intero o carattere).  
 Ecco due codici equivalenti, uno con gli if-else, l'altro con uno switch:
 
 ```cpp
@@ -1343,7 +1343,7 @@ int main()
 }
 ```
 
-+ **```std::hypot```** calcola l'ipotenusa di un triangolo rettangolo dati i cateti
++ **```std::hypot```** calcola l'ipotenusa di un triangolo rettangolo dati i cateti:
 
 ```cpp
 #include <cmath>
@@ -1360,13 +1360,13 @@ int main()
 
 #### ***Logaritmi e trigonometria***
 
-+ Per calcolare il logaritmo si possono usare **```std::log2```**, **```std::log10```** e **```std::log```**
++ Per calcolare il logaritmo si possono usare **```std::log2```**, **```std::log10```** e **```std::log```**.
 
-+ Tra le funzioni trigonometriche ci sono **```std::sin```**, **```std::sinh```**, **```std::cos```**, **```std::cosh```**, **```std::tan```**, **```std::tanh```**, **```std::asin```**, **```std::acos```**, **```std::atan```**, **```std::asinh```**, **```std::acosh```** e **```std::atanh```**
++ Tra le funzioni trigonometriche ci sono **```std::sin```**, **```std::sinh```**, **```std::cos```**, **```std::cosh```**, **```std::tan```**, **```std::tanh```**, **```std::asin```**, **```std::acos```**, **```std::atan```**, **```std::asinh```**, **```std::acosh```** e **```std::atanh```**.
 
 ### La complessità temporale di un'operazione
 
-La notazione **O grande** è uno strumento per descrivere il comportamento asintotico di una funzione
+La notazione **O grande** è uno strumento per descrivere il comportamento asintotico di una funzione.
 
 $$
 f(n) \leq k \cdot g(n) \quad \forall n \geq n_0 \qquad \Rightarrow \qquad f(n) = O(g(n))
@@ -4481,14 +4481,259 @@ Spiegazione: quando si esegue ```ctwo = cone```, a ```ctwo``` viene assegnato il
 
 #### ***sovraccarico degli operatori logici e di confronto***
 
+Esempi:
+
++ Operatori ```&&``` e ```||```
+
+```cpp
+bool operator&&(const coord other) const
+{
+    return (X != 0 && Y != 0) && (other.X != 0 and other.Y != 0);
+}
+bool operator||(const coord other) const
+{
+    return (X != 0 && Y != 0) || (other.X != 0 and other.Y != 0);
+}
+```
+
+Questi due operatori consentono di comparare i valori booleani delle due coordinate, in questo caso, una coordinata è falsa se e solo se è nulla.
+
++ Operatori ```<```, ```>```, ```<=```, ```>=```, ```==``` e ```!=```
+
+```cpp
+bool operator==(const coord other) const
+{
+    return X == other.X && Y == other.Y;
+}
+bool operator!=(const coord other) const
+{
+    return X != other.X || Y != other.Y;
+}
+bool operator<(const coord other) const
+{
+    return std::hypot(X, Y) <  std::hypot(other.X, other.Y);
+}
+bool operator>(const coord other) const
+{
+    return std::hypot(X, Y) >  std::hypot(other.X, other.Y);
+}
+bool operator<=(const coord other) const
+{
+    return std::hypot(X, Y) <= std::hypot(other.X, other.Y);
+}
+bool operator>=(const coord other) const
+{
+    return std::hypot(X, Y) >= std::hypot(other.X, other.Y);
+}
+```
+
+In questo caso confrontiamo i moduli delle due coordinate (le distanze da {0, 0}), che si calcolano con il teorema di pitagora (```std::hypot```).
+
 #### ***sovraccarico degli operatori aritmetici***
 
+```cpp
+coord operator+(const coord other) const
+{
+    coord result = *this;
+    result.X += other.X;
+    result.Y += other.Y;
+    return result;
+}
+coord& operator+=(const coord other)
+{
+    *this = *this + other;
+    return  *this;
+}
+coord& operator++()    // ++ pre-fisso  (++a)
+{
+    *this = *this + coord{1, 0};
+    return  *this;
+}
+coord& operator++(int) // ++ post-fisso (a++)
+{
+    *this = *this + coord{0, 1};
+    return  *this;
+}
+```
+
+Il riferimento (```&```) si trova solo sul tipo restituito dagli operatori ```+=``` e ```++``` perché quel risultato viene assegnato solo in caso di una seconda operazione (```c = a += b```) invece di una sola operazione come con l'operatore ```+``` (```c = a + b```).
+
+L'operatore ```++``` post-fisso si distingue da quello pre-fisso perché accetta un parametro di tipo ```int```, ma esso non viene mai usato.
+
 #### ***sovraccarico degli operatori speciali***
+
++ Operatore ```->```  
+
+```cpp
+coord* operator->()
+{
+    return this;
+}
+```
+
+Si eseguisce ```return this``` invece di ```return *this``` perché si sta restituendo un puntatore.
+
++ Operatore ```()```
+
+E' possibile utilizzare l'operatore ```()``` per eseguire una chiamata di funzione con un oggetto (**funtore**):
+
+```cpp
+coord operator()(int scalar) const
+{
+    coord result = *this;
+    result.X *= scalar;
+    result.Y *= scalar;
+    return result;
+}
+```
+
+In questo caso viene utilizzato l'operatore ```()``` per eseguire il prodotto per uno scalare, adesso questo operatore si può utilizzare così:
+
+```cpp
+int main()
+{
+    setlocale(0, "");
+    coord Coord{2, -1};
+
+    // output = {6, -3}
+    std::wcout << L"triplo della coordinata: " << Coord(3).str();
+    std::wcout << L'\n';
+
+    return 0;
+}
+```
 
 ---
 ---
 
 ### I template
+
+In C++ i **template** permettono di creare codice generico, utilizzabile con diversi datatype allo stesso modo.
+
+#### ***Funzioni template***
+
+Vediamo alcuni esempi di funzioni template:
+
+```cpp
+template<typename T> static void swap(T& A, T& B)
+{
+    auto temp = B;
+    A = temp;
+    B = A;
+}
+template<class T> T add(T A, T B)      { return A + B; }
+template<class T> T subtract(T A, T B) { return A - B; }
+```
+
+In questo modo si evita di scrivere funzioni diverse per datatype diversi, evitando la duplicazione del codice.
+
+L'utilizzo di ```class``` al posto di ```typename``` non cambia nulla, sono solo due diversi modi di scrivere un template, ```T``` è il nome di un datatype che vale solo all'interno della funzione, il suo reale datatype viene determinato dai parametri nella chiamata di funzione:
+
+```cpp
+int main()
+{
+    setlocale(0, "");
+
+    std::wcout << L"1 + 2 è "     << add(1, 2)          << L'\n';
+    std::wcout << L"1.5 - 2.3 è " << subtract(1.5, 2.3) << L'\n';
+
+    return 0;
+}
+```
+
+#### ***Template doppi***
+
+E' possibile scrivere una funzione con più di un template come in questo esempio:
+
+```cpp
+template<class T, class U> T add(T A, U B)      { return A + B; }
+template<class T, class U> T subtract(T A, U B) { return A - B; }
+```
+
+Per usare funzioni di questo genere è buona pratica specificare i template nella chiamata di funzione (per prevenire errori di compilazione):
+
+```cpp
+int main()
+{
+    setlocale(0, "");
+
+    std::wcout << L"1 + 2.21 è ";
+    std::wcout << add<int, double>(1, 2.21)     << L'\n';
+    
+    std::wcout << L"1.5 - 2 è ";
+    std::wcout << subtract<double, int>(1.5, 2) << L'\n';
+
+    return 0;
+}
+```
+
+#### ***Classi Template***
+
+Anche le strutture possono essere template, ma il ragionamento è analogo; le classi template si distinguono dalle funzioni template perché bisogna sempre specificare il template (anche se è uno solo).
+
+Esempio:
+
+```cpp
+template<class Ty> class MyClass
+{
+public:
+    Ty data;
+    MyClass(Ty val) : data(val) {}
+};
+
+// oggetto di tipo int
+MyClass<int>    intObj(4);
+
+// oggetto di tipo double
+MyClass<double> doubleObj(7.5);
+```
+
+La sintassi infatti è molto simile a classi come ```std::vector``` o ```std::queue```, questo perché sono **classi template** anche loro, le mappe invece hanno un **template doppio**.
+
+---
+---
+
+### Tecniche avanzate dei template
+
+In C++ i template hanno un sacco di utilizzi, qui vedremo quelli avanzati.
+
+#### ***Template alias***
+
+Per definire un alias di una classe template la sintassi cambia leggermente rispetto a un alias normale.
+
+Esempio di alias normale:
+
+```cpp
+using vector_int = vector<int>;
+```
+
+Esempio di alias di template:
+
+```cpp
+template<typename T> using vec = vector<T>;
+```
+
+Nel primo esempio ```vector_int``` è un vettore di interi, mentre nel secondo esempio ```vec``` è un vettore di qualsiasi template.
+
+#### ***Template con valori costanti***
+
+I template possono accettare parametri che non sono tipi (ma devono essere integrali, puntatori o riferimenti), esempio:
+
+```cpp
+template<typename T, int size> static void BubbleSort(T arr[])
+{
+    for (int i = 0; i < size - 1; ++i)
+        for (int j = 0; j < size - i - 1; ++j)
+            if (arr[j] > arr[j + 1])
+                std::swap(arr[j], arr[j + 1]);
+}
+```
+
+Viene passato un parametro integrale ```size``` al template, non alla funzione (ma cambia solo la chiamata di funzione, per il resto la logica è la stessa).
+
+```cpp
+// continua...
+```
 
 ---
 ---
