@@ -159,7 +159,7 @@ Ha particolare importanza ```\n```, che è un'alternativa in genere preferibile 
 
 La tabella ASCII assegna un numero a ogni carattere:
 
-![](ascii.jpg)
+![ascii_table_jpg](ascii.jpg)
 
 ---
 ---
@@ -1502,9 +1502,42 @@ int main()
 Poiché i parametri ```dividend``` e ```divisor``` non sono preceduti dall'**operatore di indirizzo ```&```**, ne viene eseguita una copia, ma i parametri ```quotient``` e ```rest``` vengono modificati.  
 in questo modo non c'è bisogno di utilizzare il ```return```.
 
-#### ***La firma***
+#### ***Funzione parametro***
 
 Ogni funzione ha una sua **firma**, che contiene le informazioni riguardo il nome, il tipo restituito e i datatype dei parametri, quando due funzioni hanno lo stesso nome ma firme diverse, si dice che la funzione è **sovraccaricata**, non si può sovraccaricare la funzione ```main```.
+
+E' possibile passare una funzione come parametro di un'altra funzione, in questo caso bisogna scrivere la firma della funzione parametro nell'elenco dei parametri e alla chiamata della funzione non si mettono le parentesi alla funzione parametro.
+
+Esempio:
+
+```cpp
+#include <iostream>
+
+void func1(int x)
+{
+    std::cout << "chiamata funzione 1 con parametro " << x << '\n';
+}
+
+void func2(int x)
+{
+    std::cout << "chiamata funzione 2 con parametro " << x << '\n';
+}
+
+void Printer(void function(int param))
+{
+    std::cout << "queste sono le funzioni: \n";
+    function(1);
+    function(2);
+    function(3);
+}
+
+int main()
+{
+    Printer(func1);
+    Printer(func2);
+    return 0;
+}
+```
 
 #### ***La ricorsione***
 
@@ -1668,7 +1701,7 @@ int main()
 }
 ```
 
-Una funzione statica è visibile solo dal file in cui è dichiarata (cioè non può essere messa in un file header).
+Una funzione statica è visibile solo dal file in cui è dichiarata (cioè non può essere messa in un file header); una variabile statica conserva il suo valore tra diverse chiamate di funzione.
 
 ---
 ---
@@ -4370,6 +4403,17 @@ public:
 };
 ```
 
+#### ***Ereditare i costruttori***
+
+Quando si deriva una classe, essa non eredita i costruttori, tuttavia ciò si risolve facilmente con ```using```, esempio:
+
+```cpp
+class vector_t : public std::vector<int>
+{
+    using std::vector<int>::vector;
+};
+```
+
 #### ***Distruttore virtuale***
 
 Quando si distrugge con ```delete``` un oggetto di una classe derivata tramite un puntatore alla classe base, se il distruttore non è virtuale verrà chiamato solo quello della classe base, causando potenziali perdite di memoria:
@@ -4697,7 +4741,7 @@ La sintassi infatti è molto simile a classi come ```std::vector``` o ```std::qu
 
 In C++ i template hanno un sacco di utilizzi, qui vedremo quelli avanzati.
 
-#### ***Template alias***
+#### ***Template facoltativi e alias***
 
 Per definire un alias di una classe template la sintassi cambia leggermente rispetto a un alias normale.
 
@@ -4713,7 +4757,20 @@ Esempio di alias di template:
 template<typename T> using vec = vector<T>;
 ```
 
-Nel primo esempio ```vector_int``` è un vettore di interi, mentre nel secondo esempio ```vec``` è un vettore di qualsiasi template.
+Nel primo esempio ```vector_int``` è un vettore di interi, mentre nel secondo esempio ```vec``` è un vettore di qualsiasi template.  
+Si può impostare un valore predefinito al template, per esempio int:
+
+```cpp
+#include <vector>
+template<typename T = int> using vec = std::vector<T>;
+
+int main()
+{
+    vec<>       intvect{ 1, 2, 3 };
+    vec<double> dblvect{ 1.0, 2.0, 3.0 };
+    return 0;
+}
+```
 
 #### ***Template con valori costanti***
 
@@ -4731,21 +4788,520 @@ template<typename T, int size> static void BubbleSort(T arr[])
 
 Viene passato un parametro integrale ```size``` al template, non alla funzione (ma cambia solo la chiamata di funzione, per il resto la logica è la stessa).
 
+#### ***La specializzazione di un template***
+
+Si utilizza questa tecnica quando si vuole creare un'altra versione di un blocco di codice solo per un template particolare.
+
 ```cpp
-// continua...
+#include <iostream>
+
+template<typename T> class MyClass
+{
+public:
+    void show()
+    {
+        std::cout << "versione generica\n";
+    }
+};
+
+template<> class MyClass<bool>
+{
+public:
+    void show()
+    {
+        std::cout << "versione specializzata con template bool\n";
+    }
+};
+
+int main()
+{
+    MyClass<int>  obj1;
+    obj1.show();  // output = versione generica
+
+    MyClass<bool> obj2;
+    // output = versione specializzata con template bool
+    obj2.show();
+}
 ```
 
+Questa era una **specializzazione totale**, si parla di **specializzazione parziale** quando la versione specializzata ha un template che dipende da quello della versione base, esempio:
+
+```cpp
+#include <iostream>
+
+template<typename T> class MyClass
+{
+public:
+    void show()
+    {
+        std::cout << "template valore\n";
+    }
+};
+
+template<typename T> class MyClass<T*>
+{
+public:
+    void show()
+    {
+        std::cout << "template puntatore\n";
+    }
+};
+
+int main()
+{
+    MyClass<int>  obj1;
+    obj1.show();  // output = template valore
+
+    MyClass<int*> obj2;
+    obj2.show();  // output = template puntatore
+}
+```
+
+#### ***Template variadici***
+
+I template variadici consentono di accettare un numero variabile di parametri di tipo:
+
+```cpp
+#include <iostream>
+
+template<typename... Args> static void write(Args... args)
+{
+    setlocale(0, "");
+    (std::wcout << ... << args) << L'\n';
+}
+
+int main()
+{
+    write(23, L' ', 1.05, L"written"); // output = 23 1.05written
+    return 0;
+}
+```
+
+I puntini di sospensione vengono espansi dal compilatore in questo modo: ```std::wcout << 23 << L' ' << 1.05 << L"written"```.
+
+Oppure la stessa cosa si può fare anche in questo modo:
+
+```cpp
+#include <iostream>
+
+template<typename T> static void print_single(T value)
+{
+    std::cout << value << '\n';
+}
+
+template<typename... Args> static void print(Args... args)
+{
+    (print_single(args), ...);
+}
+
+int main()
+{
+    write(23, L' ', 1.05, L"written");
+    return 0;
+}
+```
+
+#### ***```std::is_same```, ```std::is_integral``` e ```std::enable_if```***
+
+Utilizzo di ```std::is_same```:
+
+```cpp
+if constexpr (std::is_same<T, int>::value)
+{
+    // codice da eseguire se T è un intero
+}
+```
+
+E' molto importante l'utilizzo di ```constexpr```, perché ```std::is_same``` agisce a tempo di compilazione, lo stesso codice si può riscrivere così:
+
+```cpp
+if constexpr (std::is_same_v<T, int>)
+{
+    // codice da eseguire se T è un intero
+}
+```
+
+Utilizzo di ```std::is_integral```:
+
+```cpp
+if constexpr (std::is_integral<T, int>::value)
+{
+    // codice da eseguire se T è integrale
+}
+```
+
+Che si può riscrivere così:
+
+```cpp
+if constexpr (std::is_integral_v<T, int>)
+{
+    // codice da eseguire se T è integrale
+}
+```
+
+Con i template, ```std::enable_if``` permermette di abilitare una porzione di codice solo se una condizione è vera, in questo caso, se T è integrale.
+
+```cpp
+template<typename T>
+typename std::enable_if<std::is_integral<T>::value, T>::type
+add(T A, T B) { return A + B; }
+```
+
+Questo codice può essere riscritto in questo modo con i **concetti**:
+
+```cpp
+template<typename T> concept Integral = std::is_integral_v<T>;
+
+template<Integral T> T add(T a, T b) { return a + b; }
+```
+
+La differenza è che nel secondo codice avviene un errore di compilazione se la condizione non è rispettata invece di disattivare il codice.
+
+#### ***Metaprogrammazione***
+
+La **metaprogrammazione** consiste nel fare calcoli a tempo di compilazione, e ciò si può fare con i template, come in questo esempio:
+
+```cpp
+template<int N> struct Factorial {
+    static const int value = N * Factorial<N - 1>::value;
+};
+template<> struct Factorial<1> {
+    static const int value = 1;
+};
+template<> struct Factorial<0> {
+    static const int value = 1;
+};
+
+int main()
+{
+    setlocale(0, "");
+
+    // output = 720
+    std::wcout << L"il fattoriale di 6 è " << Factorial<6>::value << L'\n';
+
+    return 0;
+}
+```
+
+Poiché la variabile ```value``` è statica, essa matiene il suo valore tra le diverse chiamate, il compilatore calcola ```value``` con la prima versione della struttura, fino a quando ```N``` non arriva a 0 o 1, in quei casi si utilizza la versione specializzata, che imposta ```value``` a 1.
+
 ---
 ---
 
-### Dichiarare una funzione o una classe come ```friend```
+### La parola chiave ```friend```
+
+In C++ si dice che una funzione o una classe è amica di un'altra classe se ha accesso alle sue variabili private e protette pur trovandosi all'esterno di quest'ultima.
+
+Esempio:
+
+```cpp
+#include <iostream>
+
+class MyClass
+{
+private: int SecretValue;
+public:
+    MyClass(int value) : SecretValue(value) {}
+
+    friend void  ShowSecret(const MyClass& obj);
+    friend class FriendClass;
+};
+
+class FriendClass
+{
+public:
+    void IncrSecret(MyClass& obj) const { obj.SecretValue++; }
+    void DecrSecret(MyClass& obj) const { obj.SecretValue--; }
+};
+
+void ShowSecret(const MyClass& obj)
+{
+    setlocale(0, "");
+    std::wcout << L"valore segreto: " << obj.SecretValue << L'\n';
+}
+
+int main()
+{
+    MyClass Object(40);
+    FriendClass Friend;
+
+    ShowSecret(Object);
+    Friend.IncrSecret(Object);
+    ShowSecret(Object);
+
+    return 0;
+}
+```
+
+In questo esempio la classe ```FriendClass``` e la funzione ```ShowSecret``` riescono ad accedere alla variabile privata ```SecretValue``` di ```MyClass``` perché vengono dichiarate **```friend```** nella classe ```MyClass```.
+
+Si può usare la parola chiave ```friend``` per sovraccaricare il comportamento degli operatori di classi esterne con una classe.
+
+Esempio: sovraccaricare l'operatore ```<<``` di ```wcout``` perché possa funzionare con una classe derivata da ```std::vector```.
+
+```cpp
+template<class Ty = int>class new_vector : public std::vector<Ty>
+{
+public: using std::vector<Ty>::vector;
+
+    friend std::wostream& operator<<(
+        std::wostream& os,
+        const new_vector& vect
+        )
+    {
+        os << L"{";
+        for (size_t i = 0; i < vect.size(); ++i)
+        {
+            os << vect[i];
+            if (i < vect.size() - 1) os << L", ";
+        }
+        os << L"}";
+        return os;
+    }
+};
+
+int main()
+{
+    setlocale(0, "");
+    new_vector<>  vec{ 1, 2, 3 };
+    std::wcout << vec << L'\n';  // output: {1, 2, 3}
+    return 0;
+}
+```
+
+Ecco un altro esempio: sovraccaricare l'operatore ```+=``` di ```std::wstring``` perché funzioni con interi.
+
+```cpp
+#include <iostream>
+#include <string>
+
+class new_wstring : public std::wstring
+{
+public: using std::wstring::wstring;
+
+    friend std::wstring& operator+=(
+        std::wstring& str,
+        const int&  param 
+        )
+    {
+        str += std::to_wstring(param);
+        return str;
+    }
+};
+
+int main()
+{
+    setlocale(0, "");
+    new_wstring str = L"123";
+    str += 4;
+    std::wcout << str << L'\n';  // Output: 1234
+    return 0;
+}
+```
 
 ---
 ---
 
 ### I thread
 
+In C++ un **thread** è un processo, si possono quindi creare più processi per eseguire diversi compiti allo stesso momento.
+
+Si può utilizzare **```std::this_thread::sleep_for```** per fermare l'esecuzione di un thread per una certa durata di tempo, ad esempio:
+
+```cpp
+#include <chrono>
+#include <thread>
+
+int main()
+{
+    // aspetta 2 secondi
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    return 0;
+}
+```
+
+#### ***Thread con una funzione***
+
+Per utilizzare un thread bisogna assegnargli una funzione:
+
+```cpp
+#include <iostream>
+#include <thread>
+
+void Function()
+{
+    // il codice della funzione
+}
+
+int main()
+{
+    std::thread Process(Function); // attiva il thread
+    Process.join();                // aspetta il termine del thread
+    return 0;
+}
+```
+
+Il thread chiamante (quello che esegue l'intero programma) attiva il thread secondario dichiarato con **```std::thread```**, quindi aspetta il suo termine prima di continuare la sua esecuzione.
+
+#### ***Thread con una lambda***
+
+Un thread può anche essere attivato senza una funzione, per fare ciò si utilizza una **funzione lambda**:
+
+```cpp
+#include <iostream>
+#include <thread>
+
+int main()
+{
+    std::thread Process([]() {
+        
+        // codice della funzione lambda
+
+        }
+    );
+    Process.join();
+
+    return 0;
+}
+```
+
+#### ***Passare parametri a un thread di una lambda***
+
+Le lambda possono catturare delle variabili dall'ambiente, se per valore o per riferimento si descrive fra le parentesi quadre:
+
+```cpp
+#include <iostream>
+#include <thread>
+
+int main()
+{
+    std::thread Process1([=]() {
+        
+        // tutte le variabili sono catturate per valore
+
+        }
+    );
+    Process1.join();
+
+    std::thread Process1([&]() {
+        
+        // tutte le variabili sono catturate per riferimento
+
+        }
+    );
+    Process2.join();
+
+    return 0;
+}
+```
+
+```cpp
+#include <iostream>
+#include <thread>
+
+int main()
+{
+    setlocale(0, "");
+    int param1 = 3, param2 = 5;
+
+    std::wcout << L"l'indirizzo del primo parametro è ";
+    std::wcout << &param1 << L'\n';
+    
+    std::wcout << L"l'indirizzo del secondo parametro è ";
+    std::wcout << &param2 << L'\n';
+
+    std::thread Process1([param1, &param2]() {
+        
+        std::wcout << L"parametro 1: "           << param1 << L'\n';
+        std::wcout << L"parametro 2: "           << param2 << L'\n';
+
+        std::wcout << L"indirizzo parametro 1: " << &param1 << L'\n';
+        std::wcout << L"indirizzo parametro 2: " << &param2 << L'\n';
+
+        // l'indirizzo del primo parametro cambia:
+        // ne viene eseguita una copia
+        // l'indirizzo del secondo parametro rimane lo stesso
+
+        }
+    );
+    Process1.join();
+
+    return 0;
+}
+```
+
+#### ***Thread di funzione membro***
+
+Per eseguire un thread di una funzione membro di una classe bisogna passare anche il puntatore a ```this```, in questo modo:
+
+```cpp
+#include <iostream>
+#include <thread>
+
+class MyClass
+{
+public:
+    void show() { std::wcout << L"thread in esecuzione\n"; }
+    void operator->() { show(); }
+};
+
+int main()
+{
+    setlocale(0, "");
+    MyClass obj;
+
+    // passaggio di operatore e puntatore all'oggetto
+    std::thread Process1(&MyClass::operator->, &obj);
+    Process1.join();
+
+    // passaggio di operatore e puntatore all'oggetto
+    std::thread Process2(&MyClass::show, &obj);
+    Process2.join();
+
+    return 0;
+}
+```
+
+#### ***Passare parametri a un thread di una funzione***
+
+Se la funzione di un thread ha degli argomenti, è possibile passare questi argomenti direttamente al thread:
+
+```cpp
+#include <iostream>
+#include <thread>
+
+void funct(int param1, int& param2)
+{
+    std::wcout << L"parametro 1: " << param1 << L'\n';
+    std::wcout << L"parametro 2: " << param2 << L'\n';
+
+    std::wcout << L"indirizzo parametro 1: " << &param1 << L'\n';
+    std::wcout << L"indirizzo parametro 2: " << &param2 << L'\n';
+}
+
+int main()
+{
+    setlocale(0, "");
+    int var1 = 3, var2 = 5;
+
+    std::wcout << L"l'indirizzo del primo parametro è ";
+    std::wcout << &var1 << L'\n';
+
+    std::wcout << L"l'indirizzo del secondo parametro è ";
+    std::wcout << &var2 << L'\n';
+
+    std::thread Process1(funct, var1, std::ref(var2));
+    Process1.join();
+
+    return 0;
+}
+```
+
+Si utilizza **```std::ref```** quando bisogna passare un parametro per riferimento a un thread.
+
+### Classi importanti con i thread
+
 ---
 ---
 
-# FINE
+## FINE
