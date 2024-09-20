@@ -5135,13 +5135,13 @@ void Function()
 
 int main()
 {
-    std::thread Process(Function); // attiva il thread
-    Process.join();                // aspetta il termine del thread
+    std::thread Process(Function);          // attiva il thread
+    if (Process.joinable()) Process.join(); // aspetta il termine del thread
     return 0;
 }
 ```
 
-Il thread chiamante (quello che esegue l'intero programma) attiva il thread secondario dichiarato con **```std::thread```**, quindi aspetta il suo termine prima di continuare la sua esecuzione.
+Il thread chiamante (quello che esegue l'intero programma) attiva il thread secondario dichiarato con **```std::thread```**, quindi aspetta il suo termine con ```join``` (importante l'utilizzo di ```joinable``` perché altrimenti il programma potrebbe andare in crash), prima di continuare la sua esecuzione.
 
 #### ***Thread con una lambda***
 
@@ -5159,7 +5159,7 @@ int main()
 
         }
     );
-    Process.join();
+    if (Process.joinable()) Process.join();
 
     return 0;
 }
@@ -5181,7 +5181,7 @@ int main()
 
         }
     );
-    Process1.join();
+    if (Process1.joinable()) Process1.join();
 
     std::thread Process1([&]() {
         
@@ -5189,7 +5189,7 @@ int main()
 
         }
     );
-    Process2.join();
+    if (Process2.joinable()) Process2.join();
 
     return 0;
 }
@@ -5210,7 +5210,7 @@ int main()
     std::wcout << L"l'indirizzo del secondo parametro è ";
     std::wcout << &param2 << L'\n';
 
-    std::thread Process1([param1, &param2]() {
+    std::thread Process([param1, &param2]() {
         
         std::wcout << L"parametro 1: "           << param1 << L'\n';
         std::wcout << L"parametro 2: "           << param2 << L'\n';
@@ -5224,7 +5224,7 @@ int main()
 
         }
     );
-    Process1.join();
+    if (Process.joinable()) Process.join();
 
     return 0;
 }
@@ -5252,11 +5252,11 @@ int main()
 
     // passaggio di operatore e puntatore all'oggetto
     std::thread Process1(&MyClass::operator->, &obj);
-    Process1.join();
+    if (Process1.joinable()) Process1.join();
 
     // passaggio di operatore e puntatore all'oggetto
     std::thread Process2(&MyClass::show, &obj);
-    Process2.join();
+    if (Process2.joinable()) Process2.join();
 
     return 0;
 }
@@ -5290,8 +5290,8 @@ int main()
     std::wcout << L"l'indirizzo del secondo parametro è ";
     std::wcout << &var2 << L'\n';
 
-    std::thread Process1(funct, var1, std::ref(var2));
-    Process1.join();
+    std::thread Process(funct, var1, std::ref(var2));
+    if (Process.joinable()) Process.join();
 
     return 0;
 }
@@ -5300,6 +5300,173 @@ int main()
 Si utilizza **```std::ref```** quando bisogna passare un parametro per riferimento a un thread.
 
 ### Classi importanti con i thread
+
+#### ***```std::mutex```***
+
+Un **mutex** è una classe utilizzata per prevenire situazioni di **race-condition** tra i thread, dove più di un thread accedono a risorse condivise provocando il crash del programma, per gestire un mutex si utilizzano **```std::lock_guard```** e **```std::unique_lock```**.
+
+```cpp
+#include <iostream>
+#include <mutex>
+#include <string>
+#include <thread>
+
+std::mutex mtx;
+
+void output(std::wstring& message)
+{
+    std::lock_guard<std::mutex> lock(mtx);
+    std::wcout << message << L'\n';
+}
+
+int main()
+{
+    setlocale(0, "");
+    std::thread t1(output, "Thread 1");
+    std::thread t2(output, "Thread 2");
+
+    if (t1.joinable()) t1.join();
+    if (t2.joinable()) t2.join();
+    return 0;
+}
+```
+
+Utilizzando ```lock_guard``` si crea un mutex e questo viene attivato, questo mette in pausa tutti gli altri thread impendendo loro di accedere a risorse condivise (```wcout```), quando lock_guard viene distrutto, il mutex è rilasciato e gli altri thread continuano la loro esecuzione.
+
+Si può anche untilizzare ```unique_lock```, in questo caso esiste un metodo **```unlock```** per sbloccare il mutex manualmente:
+
+```cpp
+    std::mutex mtx;
+    std::unique_lock<std::mutex> lock(mtx);
+    lock.unlock();
+```
+
+Il template di ```lock_guard``` e ```unique_lock``` esistono per via di un altro tipo di mutex detto ```shared_mutex```, che consente a più thread di accedere a una risorsa in lettura ma non in scrittura.
+
+#### ***```std::condition_variable```***
+
+Una variabile condizionale è molto utile quando diversi thread devono interagire, vediamo un esempio dove un thread sta aspettando che un altro thread finisca il calcolo prima di procedere:
+
+```cpp
+#include <condition_variable>
+#include <iostream>
+#include <mutex>
+#include <thread>
+
+std::mutex mtx;
+std::condition_variable cv;
+bool ready = false;
+
+// funzione del thread che aspetta
+void waiter()
+{
+    std::unique_lock<std::mutex> lock(mtx);
+    cv.wait(lock, []{ return ready; });
+    std::wcout << L"Il thread è stato sbloccato\n";
+}
+
+// funzione del thread che esegue il calcolo
+void worker()
+{
+    // il calcolo
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+
+    {
+        std::lock_guard<std::mutex> lock(mtx);
+        ready = true;
+    }
+
+    // notifica l'altro thread
+    cv.notify_one();
+}
+
+int main()
+{
+    setlocale(0, "");
+    std::thread t1(waiter);
+    std::thread t2(worker);
+
+    if (t1.joinable()) t1.join();
+    if (t2.joinable()) t2.join();
+    return 0;
+}
+```
+
+In questo codice vengono avviati due thread, il primo viene fermato dalla variabile condizionale, importante l'utilizzo del mutex, il secondo thread esegue un calcolo, poi utilizza un mutex per modificare la variabile globale ```ready```, importante l'uso delle parentesi graffe per rilasciare il mutex, si esegue la notifica, il thread in attesa si sblocca perché ```ready == true```.
+
+Vediamo più nel dettaglio alcuni metodi di ```std::condition_variable```:
+
++ ```wait```
+
+```cpp
+cv.wait(lock);
+```
+
+```cpp
+cv.wait(lock, [] { return ready; });
+```
+
+Il primo metodo aspetta fino a quando non riceve una notifica, mentre il secondo metodo sveglia il thread solo se dopo una notifica ```ready == true```.
+
++ ```wait_for```
+  Aspetta per una durata specifica
+
+```cpp
+cv.wait_for(lock, std::chrono::seconds(1), [] { return ready; });
+```
+
++ ```wait_until```
+  Attende fino a un punto temporale specifico
+
+```cpp
+cv.wait_until(
+    lock,
+    std::chrono::steady_clock::now() + std::chrono::seconds(1),
+    [] { return ready; }
+);
+```
+
++ ```notify_one```
+  Risveglia un singolo thread in attesa.
+
+```cpp
+cv.notify_one();
+```
+
++ ```notify_all```
+  Risveglia tutti i thread in attesa.
+
+```cpp
+cv.notify_all();
+```
+
+#### ***```std::future``` e ```std::promise```***
+
+```cpp
+#include <future>
+#include <iostream>
+#include <thread>
+
+void setter(std::promise<int> P) { P.set_value(40); }
+
+int main()
+{
+    setlocale(0, "");
+
+    std::promise<int> P;
+    std::future <int> F = P.get_future();
+
+    std::thread thr(setter, std::move(P));
+    std::wcout << L"risultato: " << F.get() << L'\n';
+
+    thr.join();
+    return 0;
+}
+```
+
+#### ***```std::async```***
+
+#### ***```std::atomic```***
 
 ---
 ---
