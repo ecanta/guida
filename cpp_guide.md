@@ -2032,7 +2032,7 @@ typedef struct _COORD {
 } COORD, *PCOORD;
 ```
 
-```SHORT``` è un typedef per ```short```.
+Dove ```SHORT``` è un typedef per ```short```.
 
 Per accedere agli elementi di una struttura si usa l'**operatore di accesso ai membri**:
 
@@ -2063,10 +2063,8 @@ Esempio:
 ```cpp
 #include <iostream>
 
-union variable
-{
-    int number;
-    int copy;
+union variable {
+    int number, copy;
 };
 
 int main()
@@ -2091,8 +2089,7 @@ Esempio: conversione tra ```int``` e ```short```
 ```cpp
 #include <iostream>
 
-union variable
-{
+union variable {
     int number;
     short mod;
 };
@@ -2112,7 +2109,7 @@ int main()
 }
 ```
 
-Quando si converte da ```int``` a ```short```, il numero 65537 è troppo grande per essere contenuto in ```mod```, quindi viene eseguito un modulo (resto della divisione).
+Quando si converte da ```int``` a ```short```, il numero 65537 è troppo grande per essere contenuto in ```mod```, quindi viene eseguita un'operazione di modulo (resto della divisione).
 
 ---
 ---
@@ -2137,11 +2134,13 @@ Per riempire un array con dei valori si usa **```std::fill```**, necessario incl
 int main()
 {
     int Array[1024]{};
-    std::fill(Array, Array + 1024, 1);
+    std::fill(Array, Array + 1023, 1);
 
     return 0;
 }
 ```
+
+Infatti in questo esempio, ```std::fill``` imposta a 1 tutti gli elementi di ```Array``` dall'indice 0 all'indice 1023.
 
 #### ***Accesso agli elementi***
 
@@ -2186,7 +2185,7 @@ Infatti la dimensione in byte di un array è pari al numero degli elementi molti
 
 #### ***Passare un array a una funzione***
 
-Per passare un array a una funzione bisogna aggiungere ```[]``` davanti al nome del parametro nella funzione, e bisogna fornire anche la dimensione, infatti quando passando un'array a una funzione viene passato in realtà un **puntatore** al primo elemento dell'array, cioè una variabile che contiene l'indirizzo del primo elemento dell'array.
+Per passare un array a una funzione bisogna aggiungere ```[]``` davanti al nome del parametro nella funzione, e bisogna fornire anche la dimensione, infatti quando si passa un'array a una funzione viene in realtà passato un **puntatore** al primo elemento dell'array, cioè una variabile che contiene l'indirizzo del primo elemento dell'array, ma questo significa che non si può più calcolare la dimensione dell'array con ```sizeof``` ed è necessario passare la dimensione come parametro.
 
 Esempio:
 
@@ -2236,7 +2235,7 @@ Questo ciclo riempie l'array di numeri interi consecutivi a partire da 0, viene 
 
 #### ***Array multidimensionali***
 
-Un array multidimensionale è un array che ha come elementi degli altri array, lo si può dichiarare così:
+Un array multidimensionale è un array che ha come elementi degli altri array, e lo si dichiara così:
 
 ```cpp
 int Array2d[10][3];     // due dimensioni
@@ -2244,23 +2243,23 @@ int Array3d[16][20][2]; // tre dimensioni
 // ecc...
 ```
 
-Supponendo di avere un array 2D, Arr:
+Supponendo di avere un array 2D, ```Arr```:
 
 ```cpp
 int Arr[12][12];
 ```
 
-E due indici i e j, Arr[i] è un array 1D, quindi ```(Arr[i])[j]``` o più semplicemente ```Arr[i][j]``` è un elemento dell'Array.
+E supponiamo di avere anche due indici ```i``` e ```j```, ```Arr[i]``` è un array 1D, quindi ```(Arr[i])[j]``` o più semplicemente ```Arr[i][j]``` è un elemento dell'array.
 
 ---
 ---
 
-### Algoritmi array
+### Algoritmi degli array
 
 #### ***Algoritmi di ordinamento***
 
 + **Bubble Sort**  
-Il Bubble Sort confonta ogni coppia di elementi adiacenti e li scambia se sono nell'ordine sbagliato:  
+Il Bubble Sort confonta ogni coppia di elementi adiacenti e li scambia se sono nell'ordine sbagliato.
 
 ```cpp
 #include <algorithm>
@@ -2274,7 +2273,7 @@ static void BubbleSort(int arr[], int size)
 ```
 
 + **Selection Sort**  
-Il Selection Sort trova l'elemento minimo e lo riposiziona all'inizio e poi ripete il processo
+Il Selection Sort trova l'elemento minimo e lo riposiziona all'inizio e poi ripete il processo.
 
 ```cpp
 static void SelectionSort(int arr[], int size)
@@ -2290,10 +2289,10 @@ static void SelectionSort(int arr[], int size)
 ```
 
 + **Insertion Sort**  
-L'Insertion Sort inserisce gli elementi già ordinati uno alla volta nella posizione corretta
+L'Insertion Sort inserisce gli elementi già ordinati uno alla volta nella posizione corretta.
 
 ```cpp
-static void insertionSort(int arr[], int size)
+static void InsertionSort(int arr[], int size)
 {
     for (int i = 1; i < size; ++i)
     {
@@ -2316,8 +2315,7 @@ static int partition(int arr[], int low, int high)
     int pivot = arr[high], i = low - 1;
     for (int j = low; j < high; ++j) if (arr[j] <= pivot)
     {
-        i++;
-        std::swap(arr[i], arr[j]);
+        std::swap(arr[++i], arr[j]);
     }
     std::swap(arr[i + 1], arr[high]);
     return i + 1;
@@ -2333,14 +2331,14 @@ static void QuickSort(int arr[], int low, int high)
 }
 ```
 
-Per chiamare ```QuickSort``` si fa così:
+Si può chiamare questa funzione ```QuickSort``` in questo modo:
 
 ```cpp
 QuickSort(arr, 0, sizeof(arr) / sizeof(arr[0]) - 1);
 ```
 
 + Heap Sort  
-L'Heap Sort costruisce una struttura dati a forma di albero (heap) dall'array ed estrae l'elemento massimo uno alla volta
+L'Heap Sort costruisce una struttura dati a forma di albero (heap) dall'array ed estrae l'elemento massimo uno alla volta.
 
 ```cpp
 static void Heapify(int arr[], int n, int i)
@@ -2371,8 +2369,8 @@ static void HeapSort(int arr[], int size)
 
 #### ***Algoritmi di ricerca***
 
-+ Ricerca lineare
-Si controlla per ogni indice dell'array se l'elemento corrisponde, funziona sempre
++ Ricerca lineare:  
+Si controlla per ogni indice dell'array se l'elemento corrisponde, funziona con ogni tipo di array.
 
 ```cpp
 static int LinearSearch(const int arr[], int size, int element)
@@ -2383,11 +2381,11 @@ static int LinearSearch(const int arr[], int size, int element)
 }
 ```
 
-+ Ricerca binaria
-Funziona solo su array ordinati, si parte dalla metà dell'array e dimezzando l'incremento a ogni iterazione si aumenta o si diminuisce l'indice se l'elemento a quell'indice è maggiore o minore dell'elemento da trovare
++ Ricerca binaria:  
+Funziona solo su array ordinati, si parte dalla metà dell'array e dimezzando l'incremento a ogni iterazione si aumenta o si diminuisce l'indice, se l'elemento all'indice è maggiore o minore dell'elemento da trovare.
 
 ```cpp
-static int binarySearch(const int arr[], int size, int element)
+static int BinarySearch(const int arr[], int size, int element)
 {
     int left{}, right{ size - 1 };
 
@@ -2415,7 +2413,7 @@ In C++ un **puntatore** è una variabile il cui valore è l'indirizzo di un'altr
 
 ***\<datatype\>*\* *\<nome\>* = nullptr;**
 
-E' possibile dichiarare un puntatore senza inizializzarlo ma per sicurezza si inizializza a ```nullptr```.
+E' possibile dichiarare un puntatore senza inizializzarlo ma per sicurezza si dovrebbe sempre inizializzare a ```nullptr```.
 
 Per assegnare un indirizzo a un puntatore si può utilizzare l'**operatore di indirizzo ```&```**:
 
@@ -2424,7 +2422,7 @@ Per assegnare un indirizzo a un puntatore si può utilizzare l'**operatore di in
     int *pointer = &Variable;
 ```
 
-Per ottenere il valore della variabile a cui punta il puntatore si usa l'**operatore 'di dereferenziazione' ```*```**:
+Per ottenere il valore della variabile a cui punta il puntatore si usa l'**operatore di dereferenziazione ```*```**:
 
 ```cpp
     int Variable{};
@@ -2434,26 +2432,24 @@ Per ottenere il valore della variabile a cui punta il puntatore si usa l'**opera
 
 #### ***Puntatori che puntano a un array \ struttura***
 
-Se un puntatore punta a un array, sta in realtà puntando al primo elemento di quell'array, e incrementando il puntatore si può accedere agli altri elementi dell'array:
+Se un puntatore punta a un array, sta in realtà puntando al primo elemento di quell'array, e incrementando il puntatore si accede agli altri elementi dell'array:
 
 ```cpp
-    int arr[5]{1, 2, 3, 4, 5};
+    int arr[5]{ 1, 2, 3, 4, 5 };
     int* pArr = &arr;         // pArr     punta a arr[0] = 1
     std::cout << *(pArr + 1); // pArr + 1 punta a arr[1] = 2
 ```
 
-Se un puntatore punta a una struttura, si può accedere ai suoi elementi tramite l'**operatore 'di accesso tramite puntatore a membro' ```->```**:
+Se un puntatore punta a una struttura, si può accedere ai suoi elementi tramite l'**operatore di accesso tramite puntatore a membro ```->```**:
 
 ```cpp
 #include <iostream>
 struct point {
-    double x;
-    double y;
-    double z;
+    double x, y, z;
 };
 int main()
 {
-    point P1{1, -1, 0};
+    point P1{ 1, -1, 0 };
     point* ptr1 = &P1;
     ptr1->z = 3; // modifica di P1.z
 
@@ -2495,7 +2491,7 @@ Quando un puntatore non serve più deve essere deallocato:
 
 #### ***Le eccezioni di ```<stdexcept>```***
 
-E' buona pratica, ogni volta che si crea un puntatore nell'heap, di controllare se il puntatore è nullo, in questo caso si può sollevare un'eccezione, che ferma in automatico il programma quando c'è un errore che non va bene:
+E' buona pratica, ogni volta che si crea un puntatore nell'heap, di controllare se il puntatore è nullo, in questo caso si può sollevare un'eccezione, che ferma in automatico il programma quando si verifica un errore:
 
 ```cpp
     int* ptr = new int;
@@ -2569,7 +2565,7 @@ int main()
 
 **```std::shared_ptr```** è un altro puntatore intelligente, e permette la condivisione delle proprietà dell'oggetto, non si usa delete perché l'oggetto a cui uno shared_ptr punta viene deallocato ogni volta che lo shared_ptr viene distrutto o diventa nullo.
 
-shared_ptr ha un contatore implementato per tenere il conto di quanti puntatori punta allo stesso oggetto alla volta.
+```std::shared_ptr``` ha un contatore implementato per tenere il conto di quanti puntatori puntano allo stesso oggetto alla volta.
 
 Esempio:
 
@@ -2595,7 +2591,7 @@ int main()
 }
 ```
 
-Tuttavia se ci sono due oggetti che puntano l'uno all'altro (riferimento circolare), il contatore non arriverà mai a zero, ma questo problema si può risolvere sostituendo uno shared_ptr con uno **```std::weak_ptr```**.
+Tuttavia se ci sono due oggetti che puntano l'uno all'altro (riferimento circolare), il contatore non arriverà mai a zero, ma questo problema si può risolvere sostituendo uno shared_ptr con un weak_ptr.
 
 **```std::weak_ptr```** non incrementa il contatore di riferimenti degli altri shared_ptr, ma può osservare se l'oggetto esiste ancora e può essere convertito in shared_ptr.
 
@@ -2608,6 +2604,7 @@ Esempio:
 struct StructA;
 struct StructB;
 struct StructA {
+     // questo deve essere uno std::weak_ptr
     std::shared_ptr<StructB> b_ptr;
 };
 struct StructB {
@@ -2656,7 +2653,7 @@ int main()
 
 ### ```Windows.h```
 
-**```<Windows.h>```** è un file header utilizzato per accedere alle API (application programming interface) di Windows, per utilizzarle serve un **handle** (puntatore void) alla console, in questo modo:
+**```<Windows.h>```** è un file header utilizzato per accedere alle API (Application Programming Interface) di Windows, per utilizzarle serve un **handle** (puntatore void) alla console, in questo modo:
 
 ```cpp
 #include <Windows.h>
@@ -2665,8 +2662,7 @@ HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
 #### ***Cambiare l'attributo della console***
 
-Per cambiare il colore del testo e dello sfondo della console si utilizza la funzione **```SetConsoleTextAttribute```**.  
-Esempio:
+Per cambiare il colore del testo e dello sfondo della console si utilizza la funzione **```SetConsoleTextAttribute```**, esempio:
 
 ```cpp
     SetConsoleTextAttribute(hConsole, BACKGROUND_RED | FOREGROUND_BLUE);
@@ -2686,7 +2682,7 @@ Le macro utilizzate sono queste:
   + ```BACKGROUND_GREEN```
   + ```BACKGROUND_INTENSITY```
 
-Queste macro vengono combinate utilizzando l'**operatore bitwise or**
+Queste macro vengono combinate utilizzando l'**operatore bitwise or**.
 
 #### ***Riposizionare il cursore***
 
@@ -2704,39 +2700,41 @@ Qui il cursore viene riposizionato alla coordinata (0, 10) sulla console, il ```
 Per ottenere dati come la posizione del cursore o la dimensione del buffer della console c'è un'unica funzione che si chiama **```GetConsoleScreenBufferInfo```**:
 
 ```cpp
+#include <stdexcept>
 #include <Windows.h>
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 CONSOLE_SCREEN_BUFFER_INFO csbi;
 
 int main()
 {
-    if (!GetConsoleScreenBufferInfo(hConsole, &csbi)) return 1;
+    if (!GetConsoleScreenBufferInfo(hConsole, &csbi))
+        throw std::runtime_error("failed to access info");
 
     csbi.dwSize;              // dimensioni del buffer
     csbi.dwCursorPosition;    // posizione del cursore
     csbi.wAttributes;         // attributo della console
     
     // SMALL_RECT con le posizioni dei vertici della finestra
-    // nel buffer dell console
+    // nel buffer della console
     csbi.srWindow;
 
-    csbi.dwMaximumWindowSize; //dimensioni massime della finestra
+    csbi.dwMaximumWindowSize; // dimensioni massime della finestra
 
     return 0;
 }
 ```
 
-L'if serve per controllare se l'operazione di ottenere i dati dalla console ha avuto successo, e il ```CONSOLE_SCREEN_BUFFER_INFO``` ```csbi``` viene passato per riferimento.
+Notare che il ```CONSOLE_SCREEN_BUFFER_INFO``` ```csbi``` viene passato per riferimento.
 
 #### ***Nascondere il cursore***
 
-Si può cambiare le informazioni del cursore con la funzione **```SetConsoleCursorInfo```**:
+Si possono cambiare le informazioni del cursore con la funzione **```SetConsoleCursorInfo```**:
 
 ```cpp
 #include <Windows.h>
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 CONSOLE_CURSOR_INFO HideCursor{ 10, FALSE };
-CONSOLE_CURSOR_INFO ShowCursor{ 10, TRUE };
+CONSOLE_CURSOR_INFO ShowCursor{ 10, TRUE  };
 
 int main()
 {
@@ -2791,7 +2789,7 @@ Bisogna fornire (in ordine) l'Handle, il carattere \ attributo da scrivere, quan
 
 La differenza tra **```FillConsoleOutputCharacterA```** e **```FillConsoleOutputCharacterW```** è il fatto che la seconda funziona anche con i caratteri unicode (estensione della tabella ASCII), Tuttavia esiste la macro **```FillConsoleOutputCharacter```**, che sceglie in automatico qual è la funzione da utilizzare.
 
-Per cancellare tutto si può utilizzare ```system("cls")``` per cancellare tutto ciò che è stato scritto sulla console.
+Si può utilizzare ```system("cls")``` per cancellare tutto ciò che è stato scritto sulla console.
 
 #### ***Inviare un input utente***
 
@@ -2814,7 +2812,9 @@ input[1].ki.dwFlags = KEYEVENTF_KEYUP;
 SendInput(2, input, sizeof(INPUT));
 ```
 
-```KEYEVENTF_KEYUP``` indica che il tasto viene rilasciato, ```MOUSEEVENTF_LEFTDOWN``` preme il tasto sinistro del mouse, ```MOUSEEVENTF_LEFTUP``` preme il tasto destro del mouse.
++ ```KEYEVENTF_KEYUP``` indica che il tasto viene rilasciato,
++ ```MOUSEEVENTF_LEFTDOWN``` preme il tasto sinistro del mouse,
++ ```MOUSEEVENTF_LEFTUP``` preme il tasto destro del mouse.
 
 Per impostare il tipo di tasto da premere, si usano i caratteri della lettera maiuscola \ numero corrispondente al tasto, se il tasto è speciale si usano queste macro:
 
@@ -2837,7 +2837,7 @@ Per impostare il tipo di tasto da premere, si usano i caratteri della lettera ma
 
 #### ***```MessageBox```***
 
-E' una funzione che crea una finestra di messaggio, esempio:
+```MessageBox``` è una funzione che crea una finestra di messaggio, ad esempio:
 
 ```cpp
 MessageBox(
@@ -2851,11 +2851,11 @@ MessageBox(
 
 Tipi di pulsanti:
 
-+ ```MB_OK```: solo pulsante OK
-+ ```MB_OKCANCEL```: pulsanti OK e ANNULLA
-+ ```MB_YESNO```: pulsanti SI e NO
-+ ```MB_RETRYCANCEL```: pulsanti RIPROVA e ANNULLA
-+ ```MB_ABORTRETRYIGNORE```: pulsanti INTERROMPI, RIPROVA e IGNORA
++ ```MB_OK```: solo pulsante ```OK```
++ ```MB_OKCANCEL```: pulsanti ```OK``` e ```ANNULLA```
++ ```MB_YESNO```: pulsanti ```SI``` e ```NO```
++ ```MB_RETRYCANCEL```: pulsanti ```RIPROVA``` e ```ANNULLA```
++ ```MB_ABORTRETRYIGNORE```: pulsanti ```INTERROMPI```, ```RIPROVA``` e ```IGNORA```
 
 Tipi di icone:
 
@@ -2889,25 +2889,7 @@ int main()
     std::getline(std::wcin, Str);
 
     std::wcout << L"la dimensione della stringa è ";
-    std::wcout << std::size(Str);
-
-    return 0;
-}
-```
-
-```cpp
-#include <iostream>
-#include <string>
-
-int main()
-{
-    setlocale(0, "");
-
-    std::wstring Str;
-    std::getline(std::wcin, Str);
-
-    std::wcout << L"la dimensione della stringa è ";
-    std::wcout << Str.size();
+    std::wcout << std::size(Str); // Str.size() va bene lo stesso
 
     return 0;
 }
@@ -2952,7 +2934,7 @@ int main()
     do std::getline(std::wcin, Str);
     while (Str.empty());
 
-    std::wcout << L"il primo carattere è " << Str.at(0) << L'\n';
+    std::wcout << L"il primo carattere è " << Str.at(0)  << L'\n';
     std::wcout << L"l'ultimo carattere è " << Str[Str.size() - 1];
 
     return 0;
@@ -3085,6 +3067,8 @@ int main()
 }
 ```
 
+Il metodo ```begin``` ritorna un **iteratore** al primo elemento della stringa, il metodo ```end``` ritorna un iteratore all'ultimo elemento, e si possono utilizzare gli operatori ```+``` e ```-``` per incrementare \ decrementare l'elemento dell'iteratore
+
 #### ***Tagliare una stringa***
 
 Si usa il metodo **```erase```**, che ha 4 varianti:
@@ -3139,8 +3123,8 @@ int main()
     std::wcout << L"inserisci il carattere da aggiungere\n";
     char ch = _getche();
 
-    std::wstring result = string;  // result = string + ch
-    result.push_back(ch);          // va bene lo stesso
+    std::wstring result = string;  // (result = string + ch
+    result.push_back(ch);          //  va bene lo stesso   )
 
     std::wcout << L"nuova stringa " << result;
     return 0;
@@ -3166,8 +3150,8 @@ int main()
     std::getline(std::wcin, A);
     std::getline(std::wcin, B);
 
-    std::wstring result = A;   // result = A + B
-    result.append(B);          // va bene lo stesso
+    std::wstring result = A;   // (result = A + B
+    result.append(B);          //  va bene lo stesso)
 
     std::wcout << L"stringhe concatenate: " << result;
     return 0;
@@ -3184,7 +3168,7 @@ Si usa il metodo **```substr```**:
     std::wstring part = str.substr(FirstIndex, LastIndex);
 ```
 
-La stessa cosa che si fa così con ```erase```:
+La stessa cosa si può fare in questo modo con ```erase```:
 
 ```cpp
     std::wstring part = str;
@@ -3282,9 +3266,14 @@ int main()
     double d;
     std::wstring s;
 
-    iss >> std::ws >> i; // ignora gli spazi bianchi prima della stringa
-    iss >> d;            // gli spazi bianchi in mezzo alla stringa non hanno effetto
-    iss >> std::ws >> s; // ignora gli spazi bianchi prima della stringa da leggere
+    // ignora gli spazi bianchi prima della stringa
+    iss >> std::ws >> i;
+    
+    // gli spazi bianchi in mezzo alla stringa non hanno effetto
+    iss >> d;
+
+    // ignora gli spazi bianchi prima della stringa da leggere
+    iss >> std::ws >> s;
 
     std::wcout << L"intero: "  << i << L'\n';
     std::wcout << L"double: "  << d << L'\n';
@@ -3296,8 +3285,7 @@ int main()
 
 #### ***Gli stringstream di output***
 
-Con i **```wostringstream```** si possono eseguire solo operazioni di output dallo stringstream.  
-Esempio:
+Con i **```wostringstream```** si possono eseguire solo operazioni di output dallo stringstream, esempio:
 
 ```cpp
 #include <iostream>
@@ -3338,10 +3326,10 @@ int main()
     setlocale(0, "");
 
     std::wostringstream stream;
-    bool alpha = true;
+    bool Alpha = true;
 
-    stream << boolalpha   << alpha;  // stream.str() = true
-    stream << noboolalpha << !alpha; // stream.str() = true0
+    stream << boolalpha   << Alpha;  // stream.str() = true
+    stream << noboolalpha << !Alpha; // stream.str() = true0
 
     std::wcout << L"lo stringstream è " << stream.str();
     return 0;
@@ -3399,7 +3387,7 @@ int main()
 ```
 
 + **```std::fixed```**, **```std::scientific```** e **```std::defaultfloat```** con **```std::setprecision```**  
-```setprecision``` stabilisce quante cifre decimali dopo la virgola ci devono essere, ```fixed``` indica che il numero di cifre decimali è fisso, ```scientific``` forza l'output in notazione scientifica e defaultfloat annulla ```fixed``` o ```scientific```:
+```setprecision``` stabilisce quante cifre decimali dopo la virgola ci devono essere, ```fixed``` indica che il numero di cifre decimali è fisso, ```scientific``` forza l'output in notazione scientifica e ```defaultfloat``` annulla ```fixed``` o ```scientific```:
 
 ```cpp
 #include <iomanip>
@@ -3591,7 +3579,7 @@ Le parentesi quadre si usano con queste regole:
 
 + ```[...]```: quasiasi carattere tra quelli nelle parentesi quadre (i puntini di sospensione sono indicativi)
 + ```[^...]```: qualsiasi carattere che non si trova nelle parentesi quadre
-+ ```[A-z]```: qualsiasi carattere compreso tra A e z nella tabella ASCII
++ ```[A-z]```: qualsiasi carattere compreso tra 'A' e 'z' nella tabella ASCII
 
 Esempio dell'uso delle parentesi quadre:
 
@@ -3946,8 +3934,10 @@ int main()
 
     auto end = std::chrono::high_resolution_clock::now();
     std::wcout << L"tempo trascorso: ";
+
     std::wcout << std::chrono::duration_cast
         <std::chrono::nanoseconds>(end - start).count();
+
     std::wcout << L" microsecondi\n";
 
     return 0;
@@ -4026,7 +4016,7 @@ int main()
     // codice...
     // ...
 
-    clock_t end = clock();
+    clock_t end   = clock();
 
     std::wcout << L"tempo trascorso: ";
     std::wcout << double(end - start) / CLOCKS_PER_SEC;
@@ -4073,7 +4063,7 @@ int main()
     setlocale(0, "");
 
     std::random_device rnd;
-    std::wcout << rnd();
+    std::wcout <<      rnd();
 
     return 0;
 }
@@ -4152,8 +4142,8 @@ class Class1
 Esempio completo di una classe:
 
 ```cpp
-#define M_PI 3.14159265358979323
 #include <iostream>
+#include <numbers>
 
 class Circle
 {
@@ -4166,11 +4156,11 @@ public:
     }
     double Circumference()
     {
-        return M_PI * radius;
+        return std::numbers::pi * radius;
     }
     long double Area()
     {
-        return M_PI * radius * radius;
+        return std::numbers::pi * radius * radius;
     }
 };
 
@@ -4243,8 +4233,8 @@ int main()
 Ecco un esempio di come si può implementare il distruttore con la classe ```Circle```:
 
 ```cpp
-#define M_PI 3.14159265358979323
 #include <iostream>
+#include <numbers>
 
 class Circle
 {
@@ -4270,11 +4260,11 @@ public:
     }
     double Circumference()
     {
-        return M_PI * radius;
+        return std::numbers::pi * radius;
     }
     long double Area()
     {
-        return M_PI * radius * radius;
+        return std::numbers::pi * radius * radius;
     }
 };
 
@@ -4296,11 +4286,12 @@ int main()
 
 #### ***Il costruttore di copia***
 
-Quando un oggetto viene passato a una funzione per valore, una funzione ritorna un oggetto o un oggetto viene inizializzato con un altro oggetto della stessa classe, viene chiamato il **costruttore di copia**:
+Quando un oggetto viene passato a una funzione per valore, una funzione ritorna un oggetto, o un oggetto viene inizializzato con un altro oggetto della stessa classe, viene chiamato il **costruttore di copia**:
 
 ```cpp
 class Circle
 {
+    using std::numbers::pi;
 public:
     int radius;
 
@@ -4320,13 +4311,13 @@ public:
         std::wcout << L"\nl'oggetto è stato distrutto\n";
     }
 
-    int         Diameter()      { return 2 * radius;             }
-    double      Circumference() { return M_PI * radius;          }
-    long double Area()          { return M_PI * radius * radius; }
+    int         Diameter()      { return 2  * radius;          }
+    double      Circumference() { return pi * radius;          }
+    long double Area()          { return pi * radius * radius; }
 };
 ```
 
-Esempio in viene chiamato il costruttore di copia:
+Esempio in cui viene chiamato il costruttore di copia:
 
 ```cpp
 int main()
@@ -4348,6 +4339,7 @@ Quando un oggetto viene spostato (con **```std::move```**) si chiama il **costru
 ```cpp
 class Circle
 {
+    using std::numbers::pi;
 public:
     int radius;
 
@@ -4370,9 +4362,9 @@ public:
         std::wcout << L"\nl'oggetto è stato distrutto\n";
     }
 
-    int         Diameter()      { return 2 * radius;             }
-    double      Circumference() { return M_PI * radius;          }
-    long double Area()          { return M_PI * radius * radius; }
+    int         Diameter()      { return 2  * radius;          }
+    double      Circumference() { return pi * radius;          }
+    long double Area()          { return pi * radius * radius; }
 };
 ```
 
@@ -4506,6 +4498,23 @@ class vector_t : public std::vector<int>
 };
 ```
 
+#### ***Ereditare i costruttori***
+
+Quando si deriva una classe, essa non eredita i costruttori, tuttavia ciò si risolve facilmente con ```using```, esempio:
+
+```cpp
+#include <initializer_list>
+#include <iostream>
+#include <string>
+#include <vector>
+class vector_t : public std::vector<int>
+{
+    using std::vector<int>::vector;
+
+    // il resto della classe
+};
+```
+
 #### ***Sovrascrivere un metodo***
 
 Una classe derivata può **sovrascrivere** un metodo della classe base con la parola chiave **```override```** solo se la classe base ha dichiarato il metodo come **```virtual```**, in questo modo la classe derivata eseguirà sempre la sua versione sovrascritta del metodo invece di quella originaria:
@@ -4634,17 +4643,6 @@ public:
 };
 ```
 
-#### ***Ereditare i costruttori***
-
-Quando si deriva una classe, essa non eredita i costruttori, tuttavia ciò si risolve facilmente con ```using```, esempio:
-
-```cpp
-class vector_t : public std::vector<int>
-{
-    using std::vector<int>::vector;
-};
-```
-
 #### ***Distruttore virtuale***
 
 Quando si distrugge con ```delete``` un oggetto di una classe derivata tramite un puntatore alla classe base, se il distruttore non è virtuale verrà chiamato solo quello della classe base, causando potenziali perdite di memoria:
@@ -4701,7 +4699,7 @@ public:
 
 In una classe in C++ si possono definire degli operatori con il **sovraccarico**, si scrive una funzione il cui nome è ```operator``` seguito dall'operatore, qui ne vedremo alcuni.
 
-#### ***sovraccarico dell'operatore ```=```***
+#### ***Sovraccarico dell'operatore ```=```***
 
 Vediamo come si può sovraccaricare l'operatore di assegnazione di questa classe ```coord```:
 
@@ -4756,7 +4754,7 @@ int main()
 
 Spiegazione: quando si esegue ```c_two = c_one```, a ```c_two``` viene assegnato il valore di ```c_one```, ma l'operatore restituisce ```*this``` cioè il risultato, di conseguenza a ```c_three``` viene assegnato il valore del risultato, e così via.
 
-#### ***sovraccarico degli operatori logici e di confronto***
+#### ***Sovraccarico degli operatori logici e di confronto***
 
 Esempi:
 
@@ -4806,7 +4804,7 @@ bool operator>=(const coord other) const
 
 In questo caso confrontiamo i moduli delle due coordinate (le distanze da {0, 0}), che si calcolano con il teorema di pitagora (```std::hypot```).
 
-#### ***sovraccarico degli operatori aritmetici***
+#### ***Sovraccarico degli operatori aritmetici***
 
 ```cpp
 coord operator+(const coord other) const
@@ -4823,12 +4821,12 @@ coord& operator+=(const coord other)
 }
 coord& operator++()    // ++ pre-fisso  (++a)
 {
-    *this = *this + coord{1, 0};
+    *this = *this + coord{ 1, 0 };
     return  *this;
 }
 coord& operator++(int) // ++ post-fisso (a++)
 {
-    *this = *this + coord{0, 1};
+    *this = *this + coord{ 0, 1 };
     return  *this;
 }
 ```
@@ -4837,7 +4835,7 @@ Il riferimento (```&```) si trova solo sul tipo restituito dagli operatori ```+=
 
 L'operatore ```++``` post-fisso si distingue da quello pre-fisso perché accetta un parametro di tipo ```int```, ma esso non viene mai usato.
 
-#### ***sovraccarico degli operatori speciali***
+#### ***Sovraccarico degli operatori speciali***
 
 + Operatore ```->```  
 
@@ -4848,7 +4846,7 @@ coord* operator->()
 }
 ```
 
-Si eseguisce ```return this``` invece di ```return *this``` perché si sta restituendo un puntatore.
+Si esegue ```return this``` invece di ```return *this``` perché si sta restituendo un puntatore.
 
 + Operatore ```()```
 
@@ -5019,7 +5017,7 @@ template<typename T, int size> static void BubbleSort(T arr[])
 }
 ```
 
-Viene passato un parametro integrale ```size``` al template, non alla funzione (ma cambia solo la chiamata di funzione, per il resto la logica è la stessa).
+Viene passato un parametro integrale ```size``` al template, non alla funzione (ma cambia solo la sintassi della chiamata di funzione, per il resto la logica è la stessa).
 
 #### ***La specializzazione di un template***
 
@@ -5116,12 +5114,12 @@ int main()
 
 I puntini di sospensione vengono espansi dal compilatore in questo modo: ```std::wcout << 23 << L' ' << 1.05 << L"written"```.
 
-Oppure la stessa cosa si può fare anche in questo modo:
+La stessa cosa si può fare anche in questo modo:
 
 ```cpp
 #include <iostream>
 
-template<typename T> static void print_single(T value)
+template<typename T>       static void print_single(T value)
 {
     std::wcout << value << L'\n';
 }
@@ -5178,18 +5176,18 @@ if constexpr (std::is_integral_v<T, int>)
 }
 ```
 
-Ecco altre classi (la sintassi è analoga):
+Tra le altre classi ci sono:
 
 + **```is_void```**
 + **```is_null_pointer```**
 + **```is_floating_point```** (controlla se un numero è decimale)
 + **```is_array```**
 + **```is_enum```**
-+ **```is_class```** (controlla se è ti tipo classe o struttura)
++ **```is_class```** (controlla se è di tipo classe o struttura)
 + **```is_function```**
 + **```is_pointer```**
 
-Con i template, **```std::enable_if```** permermette di abilitare una porzione di codice solo se una condizione è vera, in questo caso, se T è integrale.
+Con i template, **```std::enable_if```** permette di abilitare una porzione di codice se e solo se una condizione è vera, in questo caso, se T è integrale.
 
 ```cpp
 template<typename T>
@@ -5202,7 +5200,7 @@ Questo codice può essere riscritto in questo modo con i **concetti**:
 ```cpp
 template<typename T> concept Integral = std::is_integral_v<T>;
 
-template<Integral T> T add(T a, T b) { return a + b; }
+template<Integral T> T add(T a, T b)  { return a + b;        }
 ```
 
 La differenza è che nel secondo codice avviene un errore di compilazione se la condizione non è rispettata invece di disattivare il codice.
@@ -5553,7 +5551,7 @@ Si utilizza **```std::ref```** quando bisogna passare un parametro per riferimen
 
 #### ***```std::mutex```***
 
-Un **mutex** è una classe utilizzata per prevenire situazioni di **race-condition** tra i thread, dove più di un thread accedono a risorse condivise provocando il crash del programma, per gestire un mutex si utilizzano **```std::lock_guard```** e **```std::unique_lock```**.
+Un **mutex** è una classe utilizzata per prevenire situazioni di **race-condition** tra i thread, dove più di un thread accede a risorse condivise provocando il crash del programma, per gestire un mutex si utilizzano **```std::lock_guard```** e **```std::unique_lock```**.
 
 ```cpp
 #include <iostream>
@@ -5591,7 +5589,7 @@ Si può anche untilizzare ```unique_lock```, in questo caso esiste un metodo **`
     lock.unlock();
 ```
 
-Il template di ```lock_guard``` e ```unique_lock``` esistono per via di un altro tipo di mutex detto ```shared_mutex```, che consente a più thread di accedere a una risorsa in lettura ma non in scrittura.
+I template di ```lock_guard``` e ```unique_lock``` esistono per via di un altro tipo di mutex detto ```shared_mutex```, che consente a più thread di accedere a una risorsa in lettura ma non in scrittura.
 
 #### ***```std::condition_variable```***
 
@@ -5658,15 +5656,15 @@ cv.wait(lock, [] { return ready; });
 
 Il primo metodo aspetta fino a quando non riceve una notifica, mentre il secondo metodo sveglia il thread solo se dopo una notifica ```ready == true```.
 
-+ ```wait_for```
-  Aspetta per una durata specifica
++ ```wait_for```  
+  aspetta per una durata specifica
 
 ```cpp
 cv.wait_for(lock, std::chrono::seconds(1), [] { return ready; });
 ```
 
-+ ```wait_until```
-  Attende fino a un punto temporale specifico
++ ```wait_until```  
+  attende fino a un punto temporale specifico
 
 ```cpp
 cv.wait_until(
@@ -5676,15 +5674,15 @@ cv.wait_until(
 );
 ```
 
-+ ```notify_one```
-  Risveglia un singolo thread in attesa.
++ ```notify_one```  
+  risveglia un singolo thread in attesa.
 
 ```cpp
 cv.notify_one();
 ```
 
-+ ```notify_all```
-  Risveglia tutti i thread in attesa.
++ ```notify_all```  
+  risveglia tutti i thread in attesa.
 
 ```cpp
 cv.notify_all();
@@ -5741,10 +5739,10 @@ Questo funziona solo se il datatype è primitivo oppure un typedef\alias di un t
 
 I metodi di ```std::atomic``` includono:
 
-+ ```load```: legge il valore
-+ ```store```: scrive un valore
-+ ```fetch_add```: incrementa
-+ ```fetch_sub```: decrementa
++ ```load```: legge il valore della variabile
++ ```store```: scrive un valore nella variabile
++ ```fetch_add```: incrementa il valore
++ ```fetch_sub```: decrementa il valore
 
 Esempio:
 
