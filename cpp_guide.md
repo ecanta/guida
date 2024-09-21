@@ -1,6 +1,6 @@
 # Guida alla programmazione in C++
 
-## ```Questa guida è per C++ dalla versione C++11 in poi utilizzando come IDE Visual Studio 2022 e come compilatore MSVC (il compilatore di Visual Studio)```
+## ```Questa guida è per C++ dalla versione C++20 in poi utilizzando come IDE Visual Studio 2022```
 
 ---
 
@@ -51,52 +51,51 @@ int main()
 
 **```main```** rappresenta il programma, e contiene ciò che deve essere eseguito, **```int```** segnala che il tipo restituito dalla funzione è un numero intero.
 
-**```return 0```** termina il programma con codice 0 che significa che non si sono verificati errori
+**```return 0```** termina il programma con codice 0 che significa che non si sono verificati errori.
 
-**```std```** è uno spazio di nomi che contiene l'oggetto **```cout```**, si scrive **```std::```** prima di ```cout``` per indicare che ```cout``` appartiene allo spazio di nomi std (standard).
+**```std```** è uno spazio di nomi che contiene l'oggetto **```cout```**, si scrive **```std::```** prima di ```cout``` per indicare che ```cout``` appartiene allo spazio di nomi ```std``` (standard).
 
 **```std::cout```** è utilizzato per scrivere nella console, in questo caso ```Hello, World!```, le cose da scrivere sono concatenate con l'operatore ```<<```.
 
 Il punto e virgola dopo ```Hello, World!``` indica che l'istruzione è terminata, infatti il compilatore distingue le istruzioni grazie al punto e virgola e non al carattere di nuova linea.
 
-```#include <iostream>``` non ha un punto e virgola alla fine perché è una direttiva, si possono riconoscere le direttive perché iniziano con ```#```
+```#include <iostream>``` non ha un punto e virgola alla fine perché è una direttiva, si possono riconoscere le direttive perché iniziano con ```#```.
 
 #### ***```using namespace std```***
 
-Esiste un modo per evitare di scrivere ```std::``` prima di ogni funzione\oggetto\classe\struttura dello spazio di nomi standard:
+Esiste un modo per evitare di scrivere ```std::``` prima di ogni variabile\funzione\enumerazione\unione\struttura\classe\oggetto dello spazio di nomi standard:
 
 ```cpp
 using namespace std;
 ```
 
-In questo caso il programma diventa
+In questo caso il programma diventa:
 
 ```cpp
 #include <iostream>
 using namespace std;
 int main()
-
 {
     cout << "Hello, World!";
     return 0;
 }
 ```
 
-In questa guida non useremo ```using namespace std``` perché così è più chiaro
+In questa guida non useremo ```using namespace std``` perché in questo modo è più chiaro.
 
-un'alternativa preferibile a ```using namespace std``` potrebbe essere questa
+Un'alternativa preferibile a ```using namespace std``` potrebbe essere questa:
 
 ```cpp
 using std::cout;
 ```
 
-oppure
+Oppure:
 
 ```cpp
 using std::cout, std::cin;
 ```
 
-chiaramente scrivendo ciò la regola vale SOLO per gli oggetti\funzioni\strutture\classi riportati dopo **```using```**
+Chiaramente scrivendo ciò la regola vale SOLO per gli variabili\funzioni\enum\unioni\strutture\classi\oggetti riportati dopo **```using```**
 
 ---
 ---
@@ -105,7 +104,7 @@ chiaramente scrivendo ciò la regola vale SOLO per gli oggetti\funzioni\struttur
 
 In C++ esistono quattro oggetti principali per eseguire l'output:
 **```cout```**, **```cerr```**, **```wcout```**, **```wcerr```**.  
-(```cout``` = c output, ```cerr``` = c error, ```wcout``` = wide c output, ```wcerr``` = wide c error)
+(```cout``` = c output, ```cerr``` = c error, ```wcout``` = wide c output, ```wcerr``` = wide c error).
 
 ```cout``` e ```wcout``` sono usati per l'output normale mentre ```cerr``` e ```wcerr``` sono usati per i messaggi di errore,
 
@@ -129,7 +128,7 @@ int main()
 }
 ```
 
-Notare l'aggiunta di ```L``` prima delle stringhe wide, in generale bisogna aggiungere **```setlocale(0, "");```** solo una volta prima di usare stringhe wide, ed è buona pratica non mescolare cout con ```wcout``` o ```cerr``` con ```wcerr```.
+Notare l'aggiunta di ```L``` prima delle stringhe wide, in generale bisogna aggiungere **```setlocale(0, "");```** solo una volta prima di usare stringhe wide, ed è buona pratica non mescolare ```cout``` con ```wcout``` o ```cerr``` con ```wcerr```.
 
 **```std::endl```** (end of line) serve per andare a capo.
 
@@ -145,12 +144,12 @@ Le sequenze di escape rappresentano dei caratteri speciali non stampabili:
 + ```\b```: carattere backspace
 + ```\a```: suono di errore
 + ```\t```: tab
-+ ```\```: carattere backslash
++ ```\\```: carattere backslash
 + ```\"```: virgolette (per distinguerle da quelle che delimitano la stringa)
 + ```\'```: apice (viene è usato per delimitare un singolo carattere invece di una stringa)
 + ```\0```: carattere nullo (non uno spazio)
 
-Ha particolare importanza ```\n```, che è un'alternativa in genere preferibile a ```std::endl```
+Ha particolare importanza ```\n```, che è un'alternativa in genere preferibile a ```std::endl```.
 
 ---
 ---
@@ -159,7 +158,7 @@ Ha particolare importanza ```\n```, che è un'alternativa in genere preferibile 
 
 La tabella ASCII assegna un numero a ogni carattere:
 
-![ascii_table_jpg](ascii.jpg)
+![ascii_table_jpg](/cpp_guide_images/ascii.jpg)
 
 ---
 ---
@@ -172,10 +171,14 @@ I datatype sono i tipi tra cui bisogna scegliere quando si dichiara una variabil
 
 Tipi interi:
 
-+ **```short```**: un intero compreso tra -32.768 e 32.767
-+ **```int```**: un intero compreso tra -2.147.483.648 e 2.147.483.647
-+ **```long```** (o ```__int32```): a seconda del sistema può comportarsi come ```int``` o ```long long```
-+ **```long long```** (o ```__int64```): un intero compreso tra -2^63 e 2^63 - 1
++ **```__int16```**: un intero compreso tra -32.768 e 32.767
++ **```__int32```**: un intero compreso tra -2.147.483.648 e 2.147.483.647
++ **```__int64```**: un intero compreso tra -2^63 e 2^63 - 1
+
++ **```short```**: ```__int16```
++ **```int```**: ```__int32```
++ **```long```**: di solito ```__int32```, ma su alcuni sistemi ```__int64```
++ **```long long```**: ```__int64```
 
 Tipi decimali:
 
@@ -227,7 +230,7 @@ using size_t = unsigned long long;
 In C++ le variabili vengono dichiarate con questa sintassi:  
 ***\<datatype\>* *\<nome\>*;**
 
-In questo modo si dichiara una variabile che però non ha un valore, che si può assegnare con l'inizializzazione:  
+In questo modo si dichiara una variabile che però non ha un valore, a cui si può assegnare un valore con l'inizializzazione:  
 ***\<datatype\>* *\<nome\>* = *\<espressione\>*;**
 
 Il nome di una qualsiasi cosa (non solo una variabile) può contenere solo lettere, numeri o underscore (```_```) e non può iniziare con un numero.  
@@ -240,14 +243,14 @@ Le variabili possono cambiare il loro valore durante l'esecuzione del programma,
 
 #### ***Inizializzazione***
 
-Si può usare la parola chiave **```auto```** al posto del datatype, dove il compilatore proverà a dedurre il tipo dall'espressione, perciò è obbligatorio assegnare un valore, ad esempio è errato scrivere
+Si può usare la parola chiave **```auto```** al posto del datatype, dove il compilatore proverà a dedurre il tipo dall'espressione, perciò è obbligatorio assegnare un valore, ad esempio è errato scrivere:
 
 ```cpp
 auto Variable;
 const double Pi;
 ```
 
-Ma è corretto scrivere
+Ma è corretto scrivere:
 
 ```cpp
 auto Variable = 1;
@@ -264,13 +267,13 @@ int A = 1, B = 2, _i, __i;
 
 Esistono altri due modi per inizializzare le variabili, l'inizializzazione per copia e uniforme, ma il datatype dell'espressione deve essere uguale a quello della variabile:  
 
-Inizializzazione per copia  
+Inizializzazione per copia:
 
 ```cpp
 int A(1), B(2);
 ```
 
-Inizializzazione uniforme
+Inizializzazione uniforme:
 
 ```cpp
 int A{ 1 }, B{ 2 };
@@ -284,8 +287,7 @@ int x{}; // stessa cosa di int x{ 0 };
 
 #### ***Cambiare il valore***
 
-Per cambiare il valore di una variabile si può usare l'operatore **```=```**.  
-Esempio:
+Per cambiare il valore di una variabile si può usare l'operatore **```=```**, esempio:
 
 ```cpp
 x = 1; // vuol dire "x è impostato a 1" non "x è uguale a 1"
@@ -308,6 +310,66 @@ int main()
 }
 ```
 
+#### ***L'ambito delle variabili***
+
+In C++ una variabile viene creata con una dichiarazione e distrutta quando esce dal proprio ambito, che è definito dalle parentesi graffe, una variabile dichiarata fuori da una funzione si dice **globale** mentre una variabile dichiarata in una funzione si dice **locale**.
+
+Se due variabili, una locale e una globale hanno lo stesso nome ma ambiti diversi, è possibile utilizzare l'**operatore di risoluzione dell'ambito ```::```** per accedere a quella globale, ciò funziona anche con le funzioni, o con una funzione e una variabile:
+
+```cpp
+#include <iostream>
+const double       Variable = 10.2; // variabile globale
+
+int main()
+{
+    int Variable = 7;
+    std::cout <<   Variable << '\n'; // output = 7
+    std::cout << ::Variable << '\n'; // output = 10.2
+
+    return 0;
+}
+```
+
+In questo caso abbiamo due variabili con lo stesso nome, una locale e una globale, possiamo accedere a quella locale con ```variable``` e a quella globale con ```::variable```.
+
+Due variabili non possono avere lo stesso nome all'interno dello stesso ambito.
+
+---
+---
+
+### Namespace
+
+In C++ un namespace si dichiara con questa sintassi:
+
+**namespace *\<nome\>*
+{  
+    *\<variabili, funzioni, enum, unioni, strutture, classi, oggetti\>*  
+}**
+
+Esempio:
+
+```cpp  
+namespace MyNamespace
+{
+    const int lenght = 10;
+    const double e = 2.7182182;
+}
+```
+
+Per accedere alle variabili di un namespace dall'esterno si precede la variabile dal nome del namespace e dall'operatore di risoluzione dell'ambito oppure si può usare ```using namespace```:
+
+```cpp
+int main()
+{
+    auto locallenght = MyNamespace::lenght;
+
+    using namespace MyNamespace;
+    auto const_e = e; // invece di usare MyNamespace::e
+
+    return 0;
+}
+```
+
 ---
 ---
 
@@ -322,6 +384,8 @@ int main()
 {
     int Number1, Number2;
     std::cin >> Number1 >> Number2;
+
+    return 0;
 }
 ```
 
@@ -345,32 +409,6 @@ int main()
 ---
 ---
 
-### L'ambito delle variabili
-
-In C++ una variabile viene creata con una dichiarazione e distrutta quando esce dal proprio ambito, che è definito dalle parentesi graffe, una variabile dichiarata fuori da una funzione si dice **globale** mentre una variabile dichiarata in una funzione si dice **locale**.
-
-Se due variabili, una locale e una globale hanno lo stesso nome ma ambiti diversi, è possibile utilizzare l'**operatore di risoluzione dell'ambito ```::```** per accedere a quella globale, ciò funziona anche con le funzioni, o con una funzione e una variabile:
-
-```cpp
-#include <iostream>
-const double Variable = 10.2; // variabile globale
-
-int main()
-{
-    int Variable = 7;
-    std::cout << Variable << '\n'; // output = 7
-    std::cout << ::Variable << '\n'; // output = 10.2
-
-    return 0;
-}
-```
-
-In questo caso abbiamo due variabili con lo stesso nome, una locale e una globale, possiamo accedere a quella locale con ```variable``` e a quella globale con ```::variable```.
-
-Due variabili non possono avere lo stesso nome all'interno dello stesso ambito.
-
----
----
 
 ### Gli operatori matematici
 
@@ -381,7 +419,7 @@ In C++ ci sono 5 operatori matematici **primari (```+```, ```-```, ```*```, ```/
 Gli operatori **(```+```, ```-```, ```*```, ```/```)** indicano rispettivamente addizione, sottrazione, moltiplicazione e divisione.  
 L'operatore **```%```** indica il resto della divisione intera.
 
-Gli operatori **```*``` ```/```** e **```%```** hanno la precedenza sugli operatori **```+```** e **```-```**.
+Gli operatori **```*```, ```/```** e **```%```** hanno la precedenza sugli operatori **```+```** e **```-```**.
 
 Esempio di utilizzo:
 
@@ -448,7 +486,7 @@ Alcune volte può essere necessario effettuare la conversione tra due datatype, 
 Il type cast può effettuare qualsiasi tipo di conversione.  
 **(*\<datatype\>*)*\<espressione\>***  
 oppure  
-***\<datatype\>*(*\<espressione\>*)**
+__*\<datatype\>*(*\<espressione\>*)__
 
 Esempio: divisione decimale tra due interi
 
@@ -465,11 +503,11 @@ int main()
 }
 ```
 
-Nel primo output viene visualizzato 1 (un intero) perché entrambi i numeri sono interi; ma nel secondo, A viene convertito in double, e quindi anche il risultato sarà double: 1.4.
+Nel primo output viene visualizzato 1 (un intero) perché entrambi i numeri sono interi; ma nel secondo, ```A``` viene convertito in double, e quindi anche il risultato sarà double: 1.4.
 
 #### ***Lo static cast***
 
-E' preferibile utilizzare lo **static cast** quando possibile, perché è più sicuro e consente solo conversioni ben definite.  
+E' preferibile utilizzare lo **static cast** quando possibile, perché è più sicuro consentendo solo conversioni ben definite.  
 **static_cast< *\<datatype\>* >(*\<espressione\>*);**
 
 ```cpp
@@ -502,26 +540,27 @@ Esempio:
 
 int main()
 {
-    std::string str = "questa e' una stringa";
+    std::string   str =  "questa e' una stringa";
     std::wstring wstr = L"questa è una stringa wide";
 
-    std::cout << str << '\n';
+    std::cout  <<  str <<  '\n';
 
     setlocale(0, "");
-    std::wcout << wstr << '\n';
+    std::wcout << wstr << L'\n';
+    return 0;
 }
 ```
 
 Se si vuole una stringa di caratteri uguali e lunghezza finita si può fare così:
 
 ```cpp
-std::string str(5, ',');   // stessa cosa di std::string str = ",,,,,";
+std::string  str(5, ',');  // stessa cosa di std::string str = ",,,,,";
 std::string wstr(9, L','); // stessa cosa di std::string str = L",,,,,,,,,";
 ```
 
 #### ***Input***
 
-Si esegue l'input di una stringa con ```std::cin``` e quello di una stringa wide con **```std::wcin```**:
+Si esegue l'input di una stringa normale con ```std::cin``` e quello di una stringa wide con **```std::wcin```**:
 
 ```cpp
 #include <iostream>
@@ -540,6 +579,8 @@ int main()
 
     std::cout  << str  << '\n';
     std::wcout << wstr << '\n';
+
+    return 0;
 }
 ```
 
@@ -562,6 +603,8 @@ int main()
 
     std::cout  << str  << '\n';
     std::wcout << wstr << '\n';
+
+    return 0;
 }
 ```
 
@@ -666,7 +709,7 @@ E' anche possibile annidare due istruzioni if in questo modo:
         }
 ```
 
-Qui vediamo che il primo if non ha le parentesi graffe, questo perché al suo interno c'è un solo if, nonostante le due istruzioni all'interno di quest'ultimo if
+Qui vediamo che il primo if non ha le parentesi graffe, questo perché al suo interno c'è un solo if, nonostante le due istruzioni all'interno di quest'ultimo if.
 
 #### ***Gli operatori***
 
@@ -685,8 +728,8 @@ Operatori logici:
 
 + **```&&```** o **```and```**: AND logico (il risultato è vero se e solo se entrambi gli input sono veri)
 + **```||```** o **```or```**: OR logico (il risultato è vero se uno dei due input è vero)
-+ **```!```** o **```not```**: NOT logico (il risultato è vero se e solo se l'input è falso)
-per usare lo XOR logico si può usare l'operatore **```!=```**
++ **```!```** o **```not```**: NOT logico (il risultato è vero se e solo se l'input è falso)  
+Per lo XOR logico si utilizza l'operatore ```!=```.
 
 Grazie agli operatori logici i due if precedenti si possono compattare così:
 
@@ -720,34 +763,34 @@ int main()
 }
 ```
 
-L'espressione ```(A / B) % 2 == 1``` non può essere eseguita se B è 0, e solleverebbe un'**eccezione ```std::invalid_argument```**, per prevenire ciò bisogna controllare che B sia diverso da 0 PRIMA dell'elaborazione dell'espressione e non nella stessa istruzione if.
+L'espressione ```(A / B) % 2 == 1``` non può essere eseguita se ```B``` è 0, e solleverebbe un'**eccezione ```std::invalid_argument```**, per prevenire ciò bisogna controllare che ```B``` sia diverso da 0 PRIMA dell'elaborazione dell'espressione e non nella stessa istruzione if.
 
 #### ***Gli IF-ELSE e l'assegnazione***
 
-Nella condizione degli if si può anche assegnare un valore a una variabile, la variabile non è nulla:
+Nella condizione degli if si può anche assegnare un valore a una variabile, poi si controlla se il risultato non è nullo.
 
 ```cpp
 #include <iostream>
 
 int main()
 {
-    int x{};
+    int x;
     
-    if (x = 5)  // x viene assegnato a 5, poi si verifica se non è nullo
-        std::cout << "x è stato assegnato a 5\n";
+    if (x = 5)  // 5 viene assegnato a x, poi si verifica se x non è nullo
+        std::cout << "5 è stato assegnato a x\n";
     
     return 0;
 }
 ```
 
-Per questo bisogna fare attenzione a non confondere gli operatori ```==``` e ```=``` perché non ci sarà nessun errore di compilazione in caso di assegnazione accidentale dentro un if.
-Per risolvere ciò può aiutare scrivere
+Per questo bisogna fare attenzione a non confondere gli operatori ```==``` e ```=``` perché non ci sarà nessun errore di compilazione in caso di assegnazione accidentale dentro un if.  
+Per evitare questo errore può aiutare scrivere
 
 ```cpp
     if (1 == x) // if (1 = x) è un errore: non si può assegnare a un numero
 ```
 
-Invece di
+Invece di:
 
 ```cpp
     if (x == 1) // if (x = 1) non genera l'errore
@@ -770,7 +813,7 @@ Esempio: programma per trovare l'inverso di un numero
 
 int main()
 {
-    long long number;
+    long long   number;
     std::cin >> number;
 
     number == 0 ?
@@ -806,6 +849,8 @@ int main()
 
 ### Gli operatori bitwise
 
+**Attenzione**: è necessario conoscere come funziona il codice binario.
+
 In C++ esistono degli operatori detti **bitwise** che eseguono delle operazioni logiche su ogni bit di uno o due numeri scritti in codice binario.
 
 Supponiamo di avere due variabili A = 9 e B = 10  
@@ -822,7 +867,7 @@ Si esegue l'OR logico su ogni bit rispettivamente:
 ```A | B``` = ```1001 | 1010``` = 1011 = 11 (in base 10)
 
 **BITWISE NOT**  
-Si cambia ogni bit di un numero:  
+Si inverte ogni bit di un numero:  
 ```~A``` = ```~1001``` = 0110 = 6 (in base 10)
 
 **BITWISE XOR**  
@@ -845,7 +890,7 @@ Ovviamente esistono anche gli operatori **```&=```, ```|=```, ```^=```, ```<<=``
 
 ### L'istruzione GOTO
 
-In C++ esiste un modo per trasferire il controllo a una certa istruzione quando ci si trova a un certo punto del codice, per fare ciò si utilizza un **```goto```**.  
+In C++ esiste un modo per trasferire il controllo a una certa istruzione quando ci si trova a un certo punto del codice, per fare questo si utilizza un **```goto```**.  
 **Attenzione**: utilizzare molti goto può rendere il codice poco leggibile.
 
 Esempio di goto:
@@ -862,7 +907,7 @@ int main()
     else {
         some_number <<= 3;
         std::cout << "eseguito left shift 3 volte\n";
-        std::cout << "il numero e' " << some_number;
+        std::cout << "il numero e' " <<  some_number;
         return 0;
     }
 
@@ -924,9 +969,11 @@ int main()
         x = y;
         y = temp;
     }
+
     std::cout << "numero di Fibonacci #" << i + 1;
     std::cout << " = " << x << '\n';
     std::cout << "si e' verificato un overflow\n";
+
     return 0;
 }
 ```
@@ -938,7 +985,7 @@ Poiché la variabile y è intera, ha un limite, quando il limite viene superato 
 
 ### Il ciclo DO WHILE
 
-Questo è un ciclo simile al while, con la differenza che qui si controlla se una condizione è vera dopo aver eseguito il codice e non prima come nel while.
+Questo è un ciclo simile al while, con la differenza che qui si verifica la condizione dopo aver eseguito il codice e non prima.
 
 **do {  
  *\<istruzioni da ripetere\>*  
@@ -958,7 +1005,7 @@ int main()
 
         if (pos_number <= 0)
         {
-            std::cout << "hai inserito un numero sbagliato!";
+            std::cout << "hai inserito un numero sbagliato!\n";
         }
     } while (pos_number <= 0);
 
@@ -979,7 +1026,7 @@ Questo è il ciclo più importante tra quelli visti finora, permette di ripetere
 }**
 
 Si può lasciare vuota qualsiasi informazione tra le tre presenti.  
-Ecco un semplice esempio di uso del for:
+Ecco un semplice esempio d'uso del for:
 
 ```cpp
 #include <iostream>
@@ -999,7 +1046,7 @@ int main()
 }
 ```
 
-L'iterazione inizia con la variabile i inizializzata a ```low```, ogni volta che l'iterazione è completata ```i``` aumenta di 1 e l'iterazione continua finché ```i``` è minore o uguale a ```high```, a ogni iterazione si stampa il valore di ```i```.
+L'iterazione inizia con la variabile ```i``` inizializzata a ```low```, ogni volta che l'iterazione è completata ```i``` aumenta di 1 e l'iterazione continua finché ```i``` è minore o uguale a ```high```, a ogni iterazione si stampa il valore di ```i```.
 
 Vediamo adesso un esempio più complesso: il riempimento di una regione della console con asterischi, l'utente sceglie la posizione della regione e le sue dimensioni:
 
@@ -1080,14 +1127,14 @@ int main()
 }
 ```
 
-In questo programma l'utente deve indovinare il valore della variabile i per terminare il programma, e il valore cambia a ogni iterazione, un istruzione **```continue```** viene utilizzata per saltare ogni iterazione dove i è vicino a 0, e due istruzioni **break** sono utilizzate per uscire dal ciclo se l'utente indovina il numero o se il numero suggerito è troppo grande.
+In questo programma l'utente deve indovinare il valore della variabile ```i``` per terminare il programma, e il valore cambia a ogni iterazione, un'istruzione **```continue```** viene utilizzata per saltare ogni iterazione dove ```i``` è vicino a 0, e due istruzioni **break** sono utilizzate per uscire dal ciclo se l'utente indovina il numero o se il numero suggerito è troppo grande.
 
 ---
 ---
 
 ### L'istruzione SWITCH
 
-In c++ esiste un istruzione detta ```switch``` che è un'alternativa più veloce delle istruzioni if-else, tuttavia se le ottimizzazioni del compilatore sono attivate, il tempo di esecuzione rimane lo stesso, è utile quando ci sono molti if-else.
+In C++ esiste un'istruzione detta ```switch``` che è un'alternativa più veloce delle istruzioni if-else, tuttavia se le ottimizzazioni del compilatore sono attivate, il tempo di esecuzione rimane lo stesso, è utile quando ci sono molti if-else.
 
 **switch(*\<espressione\>*) {  
 case *\<caso_1\>*:  
@@ -1113,19 +1160,19 @@ int main()
     std::cout << "inserisci un numero di mese\n";
     std::cin >> month;
 
-    if (month == 1) std::cout << "e' gennaio\n";
-    else if (month == 2) std::cout << "e' febbraio\n";
-    else if (month == 3) std::cout << "e' marzo\n";
-    else if (month == 4) std::cout << "e' aprile\n";
-    else if (month == 5) std::cout << "e' maggio\n";
-    else if (month == 6) std::cout << "e' giugno\n";
-    else if (month == 7) std::cout << "e' luglio\n";
-    else if (month == 8) std::cout << "e' agosto\n";
-    else if (month == 9) std::cout << "e' settembre\n";
+    if      (month == 1)  std::cout << "e' gennaio\n";
+    else if (month == 2)  std::cout << "e' febbraio\n";
+    else if (month == 3)  std::cout << "e' marzo\n";
+    else if (month == 4)  std::cout << "e' aprile\n";
+    else if (month == 5)  std::cout << "e' maggio\n";
+    else if (month == 6)  std::cout << "e' giugno\n";
+    else if (month == 7)  std::cout << "e' luglio\n";
+    else if (month == 8)  std::cout << "e' agosto\n";
+    else if (month == 9)  std::cout << "e' settembre\n";
     else if (month == 10) std::cout << "e' ottobre\n";
     else if (month == 11) std::cout << "e' novembre\n";
     else if (month == 12) std::cout << "e' dicembre\n";
-    else std::cout << "quello non e' un mese\n";
+    else                  std::cout << "quello non e' un mese\n";
 
     return 0;
 }
@@ -1141,23 +1188,23 @@ int main()
     std::cin >> month;
 
     switch (month) {
-    case 1: std::cout << "e' gennaio\n";
+    case 1:  std::cout << "e' gennaio\n";
         break;
-    case 2: std::cout << "e' febbraio\n";
+    case 2:  std::cout << "e' febbraio\n";
         break;
-    case 3: std::cout << "e' marzo\n";
+    case 3:  std::cout << "e' marzo\n";
         break;
-    case 4: std::cout << "e' aprile\n";
+    case 4:  std::cout << "e' aprile\n";
         break;
-    case 5: std::cout << "e' maggio\n";
+    case 5:  std::cout << "e' maggio\n";
         break;
-    case 6: std::cout << "e' giugno\n";
+    case 6:  std::cout << "e' giugno\n";
         break;
-    case 7: std::cout << "e' luglio\n";
+    case 7:  std::cout << "e' luglio\n";
         break;
-    case 8: std::cout << "e' agosto\n";
+    case 8:  std::cout << "e' agosto\n";
         break;
-    case 9: std::cout << "e' settembre\n";
+    case 9:  std::cout << "e' settembre\n";
         break;
     case 10: std::cout << "e' ottobre\n";
         break;
@@ -1215,8 +1262,8 @@ int main()
 
 #### ***Per i caratteri***
 
-+ ```isalpha``` permette di controllare se un carattere è alfabetico,
-+ ```isdigit``` controlla se un carattere è numerico,
++ ```isalpha``` permette di controllare se un carattere è alfabetico
++ ```isdigit``` controlla se un carattere è numerico
 + ```isalnum``` controlla se un carattere è alfanumerico
 
 + ```tolower``` e ```toupper``` trasformano un carattere nelle sue versioni in minuscolo o maiuscolo rispettivamente
@@ -1244,6 +1291,24 @@ int main()
 
 ---
 ---
+
+### Le costanti matematiche
+
+In C++ il namespace ```std::numbers``` (necessario includere ```<numbers>```) contiene molte costanti matematiche utili:
+
++ ```std::numbers::e```: il numero di nepero (e)
++ ```std::numbers::log2e```: logaritmo in base 2 di e
++ ```std::numbers::log10e```: logaritmo in base 10 di e
++ ```std::numbers::pi```: il pi greco
++ ```std::numbers::inv_pi```: inverso del pi greco
++ ```std::numbers::inv_sqrtpi```: inverso della radice del pi greco
++ ```std::numbers::ln2```: logaritmo naturale di 2
++ ```std::numbers::ln10```: logaritmo naturale di 10
++ ```std::numbers::sqrt2```: radice quadrata di 2
++ ```std::numbers::sqrt3```: radice quadrata di 3
++ ```std::numbers::inv_sqrt3```: inverso della radice quadrata di 3
++ ```std::numbers::egamma```: costante di Euler-Mascheroni
++ ```std::numbers::phi```: la costante aurea
 
 ### Le funzioni matematiche
 
@@ -1368,18 +1433,16 @@ int main()
 
 La notazione **O grande** è uno strumento per descrivere il comportamento asintotico di una funzione.
 
-$$
-f(n) \leq k \cdot g(n) \quad \forall n \geq n_0 \qquad \Rightarrow \qquad f(n) = O(g(n))
-$$
+<img src="/cpp_guide_images/big_o_notation.png" alt="big_o_png" width="500" /></img>
 
 Esempi di ordini:
 
-+ $O(1)$: **tempo costante**, cioè non dipende dalla dimensione dell'input
-+ $O(log(n))$: **tempo logaritmico** come la ricerca binaria
-+ $O(n)$: **tempo lineare**, il tempo di esecuzione è direttamente proporzionale alla dimensione dell'input, come la ricerca lineare
-+ $O(n \cdot log(n))$: **tempo semilogaritmico** come il merge sort
-+ $O(n^2)$: **tempo quadratico** come due loop for annidati
-+ $O(b^n)$: **tempo esponenziale**.
++ O(1): **tempo costante**, cioè non dipende dalla dimensione dell'input
++ O(log(n)): **tempo logaritmico** come la ricerca binaria
++ O(n): **tempo lineare**, il tempo di esecuzione è direttamente proporzionale alla dimensione dell'input, come la ricerca lineare
++ O(n * log(n)): **tempo semilogaritmico** come il merge sort
++ O(n^2): **tempo quadratico** come due cicli for annidati
++ O(b^n): **tempo esponenziale**.
 
 ---
 ---
@@ -1411,7 +1474,7 @@ int main()
 }
 ```
 
-Quando viene chaiamata una funzione, il controllo viene trasferito a quella funzione, e viene eseguito tutto il codice che c'è all'interno di questa.
+Quando viene chiamata una funzione, il controllo viene trasferito a quella funzione, e viene eseguito tutto il codice che c'è all'interno di questa.
 
 #### ***I parametri***
 
@@ -1461,11 +1524,11 @@ int main()
 }
 ```
 
-In questo esempio viene chiamata la funzione Add per sommare i due numeri decimali, che restituisce con ```return``` la loro somma, e il valore restituito viene assegnato a un risultato per essere scritto.
+In questo esempio viene chiamata la funzione Add per sommare i due numeri decimali, che restituisce con ```return``` la loro somma, e il valore restituito viene assegnato a una variabile per essere scritto.
 
 #### ***Passare parametri per riferimento***
 
-Per restituire più di un valore NON si può usare due volte ```return```, questo perché in un istruzione ```return``` il controllo esce dalla funzione, e ciò che viene dopo è ignorato, il modo corretto di fare ciò sarebbe passare i parametri per riferimento.
+Per restituire più di un valore NON si può usare due volte ```return```, questo perché in un'istruzione ```return``` il controllo esce dalla funzione, e ciò che viene dopo è ignorato; l'approccio giusto è passare dei parametri aggiuntivi per riferimento.
 
 Perché quando viene chiamata una funzione, viene eseguita una copia dei due input per non modificarli, ma ciò non succede se si fornisce l'**indirizzo**, esempio:
 
@@ -1499,7 +1562,7 @@ int main()
 }
 ```
 
-Poiché i parametri ```dividend``` e ```divisor``` non sono preceduti dall'**operatore di indirizzo ```&```**, ne viene eseguita una copia, ma i parametri ```quotient``` e ```rest``` vengono modificati.  
+Poiché i parametri ```dividend``` e ```divisor``` non sono preceduti dall'**operatore di indirizzo ```&```**, viene eseguita una copia di ```A```  e ```B```, invece i parametri ```Quotient``` e ```Rest``` non vengono copiati, ma modificano il loro valore secondo le operazioni di ```quotient``` e ```rest```.  
 in questo modo non c'è bisogno di utilizzare il ```return```.
 
 #### ***Funzione parametro***
@@ -1548,7 +1611,7 @@ Una funzione può chiamare se stessa, quando ciò accade si dice che la funzione
 
 size_t Factorial(size_t number)
 {
-    if (number <= 2) return number;
+    if (number < 2) return 1;
     return number * Factorial(number - 1);
 }
 ```
@@ -1564,7 +1627,7 @@ Ecco un esempio di codice che genera l'errore di stack overflow:
 int main() { main(); }
 ```
 
-Qui avviene una ricorsione infinita, che eventualmente riempie la memoria disponibile e il programma viene interrotto.
+Qui avviene una ricorsione infinita, che eventualmente riempie la memoria disponibile e il programma va in crash.
 
 #### ***Dichiarazione e definizione***
 
@@ -1612,7 +1675,7 @@ void Divide(
 }
 ```
 
-Questa cosa è molto comoda, infatti non si può chiamare una funzione in una riga di codice prima della dichiarazione, ma si possono spostare tutte le dichiarazioni all'inizio del codice e definire la funzione in seguito
+Questa cosa è molto utile, infatti non si può chiamare una funzione in una riga di codice prima della dichiarazione, ma si possono spostare tutte le dichiarazioni all'inizio del codice e definire la funzione in seguito
 
 E' possibile creare dei parametri facoltativi, che però devono essere messi per ultimi nell'elenco dei parametri di una funzione, riscriviamo l'esempio di prima supponendo che ```dividend``` sia predefinito a 1 così come ```divisor```:
 
@@ -1637,13 +1700,13 @@ void Divide(
 }
 ```
 
-In questo modo si può fare una chiamata di funzione senza dover per forza specificare quali siano ```dividend``` e ```divisor```, ricordare che non si può fare così con quotient e rest perché sono assegnati per indirizzo e devono essere **lvalue modificabili** quindi non costanti (e quindi neanche numeri dato che sono costanti).
+In questo modo si può fare una chiamata di funzione senza dover per forza specificare quali siano ```dividend``` e ```divisor```, ricordare che non si può fare così con quotient e rest perché sono passati per riferimento e devono essere **lvalue modificabili** quindi non costanti (e quindi neanche numeri dato che essi sono costanti).
 
 #### ***Gli specificatori***
 
 Una funzione può essere contrassegnata da alcune parole chiave dette **specificatori**, tra le quali troviamo **```inline```**, **```constexpr```** e **```static```**.
 
-Se una funzione è inline, vuol dire che il compilatore sostituirà con il corpo della funzione tutte le chiamate (se possibile), ad esempio
+Se una funzione è inline, vuol dire che il compilatore sostituirà con il corpo della funzione tutte le chiamate (se possibile), ad esempio questo codice:
 
 ```cpp
 #include <iostream>
@@ -1664,7 +1727,7 @@ int main()
 }
 ```
 
-Viene considerato come
+Viene considerato come:
 
 ```cpp
 #include <iostream>
@@ -1701,7 +1764,7 @@ int main()
 }
 ```
 
-Una funzione statica è visibile solo dal file in cui è dichiarata (cioè non può essere messa in un file header); una variabile statica conserva il suo valore tra diverse chiamate di funzione.
+Una funzione statica è visibile solo dal file in cui è dichiarata (e quindi non può essere messa in un file header); una variabile statica conserva il suo valore tra diverse chiamate di funzione.
 
 ---
 ---
@@ -1725,18 +1788,17 @@ Elenco di direttive:
 + ```#pragma```
 + ```#undef```
 
-Abbiamo già visto ```#include```, quindi descriveremo le altre diirettive.
+Abbiamo già visto ```#include```, quindi descriveremo le altre direttive.
 
-La direttiva ```#define``` permette di definire una **macro** mentre ```#undef``` la annulla.  
-Esempio:
+La direttiva ```#define``` permette di definire una **macro** mentre ```#undef``` la annulla, esempio:
 
 ```cpp
 #define SIZE
 ```
 
-```SIZE``` è una macro, in generale si utilizzano le lettere maiuscole.
+```SIZE``` è una macro, in generale i nomi di macro utilizzano lettere maiuscole.
 
-La direttiva ```#ifdef``` controlla se una macro è definita o meno, e ci deve essere sempre una direttiva ```#endif``` alla fine, il codice presente tra ```#ifdef``` e ```#endif``` viene eseguito se e solo se la macro in questione è definita a quella riga:
+La direttiva ```#ifdef``` controlla se una macro è definita o meno, e deve essere sempre presente una direttiva ```#endif``` dopo l'```#ifdef```, il codice presente tra ```#ifdef``` e ```#endif``` viene eseguito se e solo se la macro in questione è definita:
 
 ```cpp
 #ifdef SIZE
@@ -1756,7 +1818,7 @@ La direttiva ```#ifndef``` controlla se una macro NON è definita (contrario di 
 
 Qui ```__cplusplus``` è una macro definita dal compilatore C++, quindi se il compilatore è sbagliato, si usa la direttiva ```#error``` per generare un errore
 
-La direttiva ```#if``` attiva il codice non se la macro è definita ma se è veritiera (cioè si espande in un valore non nullo),
+La direttiva ```#if``` attiva il codice non se la macro è definita ma se è veritiera (cioè si espande in un valore non nullo):
 
 ```cpp
 #if _HAS_CXX23
@@ -1775,13 +1837,7 @@ La direttiva ```#line``` serve per cambiare la linea del programma, è utile qua
 // questa riga sarà vista come riga 100 in example.cpp
 ```
 
-La direttiva ```#pragma``` è la più complessa, un esempio potrebbe essere questo:
-
-```cpp
-#pragma once
-```
-
-In questo modo non è possibile includere il file più di una volta.
+La direttiva ```#pragma``` è la più complessa, ne esistono molte varianti, ad esempio ```#pragma once``` rende impossibile includere il file più di una volta.
 
 ---
 ---
@@ -1814,12 +1870,16 @@ Le macro non sono delle funzioni, servono solo a sostituire del testo, per quest
 
 ```cpp
 #define SQUARE(x) (x * x)
-SQUARE(1 + 2); // si espande in 1 + 2 * 1 + 2 = 5 non 9
+
+// si espande in 1 + 2 * 1 + 2 = 1 + 2 + 2 = 5
+SQUARE(1 + 2);
 ```
 
 ```cpp
 #define SQUARE(x) ((x) * (x))
-SQUARE(1 + 2); // si espande in (1 + 2) * (1 + 2)
+
+// si espande in (1 + 2) * (1 + 2) = 3 * 3 = 9
+SQUARE(1 + 2);
 ```
 
 #### ***Operatori***
@@ -1841,7 +1901,7 @@ int __##x{}
 
 #### ***Esempi***
 
-Esistono alcune predefinite del preprocessore:
+Esistono alcune macro predefinite del preprocessore:
 
 + ```__FILE__```: il nome del file corrente
 + ```__LINE__```: il nome della linea corrente
@@ -1855,7 +1915,7 @@ Altre macro sono definite esternamente, un esempio è **```_STD```** che si espa
 
 ### Le enumerazioni
 
-In C++ le enumerazioni sono un modo per rendere il codice più leggibile, dove invece di dichiarare tante macro in questo modo:
+In C++ le enumerazioni sono un modo per rendere il codice più leggibile, dove invece di dichiarare un elenco di macro in questo modo:
 
 ```cpp
 #define MONDAY    1
@@ -1904,8 +1964,10 @@ int main()
     // oppure
     ::Day day = Day::monday;
 
-    // l'operatore '::' è usato solo perché c'è una variabile che
-    // ha lo stesso nome dell'enum
+    // il primo operatore di risoluzione è usato solo
+    // perché c'è una variabile che ha lo stesso nome dell'enum
+
+    return 0;
 }
 ```
 
@@ -1938,6 +2000,8 @@ int main()
 {
     Day lastDay  = Day::sunday;
     DAY firstDay = DAY::sunday;
+
+    return 0;
 }
 ```
 
@@ -1948,7 +2012,7 @@ Gli enum e gli enum class sono due modi di definire dei datatype secondari.
 
 ### Le strutture
 
-In C++ esiste sono un modo per raggruppare più variabili di datatype differenti sotto lo stesso nome, il nome della struttura, che diventa un datatype secondario, un esempio è la struttura **```_COORD```** di **```<Windows.h>```** che si definisce così:
+In C++ esiste sono un modo per raggruppare più variabili di datatype non necessariamente uguali, sotto lo stesso nome, il nome della struttura, che diventa un datatype secondario, un esempio è la struttura **```_COORD```** di **```<Windows.h>```** che si definisce così:
 
 ```cpp
 struct _COORD {
@@ -1959,7 +2023,7 @@ struct _COORD {
 
 Questo è un tipico esempio di struttura, contiene due variabili ```short```, chiamate ```X``` e ```Y``` che sono le coordinate di un punto, (questa struttura è usata anche per indicare la posizione del cursore).
 
-Tuttavia la definizione completa della struttura è in realtà questa:
+In realtà la definizione completa della struttura è questa:
 
 ```cpp
 typedef struct _COORD {
@@ -1990,10 +2054,73 @@ int main()
 ---
 ---
 
+### Le unioni
+
+In C++ Le unioni sono simili alle strutture, tuttavia ogni variabile ha la stessa regione in memoria, questo significa che modificando una variabile, tutte le altre cambiano, questo è utile quando bisogna effettuare operazioni di conversione oppure operazioni di modulo.
+
+Esempio:
+
+```cpp
+#include <iostream>
+
+union variable
+{
+    int number;
+    int copy;
+};
+
+int main()
+{
+    variable var;
+    var.number = 123;
+
+    // output = 123
+    std::cout << var.number << ' ';
+    
+    // output = 123
+    std::cout << var.copy;
+
+    return 0;
+}
+```
+
+In questo esempio tutte e due le variabili di ```variable``` sono state modificate.
+
+Esempio: conversione tra ```int``` e ```short```
+
+```cpp
+#include <iostream>
+
+union variable
+{
+    int number;
+    short mod;
+};
+
+int main()
+{
+    variable var;
+    var.number = 65537;
+
+    // output = 65537
+    std::cout << var.number << ' ';
+    
+    // output = 65537 % 32768 = 1
+    std::cout << var.mod;
+
+    return 0;
+}
+```
+
+Quando si converte da ```int``` a ```short```, il numero 65537 è troppo grande per essere contenuto in ```mod```, quindi viene eseguito un modulo (resto della divisione).
+
+---
+---
+
 ### Gli array
 
 In C++ gli array sono degli insiemi di lunghezza costante che contengono valori dello stesso datatype, possono essere statici (allocati nella **stack**) oppure dinamici (allocati nell'**heap**), Per ora vedremo solo come creare array statici.  
-***\<datatype\>* *\<nome\>* [*\<dimensione\>*];**
+__*\<datatype\>* *\<nome\>* [*\<dimensione\>*];__
 
 #### ***Inizializzazione di un array***
 
@@ -2087,7 +2214,7 @@ int main()
 
 #### ***Il ciclo FOREACH***
 
-Un ciclo **foreach** è un for che iterà su ogni elemento di un array in ordine crescente.
+Un ciclo **foreach** è un for che itera su ogni elemento di un array in ordine crescente.
 
 **for (*\<datatype\>* *\<nome_elemento\>* : *\<nome_array\>*)  
 {  
@@ -2366,7 +2493,7 @@ Quando un puntatore non serve più deve essere deallocato:
     Ptr = nullptr
 ```
 
-#### ***Le eccezioni***
+#### ***Le eccezioni di ```<stdexcept>```***
 
 E' buona pratica, ogni volta che si crea un puntatore nell'heap, di controllare se il puntatore è nullo, in questo caso si può sollevare un'eccezione, che ferma in automatico il programma quando c'è un errore che non va bene:
 
@@ -2375,19 +2502,50 @@ E' buona pratica, ogni volta che si crea un puntatore nell'heap, di controllare 
     if (!ptr) throw std::bad_alloc();
 ```
 
-Esistono altri tipi di eccezioni come ad esempio:
+Esistono altri tipi di eccezioni come ad esempio queste:
 
 + ```std::invalid_argument```
 + ```std::out_of_range```
 + ```std::overflow_error```
 
+E' possibile gestire queste eccezioni con dei blocchi **try-catch**, dove non si possono sottointendere le parentesi graffe, esempio:
+
+```cpp
+#include <iostream>
+#include <stdexcept>
+
+int main()
+{
+    try {
+        throw std::out_of_range("this exception");
+        throw std::exception();
+    }
+    catch (std::out_of_range E) // cattura solo out_of_range
+    {
+        // output = "eccezione catturata: this exception"
+        std::cout << "eccezione catturata: " << E.what() << '\n';
+        return 1;
+    }
+    catch (...) // cattura qualsiasi eccezione
+    {
+        std::cout << "eccezione sconosciuta catturata\n";
+        return 2;
+    }
+
+    std::cout << "non si sono verificate eccezioni\n";
+    return 0;
+}
+```
+
+Ogni istruzione ```try``` deve avere almeno un'istruzione ```catch```.
+
 #### ***Puntatori intelligenti***
 
 In C++ l'utilizzo dei puntatori è facilitato dai puntatori intelligenti (necessario includere **```<memory>```**): **```std::unique_ptr```**, **```std::shared_ptr```** e **```std::weak_ptr```**:
 
-**```std::unique_ptr```** è un puntatore che garantisce l'univocità del possesso di un oggetto, ciò significa che solo un unique\_ptr può possedere un determinato oggetto alla volta, non si usa ```delete``` perché quando un unique\_ptr esce dal suo ambito, l'oggetto a cui punta viene deallocato automaticamente.
+**```std::unique_ptr```** è un puntatore che garantisce l'univocità del possesso di un oggetto, ciò significa che solo uno unique\_ptr può possedere un determinato oggetto alla volta, non si usa ```delete``` perché quando uno unique\_ptr esce dal suo ambito, l'oggetto a cui punta viene deallocato automaticamente.
 
-Non si può copiare un unique\_ptr ma lo si può spostare con **```std::move```**
+Non si può copiare uno unique\_ptr ma lo si può spostare con **```std::move```**
 
 Esempio:
 
@@ -2485,6 +2643,8 @@ int main()
 
     if (auto checkptr = wptr.lock()) // operatore = non ==
         std::cout << "l'oggetto è ancora vivo\n";
+    // checkptr viene distrutto uscendo dall'ambito
+
     else std::cout << "l'oggetto è stato deallocato\n";
 
     return 0;
@@ -2541,7 +2701,7 @@ Qui il cursore viene riposizionato alla coordinata (0, 10) sulla console, il ```
 
 #### ***Ottenere i dati della console***
 
-Per ottenere dati come la posizione del cursore o la dimensione del buffer della console c'è un unica funzione che si chiama **```GetConsoleScreenBufferInfo```**:
+Per ottenere dati come la posizione del cursore o la dimensione del buffer della console c'è un'unica funzione che si chiama **```GetConsoleScreenBufferInfo```**:
 
 ```cpp
 #include <Windows.h>
@@ -2589,7 +2749,7 @@ int main()
 }
 ```
 
-#### ***Pulire un area dello schermo***
+#### ***Pulire un'area dello schermo***
 
 Per riempire una linea dello schermo esistono queste funzioni:  
 ```FillConsoleOutputCharacterA```, ```FillConsoleOutputCharacterW``` e ```FillConsoleOutputAttribute```.
@@ -2631,9 +2791,80 @@ Bisogna fornire (in ordine) l'Handle, il carattere \ attributo da scrivere, quan
 
 La differenza tra **```FillConsoleOutputCharacterA```** e **```FillConsoleOutputCharacterW```** è il fatto che la seconda funziona anche con i caratteri unicode (estensione della tabella ASCII), Tuttavia esiste la macro **```FillConsoleOutputCharacter```**, che sceglie in automatico qual è la funzione da utilizzare.
 
-#### ***Cancellare tutto***
+Per cancellare tutto si può utilizzare ```system("cls")``` per cancellare tutto ciò che è stato scritto sulla console.
 
-Si può utilizzare ```system("cls")``` per cancellare qualsiasi cosa scritta sulla console.
+#### ***Inviare un input utente***
+
+Si usa la funzione SendInput: il primo parametro indica quanti input inviare, il secondo è un array di ```INPUT``` e il terzo è ```sizeof(INPUT)```.
+
+Esempio:
+
+```cpp
+INPUT input[2]{};
+
+// pressione tasto 'A'
+input[0].type = INPUT_KEYBOARD;
+input[0].ki.wVk = 'A';
+
+// rilascio tasto
+input[1].type = INPUT_KEYBOARD;
+input[1].ki.wVk = 'A';
+input[1].ki.dwFlags = KEYEVENTF_KEYUP;
+
+SendInput(2, input, sizeof(INPUT));
+```
+
+```KEYEVENTF_KEYUP``` indica che il tasto viene rilasciato, ```MOUSEEVENTF_LEFTDOWN``` preme il tasto sinistro del mouse, ```MOUSEEVENTF_LEFTUP``` preme il tasto destro del mouse.
+
+Per impostare il tipo di tasto da premere, si usano i caratteri della lettera maiuscola \ numero corrispondente al tasto, se il tasto è speciale si usano queste macro:
+
++ ```VK_SHIFT```
++ ```VK_CONTROL```
++ ```VK_MENU``` (tasto ALT)
++ ```VK_ESCAPE```
++ ```VK_SPACE```
++ ```VK_END```
++ ```VK_HOME```
++ ```VK_LEFT```
++ ```VK_UP```
++ ```VK_RIGHT```
++ ```VK_DOWN```
++ ```VK_PRINT```
++ ```VK_INSERT```
++ ```VK_DELETE```
++ da ```VK_F1``` a ```VK_F24```
++ ...
+
+#### ***```MessageBox```***
+
+E' una funzione che crea una finestra di messaggio, esempio:
+
+```cpp
+MessageBox(
+    NULL,                        // handle alla finestra proprietaria
+    L"Il programma \
+è terminato con successo.",      // messaggio
+    L"info",                     // titolo           
+    MB_OK | MB_ICONINFORMATION   // tipo di finestra MessageBox
+);
+```
+
+Tipi di pulsanti:
+
++ ```MB_OK```: solo pulsante OK
++ ```MB_OKCANCEL```: pulsanti OK e ANNULLA
++ ```MB_YESNO```: pulsanti SI e NO
++ ```MB_RETRYCANCEL```: pulsanti RIPROVA e ANNULLA
++ ```MB_ABORTRETRYIGNORE```: pulsanti INTERROMPI, RIPROVA e IGNORA
+
+Tipi di icone:
+
++ ```MB_ICONERROR```: un errore
++ ```MB_ICONWARNING```: un avviso
++ ```MB_ICONQUESTION```: un punto interrogativo
++ ```MB_ICONINFORMATION```: un'informazione
+
+Il valore restituito dalla funzione indica il tasto che l'utente ha premuto, che può essere ```IDOK```, ```IDYES```, ```IDNO```, ```IDRETRY```, ```IDCANCEL```, ```IDABORT``` o ```IDIGNORE```.
 
 ---
 ---
@@ -2963,7 +3194,7 @@ La stessa cosa che si fa così con ```erase```:
 
 #### ***Altro***
 
-Esistono sono gli operatori ```=``` per assegnare una stringa, e ```==``` per eguagliare due stringhe
+Esistono sono gli operatori ```=``` per assegnare a una stringa, e ```==``` per eguagliare due stringhe
 
 ---
 ---
@@ -3683,7 +3914,7 @@ int main()
 
 #### ***Differenze***
 
-```std::unordered_map``` differisce da ```std::map``` perché non ordina le chiavi e usa una **tabella hash** per accedere agli elementi (tempo di $O(1)$)
+```std::unordered_map``` differisce da ```std::map``` perché non ordina le chiavi e usa una **tabella hash** per accedere agli elementi (tempo di O(1))
 
 ---
 ---
@@ -4421,17 +4652,18 @@ Quando si distrugge con ```delete``` un oggetto di una classe derivata tramite u
 ```cpp
 #include <iostream>
 
-class Base {
+class Base
+{
 public:
-    Base ()    { std::cout << "costruttore Base\n"; }
-    ~Base()    { std::cout << "distruttore Base\n"; }
+    Base ()    { std::wcout << L"costruttore Base\n"; }
+    ~Base()    { std::wcout << L"distruttore Base\n"; }
 };
 
 class Derived : public Base
 {
 public:
-    Derived () { std::cout << "costruttore Derived\n"; }
-    ~Derived() { std::cout << "distruttore Derived\n"; }
+    Derived () { std::wcout << L"costruttore Derived\n"; }
+    ~Derived() { std::wcout << L"distruttore Derived\n"; }
 };
 
 int main()
@@ -4447,17 +4679,18 @@ In questi casi si rende il distruttore virtuale:
 ```cpp
 #include <iostream>
 
-class Base {
+class Base
+{
 public:
-            Base () { std::cout << "costruttore Base\n"; }
-    virtual ~Base() { std::cout << "distruttore Base\n"; }
+            Base () { std::wcout << L"costruttore Base\n"; }
+    virtual ~Base() { std::wcout << L"distruttore Base\n"; }
 };
 
 class Derived : public Base
 {
 public:
-    Derived ()      { std::cout << "costruttore Derived\n"; }
-    ~Derived()      { std::cout << "distruttore Derived\n"; }
+    Derived ()      { std::wcout << L"costruttore Derived\n"; }
+    ~Derived()      { std::wcout << L"distruttore Derived\n"; }
 };
 ```
 
@@ -4508,20 +4741,20 @@ int main()
 {
     setlocale(0, "");
 
-    coord cone{ 1, 2 }, ctwo, cthree, cfour, cfive;
+    coord c_one{ 1, 2 }, c_two, c_three, c_four, c_five;
     cfive = cfour = cthree = ctwo = cone;
 
-    std::wcout << one.str()   << L'\n';
-    std::wcout << two.str()   << L'\n';
-    std::wcout << three.str() << L'\n';
-    std::wcout << four.str()  << L'\n';
-    std::wcout << five.str()  << L'\n';
+    std::wcout << c_one.str()   << L'\n';
+    std::wcout << c_two.str()   << L'\n';
+    std::wcout << c_three.str() << L'\n';
+    std::wcout << c_four.str()  << L'\n';
+    std::wcout << c_five.str()  << L'\n';
 
     return 0;
 }
 ```
 
-Spiegazione: quando si esegue ```ctwo = cone```, a ```ctwo``` viene assegnato il valore di ```cone```, ma l'operatore restituisce ```*this``` cioè il risultato, di conseguenza a ```cthree``` viene assegnato il valore del risultato, e così via.
+Spiegazione: quando si esegue ```c_two = c_one```, a ```c_two``` viene assegnato il valore di ```c_one```, ma l'operatore restituisce ```*this``` cioè il risultato, di conseguenza a ```c_three``` viene assegnato il valore del risultato, e così via.
 
 #### ***sovraccarico degli operatori logici e di confronto***
 
@@ -4637,7 +4870,7 @@ In questo caso viene utilizzato l'operatore ```()``` per eseguire il prodotto pe
 int main()
 {
     setlocale(0, "");
-    coord Coord{2, -1};
+    coord Coord{ 2, -1 };
 
     // output = {6, -3}
     std::wcout << L"triplo della coordinata: " << Coord(3).str();
@@ -4800,7 +5033,7 @@ template<typename T> class MyClass
 public:
     void show()
     {
-        std::cout << "versione generica\n";
+        std::wcout << L"versione generica\n";
     }
 };
 
@@ -4809,7 +5042,7 @@ template<> class MyClass<bool>
 public:
     void show()
     {
-        std::cout << "versione specializzata con template bool\n";
+        std::wcout << L"versione specializzata con template bool\n";
     }
 };
 
@@ -4821,6 +5054,8 @@ int main()
     MyClass<bool> obj2;
     // output = versione specializzata con template bool
     obj2.show();
+
+    return 0;
 }
 ```
 
@@ -4834,7 +5069,7 @@ template<typename T> class MyClass
 public:
     void show()
     {
-        std::cout << "template valore\n";
+        std::wcout << L"template valore\n";
     }
 };
 
@@ -4843,7 +5078,7 @@ template<typename T> class MyClass<T*>
 public:
     void show()
     {
-        std::cout << "template puntatore\n";
+        std::wcout << L"template puntatore\n";
     }
 };
 
@@ -4854,6 +5089,8 @@ int main()
 
     MyClass<int*> obj2;
     obj2.show();  // output = template puntatore
+
+    return 0;
 }
 ```
 
@@ -4886,7 +5123,7 @@ Oppure la stessa cosa si può fare anche in questo modo:
 
 template<typename T> static void print_single(T value)
 {
-    std::cout << value << '\n';
+    std::wcout << value << L'\n';
 }
 
 template<typename... Args> static void print(Args... args)
@@ -4901,9 +5138,11 @@ int main()
 }
 ```
 
-#### ***```std::is_same```, ```std::is_integral``` e ```std::enable_if```***
+#### ***```<type_traits>```***
 
-Utilizzo di ```std::is_same```:
+Il file header ```<type_traits>``` contiene alcune classi importanti per controllare di quale datatype è un template, vediamo i principali:
+
++ **```std::is_same```**:
 
 ```cpp
 if constexpr (std::is_same<T, int>::value)
@@ -4921,7 +5160,7 @@ if constexpr (std::is_same_v<T, int>)
 }
 ```
 
-Utilizzo di ```std::is_integral```:
++ **```std::is_integral```**:
 
 ```cpp
 if constexpr (std::is_integral<T, int>::value)
@@ -4930,7 +5169,7 @@ if constexpr (std::is_integral<T, int>::value)
 }
 ```
 
-Che si può riscrivere così:
+Il codice si può riscrivere così:
 
 ```cpp
 if constexpr (std::is_integral_v<T, int>)
@@ -4939,7 +5178,18 @@ if constexpr (std::is_integral_v<T, int>)
 }
 ```
 
-Con i template, ```std::enable_if``` permermette di abilitare una porzione di codice solo se una condizione è vera, in questo caso, se T è integrale.
+Ecco altre classi (la sintassi è analoga):
+
++ **```is_void```**
++ **```is_null_pointer```**
++ **```is_floating_point```** (controlla se un numero è decimale)
++ **```is_array```**
++ **```is_enum```**
++ **```is_class```** (controlla se è ti tipo classe o struttura)
++ **```is_function```**
++ **```is_pointer```**
+
+Con i template, **```std::enable_if```** permermette di abilitare una porzione di codice solo se una condizione è vera, in questo caso, se T è integrale.
 
 ```cpp
 template<typename T>
@@ -5442,6 +5692,8 @@ cv.notify_all();
 
 #### ***```std::future``` e ```std::promise```***
 
+```std::promise``` viene utilizzato per impostare un risultato che verrà poi recuperato da ```std::future```, il tutto in un thread separato
+
 ```cpp
 #include <future>
 #include <iostream>
@@ -5464,9 +5716,141 @@ int main()
 }
 ```
 
-#### ***```std::async```***
+```std::async``` può essere utilizzato con ```std::future``` per semplificare l'utilizzo:
+
+```cpp
+#include <iostream>
+#include <future>
+
+int setter() { return 40; }
+
+int main()
+{
+    setlocale(0, "");
+    std::future<int> result = std::async(calculate);
+    std::wcout << L"risultato: " << result.get() << L'\n';
+    return 0;
+}
+```
 
 #### ***```std::atomic```***
+
+Con l'espressione **variabile atomica** si intende una variabile in grado di effettuare **operazioni atomiche**, cioè operazioni sicure anche se la variabile è condivisa (un'alternativa ai mutex).
+
+Questo funziona solo se il datatype è primitivo oppure un typedef\alias di un tipo primitivo.
+
+I metodi di ```std::atomic``` includono:
+
++ ```load```: legge il valore
++ ```store```: scrive un valore
++ ```fetch_add```: incrementa
++ ```fetch_sub```: decrementa
+
+Esempio:
+
+```cpp
+#include <atomic>
+#include <iostream>
+
+std::atomic_int atomic_num;
+
+int main()
+{
+    setlocale(0, "");
+
+    atomic_num.store(17);
+    atomic_num.fetch_sub(1);
+    atomic_num.fetch_add(4);
+
+    std::wcout << atomic_num.load() << L'\n'; // output = 20
+    return 0;
+}
+```
+
+In questo caso viene usato ```std::atomic_int``` al posto di ```std::atomic<int>``` ma è la stessa cosa, questo si può fare anche con ```bool```, ```char```, ```size_t``` e altri tipi primitivi.
+
+---
+---
+
+### La parallelizzazione del codice
+
+#### ***Con ```<execution>```***
+
+In C++ è possibile dividere il lavoro di una porzione di codice fra più thread con le funzioni dell'header **```execution```**, ecco un esempio:
+
+```cpp
+#include <algorithm>
+#include <execution>
+#include <iostream>
+#include <vector>
+
+int main()
+{
+    setlocale(0, "");
+    std::vector<int> vect{ 5, 2, 9, 1, 5, 6, 7 };
+
+    std::wcout << L"questo è il vettore: ";
+    for (const auto& v : vect) std::wcout << v << L' ';
+    std::wcout << L'\n';
+
+    // foreach
+    std::for_each(
+        std::execution::par_unseq,
+        vect.begin(), vect.end() ,
+        [](int& n) {
+            n *= 2;
+        }
+    );
+
+    std::wcout << L"vettore modificato: ";
+    for (const auto& v : vect) std::wcout << v << L' ';
+    std::wcout << L'\n';
+
+    // ordinamento
+    std::sort(std::execution::par, vect.begin(), vect.end());
+
+    std::wcout << L"vettore ordinato: ";
+    for (const auto& v : vect) std::wcout << v << L' ';
+    std::wcout << L'\n';
+
+    return 0;
+}
+```
+
+La funzione **```std::for_each```** esegue il codice contenuto nella lambda in parallelo, dove ```n``` è un elemento del vettore (questo il motivo del riferimento ```&```), mentre la funzione **```std::sort```** ordina il vettore con un calcolo in parallelo.
+
++ ```std::execution::seq``` esegue il codice in sequenza
++ ```std::execution::par``` esegue il codice in parallelo mantenendo comunque un certo ordine
++ ```std::execution::par_unseq``` esegue il codice in parallelo senza alcun ordine
+
+#### ***Con ```Concurrency```***
+
+Se invece si intende parallelizzare un semplice ciclo for invece di un foreach si può utilizzare **```Concurrency::parallel_for```**:
+
+```cpp
+#include <iostream>
+#include <ppl.h>
+#include <vector>
+
+int main()
+{
+    setlocale(0, "");
+    std::vector<int> vect(1'000'000);
+
+    Concurrency::parallel_for(
+        0, 1'000'000,
+        [&](int i) {
+            vect[i] = i * 2;
+        }
+    );
+
+    std::wcout << L"ecco il vettore: ";
+    for (const auto& v : vect) std::wcout << v << L' ';
+    std::wcout << L'\n';
+
+    return 0;
+}
+```
 
 ---
 ---
