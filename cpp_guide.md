@@ -1,14 +1,17 @@
-# Guida alla programmazione in C++
-
-## ```Questa guida è per C++ dalla versione C++20 in poi utilizzando come IDE Visual Studio 2022```
 
 ---
 
-## **Livello Principiante**
+<h2 style="text-align: center;"><b>Livello Beginner</b></h2>
 
 ---
+
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
 
 ### I commenti
+
+</div>
 
 I commenti sono delle parti di testo inserite nel codice il cui unico scopo è quello di fornire informazioni sul codice, vengono ignorati dal compilatore e perciò non influiscono sull'esecuzione del programma.
 
@@ -28,9 +31,19 @@ Esempio:
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### Le basi del linguaggio C++
 
+</div>
+
+<div style="text-align: center;">
+
 #### ***Hello World***
+
+</div>
 
 Ecco un semplice programma che scrive “Hello World!”:
 
@@ -45,7 +58,11 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Spiegazione***
+
+</div>
 
 **```iostream```** (input output stream) è un file esterno, che è necessario includere per usare **```std::cout```**.
 
@@ -61,13 +78,19 @@ Il punto e virgola dopo ```Hello, World!``` indica che l'istruzione è terminata
 
 ```#include <iostream>``` non ha un punto e virgola alla fine perché è una direttiva, si possono riconoscere le direttive perché iniziano con ```#```.
 
+<div style="text-align: center;">
+
 #### ***```using namespace std```***
+
+</div>
 
 Esiste un modo per evitare di scrivere ```std::``` prima di ogni variabile\funzione\enumerazione\unione\struttura\classe\oggetto dello spazio di nomi standard:
 
 ```cpp
 using namespace std;
 ```
+
+<div style="page-break-after: always;"></div>
 
 In questo caso il programma diventa:
 
@@ -100,14 +123,19 @@ Chiaramente scrivendo ciò la regola vale SOLO per gli variabili\funzioni\enum\u
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### L'output (o stampa a video)
+
+</div>
 
 In C++ esistono quattro oggetti principali per eseguire l'output:
 **```cout```**, **```cerr```**, **```wcout```**, **```wcerr```**.  
 (```cout``` = c output, ```cerr``` = c error, ```wcout``` = wide c output, ```wcerr``` = wide c error).
 
-```cout``` e ```wcout``` sono usati per l'output normale mentre ```cerr``` e ```wcerr``` sono usati per i messaggi di errore,
-
+```cout``` e ```wcout``` sono usati per l'output normale mentre ```cerr``` e ```wcerr``` sono usati per i messaggi di errore,  
 ```cout``` e ```cerr``` sono usati con le stringhe normali e ```wcout``` e ```wcerr``` con stringhe larghe, vale a dire stringhe che supporatano una maggiore quantità di caratteri (come ad esempio lettere accentate).
 
 Esempio:
@@ -135,7 +163,13 @@ Notare l'aggiunta di ```L``` prima delle stringhe wide, in generale bisogna aggi
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### Le sequenze di escape
+
+</div>
 
 Le sequenze di escape rappresentano dei caratteri speciali non stampabili:
 
@@ -154,20 +188,38 @@ Ha particolare importanza ```\n```, che è un'alternativa in genere preferibile 
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### La tabella ASCII
+
+</div>
 
 La tabella ASCII assegna un numero a ogni carattere:
 
-![ascii_table_jpg](/cpp_guide_images/ascii.jpg)
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br>
 
 ---
 ---
+
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
 
 ### I datatype
 
+</div>
+
 I datatype sono i tipi tra cui bisogna scegliere quando si dichiara una variabile, esistono dei datatype primari, forniti dal linguaggio C++, e datatype secondari che possono essere definiti nei file header esterni oppure direttamente nel codice.
 
+<div style="text-align: center;">
+
 #### ***I datatype primari***
+
+</div>
 
 Tipi interi:
 
@@ -198,7 +250,11 @@ Esempio:
 ```__int64``` va da **-9.223.372.036.854.775.808** a **9.223.372.036.854.775.807**,  
 ma ```unsigned __int64``` va da **0** a **18.446.744.073.709.551.615**.
 
-#### ***I ```typedef```***
+<div style="text-align: center;">
+
+#### ***I ```typedef``` e gli alias***
+
+</div>
 
 Per definire un datatype secondario è possibile utilizzare un ```typedef```:  
 **typedef *\<datatype\>* *\<nome\>*;**
@@ -211,7 +267,7 @@ typedef unsigned long long size_t;
 
 Qui si definisce **```size_t```** come ```unsigned long long```.
 
-Esiste un altro modo per definire un datatype secondario con la parola chiave **```using```**:  
+Esiste un altro modo (alias) per definire un datatype secondario con la parola chiave **```using```**:  
 **using *\<nome\>* = *\<datatype\>*;**
 
 L'esempio di prima diventa
@@ -223,9 +279,19 @@ using size_t = unsigned long long;
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### Le variabili e le costanti
 
+</div>
+
+<div style="text-align: center;">
+
 #### ***Che cosa sono***
+
+</div>
 
 In C++ le variabili vengono dichiarate con questa sintassi:  
 ***\<datatype\>* *\<nome\>*;**
@@ -241,7 +307,11 @@ Per dichiarare una costante bisogna aggiungere la parola chiave **```const```** 
 
 Le variabili possono cambiare il loro valore durante l'esecuzione del programma, al contrario delle constanti.
 
+<div style="text-align: center;">
+
 #### ***Inizializzazione***
+
+</div>
 
 Si può usare la parola chiave **```auto```** al posto del datatype, dove il compilatore proverà a dedurre il tipo dall'espressione, perciò è obbligatorio assegnare un valore, ad esempio è errato scrivere:
 
@@ -285,7 +355,11 @@ Nell'inizializzazione uniforme si può omettere il valore tra le parentesi:
 int x{}; // stessa cosa di int x{ 0 };
 ```
 
+<div style="text-align: center;">
+
 #### ***Cambiare il valore***
+
+</div>
 
 Per cambiare il valore di una variabile si può usare l'operatore **```=```**, esempio:
 
@@ -310,11 +384,17 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***L'ambito delle variabili***
+
+</div>
 
 In C++ una variabile viene creata con una dichiarazione e distrutta quando esce dal proprio ambito, che è definito dalle parentesi graffe, una variabile dichiarata fuori da una funzione si dice **globale** mentre una variabile dichiarata in una funzione si dice **locale**.
 
 Se due variabili, una locale e una globale hanno lo stesso nome ma ambiti diversi, è possibile utilizzare l'**operatore di risoluzione dell'ambito ```::```** per accedere a quella globale, ciò funziona anche con le funzioni, o con una funzione e una variabile:
+
+<div style="page-break-after: always;"></div>
 
 ```cpp
 #include <iostream>
@@ -337,7 +417,13 @@ Due variabili non possono avere lo stesso nome all'interno dello stesso ambito.
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### Namespace
+
+</div>
 
 In C++ un namespace si dichiara con questa sintassi:
 
@@ -373,7 +459,13 @@ int main()
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### L'input utente
+
+</div>
 
 In C++ l'input viene eseguito con **```std::cin```**, necessario includere  **```<iostream>```**:
 
@@ -409,12 +501,21 @@ int main()
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
 
 ### Gli operatori matematici
 
+</div>
+
 In C++ ci sono 5 operatori matematici **primari (```+```, ```-```, ```*```, ```/```, ```%```)**, 5 operatori matematici **composti (```+=```, ```-=```, ```*=```, ```/=```, ```%=```)** e 2 operatori **unari (```++``` e ```--```)**.
 
+<div style="text-align: center;">
+
 #### ***Gli operatori matematici primari***
+
+</div>
 
 Gli operatori **(```+```, ```-```, ```*```, ```/```)** indicano rispettivamente addizione, sottrazione, moltiplicazione e divisione.  
 L'operatore **```%```** indica il resto della divisione intera.
@@ -442,7 +543,11 @@ int main()
 
 Gli operatori composti e unari abbreviano alcune espressioni:
 
+<div style="text-align: center;">
+
 #### ***Gli operatori matematici composti***
+
+</div>
 
 ```cpp
     Var += i;   // Var = Var + i
@@ -456,9 +561,15 @@ Gli operatori composti e unari abbreviano alcune espressioni:
     --Var;      // Var = Var - 1
 ```
 
+<div style="text-align: center;">
+
 #### ***Gli operatori unari***
 
+</div>
+
 Tuttavia esiste una leggera differenza tra ```++Variabile``` e ```Variabile++``` e tra ```--Variabile``` e ```Variabile--```:
+
+<div style="page-break-after: always;"></div>
 
 ```cpp
     int Var, i;
@@ -477,11 +588,21 @@ Tuttavia esiste una leggera differenza tra ```++Variabile``` e ```Variabile++```
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### La conversione tra datatype
+
+</div>
 
 Alcune volte può essere necessario effettuare la conversione tra due datatype, in C++ esistono vari modi per fare ciò, ma qui ne vedremo solo due: il **type cast** e lo **static cast**.
 
+<div style="text-align: center;">
+
 #### ***Il type cast***
+
+</div>
 
 Il type cast può effettuare qualsiasi tipo di conversione.  
 **(*\<datatype\>*)*\<espressione\>***  
@@ -505,10 +626,13 @@ int main()
 
 Nel primo output viene visualizzato 1 (un intero) perché entrambi i numeri sono interi; ma nel secondo, ```A``` viene convertito in double, e quindi anche il risultato sarà double: 1.4.
 
+<div style="text-align: center;">
+
 #### ***Lo static cast***
 
-E' preferibile utilizzare lo **static cast** quando possibile, perché è più sicuro consentendo solo conversioni ben definite.  
-**static_cast< *\<datatype\>* >(*\<espressione\>*);**
+</div>
+
+E' preferibile utilizzare lo **static cast** quando possibile, perché è più sicuro consentendo solo conversioni ben definite: **static_cast< *\<datatype\>* >(*\<espressione\>*);**
 
 ```cpp
 #include <iostream>
@@ -526,11 +650,21 @@ int main()
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### I concetti di base delle stringhe
 
-In C++ una stringa è un datatype secondario per una variabile che contiene del testo, esistono due classi per questo dette **```std::string```** e **```std::wstring```**, per usare le stringhe bisogna includere **```<string>```**
+</div>
+
+In C++ una stringa è un datatype secondario per una variabile che contiene del testo, esistono due classi per questo dette **```std::string```** e **```std::wstring```**, per usare le stringhe bisogna includere **```<string>```**.
+
+<div style="text-align: center;">
 
 #### ***Output***
+
+</div>
 
 Esempio:
 
@@ -558,7 +692,11 @@ std::string  str(5, ',');  // stessa cosa di std::string str = ",,,,,";
 std::string wstr(9, L','); // stessa cosa di std::string str = L",,,,,,,,,";
 ```
 
+<div style="text-align: center;">
+
 #### ***Input***
+
+</div>
 
 Si esegue l'input di una stringa normale con ```std::cin``` e quello di una stringa wide con **```std::wcin```**:
 
@@ -577,8 +715,8 @@ int main()
     std::cin >> str;
     std::wcin >> wstr;
 
-    std::cout  << str  << '\n';
-    std::wcout << wstr << '\n';
+    std::cout  << str  <<  '\n';
+    std::wcout << wstr << L'\n';
 
     return 0;
 }
@@ -608,7 +746,11 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Input senza ```cin```***
+
+</div>
 
 Esiste un altro modo per eseguire l'input di un carattere, che è strettamente legato alle stringhe, con il file header **```<conio.h>```**:
 
@@ -623,6 +765,8 @@ int main()
     return 0;
 }
 ```
+
+<div style="page-break-after: always;"></div>
 
 ```cpp
 #include <conio.h>
@@ -654,9 +798,19 @@ int main()
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### Le istruzioni IF-ELSE
 
+</div>
+
+<div style="text-align: center;">
+
 #### ***Che cos'è***
+
+</div>
 
 Un'istruzione if-else è un modo per eseguire determinate parti di codice in base alla verità di una condizione:
 
@@ -690,13 +844,19 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Le parentesi graffe***
+
+</div>
 
 Qui possiamo vedere i 3 principali stili di un if-else quanto a parentesi graffe, che valgono anche per i **cicli**, che saranno descritti in seguito:  
 
 + con la parentesi graffa aperta davanti alla condizione
 + con le parentesi graffe a capo
 + senza parentesi graffe, tuttavia deve essere presente una sola istruzione
+
+<div style="page-break-after: always;"></div>
 
 E' anche possibile annidare due istruzioni if in questo modo:
 
@@ -711,7 +871,11 @@ E' anche possibile annidare due istruzioni if in questo modo:
 
 Qui vediamo che il primo if non ha le parentesi graffe, questo perché al suo interno c'è un solo if, nonostante le due istruzioni all'interno di quest'ultimo if.
 
+<div style="text-align: center;">
+
 #### ***Gli operatori***
+
+</div>
 
 Negli if vengono usati gli **operatori di confronto** e gli **operatori logici**:
 
@@ -741,7 +905,13 @@ Grazie agli operatori logici i due if precedenti si possono compattare così:
     }
 ```
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 #### ***Gli IF-ELSE e le eccezioni***
+
+</div>
 
 Tuttavia esistono dei casi in cui è meglio usare due if invece di uno solo, come in questo esempio:
 
@@ -765,7 +935,11 @@ int main()
 
 L'espressione ```(A / B) % 2 == 1``` non può essere eseguita se ```B``` è 0, e solleverebbe un'**eccezione ```std::invalid_argument```**, per prevenire ciò bisogna controllare che ```B``` sia diverso da 0 PRIMA dell'elaborazione dell'espressione e non nella stessa istruzione if.
 
+<div style="text-align: center;">
+
 #### ***Gli IF-ELSE e l'assegnazione***
+
+</div>
 
 Nella condizione degli if si può anche assegnare un valore a una variabile, poi si controlla se il risultato non è nullo.
 
@@ -783,8 +957,10 @@ int main()
 }
 ```
 
+<div style="page-break-after: always;"></div>
+
 Per questo bisogna fare attenzione a non confondere gli operatori ```==``` e ```=``` perché non ci sarà nessun errore di compilazione in caso di assegnazione accidentale dentro un if.  
-Per evitare questo errore può aiutare scrivere
+Per evitare questo errore può aiutare scrivere:
 
 ```cpp
     if (1 == x) // if (1 = x) è un errore: non si può assegnare a un numero
@@ -799,12 +975,22 @@ Invece di:
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### L'operatore ternario
+
+</div>
 
 In C++ esiste un'alternativa rispetto alle istruzioni if-else detta operatore ternario.  
 ***\<condizione\>* ? *\<se vero\>* : *\<se falso\>*;**
 
+<div style="text-align: center;">
+
 #### ***Senza assegnazione***
+
+</div>
 
 Esempio: programma per trovare l'inverso di un numero
 
@@ -824,7 +1010,11 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Con l'assegnazione***
+
+</div>
 
 E' possibile utilizzare l'operatore ternario per assegnare un valore, qui viene riportato un programma per calcolare il massimo tra due numeri:
 
@@ -847,7 +1037,13 @@ int main()
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### Gli operatori bitwise
+
+</div>
 
 **Attenzione**: è necessario conoscere come funziona il codice binario.
 
@@ -888,7 +1084,13 @@ Ovviamente esistono anche gli operatori **```&=```, ```|=```, ```^=```, ```<<=``
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### L'istruzione GOTO
+
+</div>
 
 In C++ esiste un modo per trasferire il controllo a una certa istruzione quando ci si trova a un certo punto del codice, per fare questo si utilizza un **```goto```**.  
 **Attenzione**: utilizzare molti goto può rendere il codice poco leggibile.
@@ -924,7 +1126,13 @@ Se tra il goto e l'istruzione del goto, viene inizializzata una variabile, si ot
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### Il ciclo WHILE
+
+</div>
 
 Un ciclo while è una sezione di codice che viene ripetuta finché una condizione rimane vera:
 
@@ -952,6 +1160,8 @@ int main()
 ```
 
 Questo codice ripeterà all'infinito all'utente di inserire un numero, perché la condizione all'interno del ciclo è sempre vera.
+
+<div style="page-break-after: always;"></div>
 
 Ecco un codice che calcola i primi numeri della sequenza di Fibonacci:
 
@@ -983,7 +1193,13 @@ Poiché la variabile y è intera, ha un limite, quando il limite viene superato 
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### Il ciclo DO WHILE
+
+</div>
 
 Questo è un ciclo simile al while, con la differenza che qui si verifica la condizione dopo aver eseguito il codice e non prima.
 
@@ -1016,7 +1232,13 @@ int main()
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### Il ciclo FOR
+
+</div>
 
 Questo è il ciclo più importante tra quelli visti finora, permette di ripetere un blocco di codice finché una condizione è vera ed eseguendo una certa operazione su di una variabile a ogni iterazione.
 
@@ -1095,7 +1317,13 @@ Possiamo vedere i due for all'interno del for più grande, che usano la stessa v
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### Le parole chiave ```break``` e ```continue```
+
+</div>
 
 In C++ l'utilizzo dei cicli è reso più semplice dalle parole chiave ```break``` e ```continue```: un'istruzione ```break``` esce dal ciclo mentre ```continue``` salta il giro, vediamo come si possono utilizzare con questo esempio:
 
@@ -1132,7 +1360,13 @@ In questo programma l'utente deve indovinare il valore della variabile ```i``` p
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### L'istruzione SWITCH
+
+</div>
 
 In C++ esiste un'istruzione detta ```switch``` che è un'alternativa più veloce delle istruzioni if-else, tuttavia se le ottimizzazioni del compilatore sono attivate, il tempo di esecuzione rimane lo stesso, è utile quando ci sono molti if-else.
 
@@ -1177,6 +1411,8 @@ int main()
     return 0;
 }
 ```
+
+<div style="page-break-after: always;"></div>
 
 ```cpp
 #include <iostream>
@@ -1224,9 +1460,19 @@ E' molto importante l'utilizzo di ```break``` perché tutte le etichette **```ca
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### Alcune funzioni esterne utili
 
+</div>
+
+<div style="text-align: center;">
+
 #### ***Per gli interi***
+
+</div>
 
 + **```std::swap```** scambia il valore di due variabili, necessario includere **```<algorithm>```**:
 
@@ -1260,13 +1506,18 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Per i caratteri***
+
+</div>
 
 + ```isalpha``` permette di controllare se un carattere è alfabetico
 + ```isdigit``` controlla se un carattere è numerico
 + ```isalnum``` controlla se un carattere è alfanumerico
-
 + ```tolower``` e ```toupper``` trasformano un carattere nelle sue versioni in minuscolo o maiuscolo rispettivamente
+
+<div style="page-break-after: always;"></div>
 
 ```cpp
 #include <iostream>
@@ -1292,7 +1543,13 @@ int main()
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### Le costanti matematiche
+
+</div>
 
 In C++ il namespace ```std::numbers``` (necessario includere ```<numbers>```) contiene molte costanti matematiche utili:
 
@@ -1310,11 +1567,21 @@ In C++ il namespace ```std::numbers``` (necessario includere ```<numbers>```) co
 + ```std::numbers::egamma```: costante di Euler-Mascheroni
 + ```std::numbers::phi```: la costante aurea
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### Le funzioni matematiche
+
+</div>
 
 In C++ esistono delle funzioni matematiche che per usare è necessario includere **```<cmath>```**, eccone alcuni esempi:
 
+<div style="text-align: center;">
+
 #### ***Arrotondamento***
+
+</div>
 
 + **```std::floor```** arrotonda per difetto
 + **```std::ceil```** arrotonda per eccesso
@@ -1355,7 +1622,13 @@ int main()
 }
 ```
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 #### ***Valore assoluto***
+
+</div>
 
 + **```std::fabs```** calcola il valore assoluto di un numero:
 
@@ -1372,7 +1645,11 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Esponenti***
+
+</div>
 
 + **```std::pow```** calcola l'elevamento a potenza  
 (base e esponente possono anche essere negativi o decimali):
@@ -1423,17 +1700,30 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Logaritmi e trigonometria***
+
+</div>
 
 + Per calcolare il logaritmo si possono usare **```std::log2```**, **```std::log10```** e **```std::log```**.
 
 + Tra le funzioni trigonometriche ci sono **```std::sin```**, **```std::sinh```**, **```std::cos```**, **```std::cosh```**, **```std::tan```**, **```std::tanh```**, **```std::asin```**, **```std::acos```**, **```std::atan```**, **```std::asinh```**, **```std::acosh```** e **```std::atanh```**.
 
+---
+---
+
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### La complessità temporale di un'operazione
 
-La notazione **O grande** è uno strumento per descrivere il comportamento asintotico di una funzione.
+</div>
 
-<img src="/cpp_guide_images/big_o_notation.png" alt="big_o_png" width="500" /></img>
+La notazione **O grande** è uno strumento per descrivere il comportamento asintotico di una funzione:
+
+<br><br>
 
 Esempi di ordini:
 
@@ -1447,15 +1737,29 @@ Esempi di ordini:
 ---
 ---
 
-## **Livello Intermedio**
+<div style="page-break-after: always;"></div>
 
 ---
 
+<h2 style="text-align: center;"><b>Livello Intermediate</b></h2>
+
+---
+
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### Le funzioni
+
+</div>
 
 Una funzione è un blocco di codice che si può riutilizzare, che elabora degli input detti **parametri** e restituisce un output tramite la parola chiave **```return```**.
 
+<div style="text-align: center;">
+
 #### ***Le basi***
+
+</div>
 
 Vediamo come si scrivono le funzioni **void** (una funzione void non restituisce nessun valore):
 
@@ -1476,7 +1780,11 @@ int main()
 
 Quando viene chiamata una funzione, il controllo viene trasferito a quella funzione, e viene eseguito tutto il codice che c'è all'interno di questa.
 
+<div style="text-align: center;">
+
 #### ***I parametri***
+
+</div>
 
 Vediamo adesso come passare dei parametri a una funzione:
 
@@ -1501,7 +1809,11 @@ int main()
 
 In questo caso la funzione ```PrintNumbers``` accetta come parametri due numeri decimali e li scrive.
 
-#### ***return***
+<div style="text-align: center;">
+
+#### ***```return```***
+
+</div>
 
 Si usa la parola chiave **```return```** per restituire il valore calcolato dalla funzione:
 
@@ -1526,7 +1838,11 @@ int main()
 
 In questo esempio viene chiamata la funzione Add per sommare i due numeri decimali, che restituisce con ```return``` la loro somma, e il valore restituito viene assegnato a una variabile per essere scritto.
 
+<div style="text-align: center;">
+
 #### ***Passare parametri per riferimento***
+
+</div>
 
 Per restituire più di un valore NON si può usare due volte ```return```, questo perché in un'istruzione ```return``` il controllo esce dalla funzione, e ciò che viene dopo è ignorato; l'approccio giusto è passare dei parametri aggiuntivi per riferimento.
 
@@ -1535,12 +1851,7 @@ Perché quando viene chiamata una funzione, viene eseguita una copia dei due inp
 ```cpp
 #include <iostream>
 
-void Divide(
-    int dividend,
-    int divisor,
-    int& quotient,
-    int& rest
-)
+void Divide(int dividend, int divisor, int& quotient, int& rest)
 {
     if (divisor == 0) return;
     quotient = dividend / divisor;
@@ -1565,7 +1876,11 @@ int main()
 Poiché i parametri ```dividend``` e ```divisor``` non sono preceduti dall'**operatore di indirizzo ```&```**, viene eseguita una copia di ```A```  e ```B```, invece i parametri ```Quotient``` e ```Rest``` non vengono copiati, ma modificano il loro valore secondo le operazioni di ```quotient``` e ```rest```.  
 in questo modo non c'è bisogno di utilizzare il ```return```.
 
+<div style="text-align: center;">
+
 #### ***Funzione parametro***
+
+</div>
 
 Ogni funzione ha una sua **firma**, che contiene le informazioni riguardo il nome, il tipo restituito e i datatype dei parametri, quando due funzioni hanno lo stesso nome ma firme diverse, si dice che la funzione è **sovraccaricata**, non si può sovraccaricare la funzione ```main```.
 
@@ -1602,7 +1917,11 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***La ricorsione***
+
+</div>
 
 Una funzione può chiamare se stessa, quando ciò accade si dice che la funzione è **ricorsiva**, esempio:
 
@@ -1629,17 +1948,16 @@ int main() { main(); }
 
 Qui avviene una ricorsione infinita, che eventualmente riempie la memoria disponibile e il programma va in crash.
 
+<div style="text-align: center;">
+
 #### ***Dichiarazione e definizione***
+
+</div>
 
 E' possibile staccare la dichiarazione della funzione dalla definizione, ad esempio la funzione di prima
 
 ```cpp
-void Divide(
-    int dividend,
-    int divisor,
-    int& quotient,
-    int& rest
-)
+void Divide(int dividend, int divisor, int& quotient, int& rest)
 {
     if (divisor == 0) return;
     quotient = dividend / divisor;
@@ -1650,24 +1968,14 @@ void Divide(
 Si può riscrivere così:
 
 ```cpp
-void Divide(
-    int dividend,
-    int divisor,
-    int& quotient,
-    int& rest
-);
+void Divide(int dividend, int divisor, int& quotient, int& rest);
 
 /*
 il resto del codice...
 ......
 */
 
-void Divide(
-    int dividend,
-    int divisor,
-    int& quotient,
-    int& rest
-)
+void Divide(int dividend, int divisor, int& quotient, int& rest)
 {
     if (divisor == 0) return;
     quotient = dividend / divisor;
@@ -1675,24 +1983,14 @@ void Divide(
 }
 ```
 
-Questa cosa è molto utile, infatti non si può chiamare una funzione in una riga di codice prima della dichiarazione, ma si possono spostare tutte le dichiarazioni all'inizio del codice e definire la funzione in seguito
+Questo è molto utile, infatti non si può chiamare una funzione in una riga di codice prima della dichiarazione, ma si possono spostare tutte le dichiarazioni all'inizio del codice e definire la funzione in seguito
 
 E' possibile creare dei parametri facoltativi, che però devono essere messi per ultimi nell'elenco dei parametri di una funzione, riscriviamo l'esempio di prima supponendo che ```dividend``` sia predefinito a 1 così come ```divisor```:
 
 ```cpp
-void Divide(
-    int& quotient,
-    int& rest,
-    int dividend = 1,
-    int divisor = 1
-);
+void Divide(int& quotient, int& rest, int dividend = 1, int divisor = 1);
 
-void Divide(
-    int& quotient,
-    int& rest,
-    int dividend,
-    int divisor
-)
+void Divide(int& quotient, int& rest, int dividend, int divisor)
 {
     if (divisor == 0) return;
     quotient = dividend / divisor;
@@ -1702,7 +2000,11 @@ void Divide(
 
 In questo modo si può fare una chiamata di funzione senza dover per forza specificare quali siano ```dividend``` e ```divisor```, ricordare che non si può fare così con quotient e rest perché sono passati per riferimento e devono essere **lvalue modificabili** quindi non costanti (e quindi neanche numeri dato che essi sono costanti).
 
+<div style="text-align: center;">
+
 #### ***Gli specificatori***
+
+</div>
 
 Una funzione può essere contrassegnata da alcune parole chiave dette **specificatori**, tra le quali troviamo **```inline```**, **```constexpr```** e **```static```**.
 
@@ -1710,15 +2012,11 @@ Se una funzione è inline, vuol dire che il compilatore sostituirà con il corpo
 
 ```cpp
 #include <iostream>
-
-inline void PrintNumbers(double param1, double param2)
-{
+inline void PrintNumbers(double param1, double param2) {
     std::cout << "paramtero 1: " << param1 << '\n';
     std::cout << "paramtero 2: " << param2 << '\n';
 }
-
-int main()
-{
+int main() {
     double A, B;
     std::cin >> A >> B;
 
@@ -1731,9 +2029,7 @@ Viene considerato come:
 
 ```cpp
 #include <iostream>
-
-int main()
-{
+int main() {
     double A, B;
     std::cin >> A >> B;
 
@@ -1766,10 +2062,56 @@ int main()
 
 Una funzione statica è visibile solo dal file in cui è dichiarata (e quindi non può essere messa in un file header); una variabile statica conserva il suo valore tra diverse chiamate di funzione.
 
+<div style="text-align: center;">
+
+#### ***Gli attributi***
+
+</div>
+
+Oltre agli specificatori esistono anche gli **attributi**, che vanno racchiusi tra una coppia di doppie parentesi quadre, vediamo quelli delle funzioni:
+
++ **```[[nodiscard]]```**  
+  Indica che il valore di ritorno di una funzione non dovrebbe essere ignorato.
+
+```cpp
+[[nodiscard]] int ReturnSpecialValue() { return 100; }
+
+
+
+int main()
+{
+    // non genera warning del compilatore
+    std::cout << "valore speciale del programma: ";
+    std::cout << ReturnSpecialValue() << '\n';
+
+    // warning: valore restituito ignorato
+    ReturnSpecialValue();
+
+    // si può fare così per sopprimere il warning
+    (void)ReturnSpecialValue();
+}
+```
+
++ **```[[deprecated]]```**  
+  Indica che una funzione è **deprecata** cioè non dovrebbe essere più utilizzata.
+
+```cpp
+[[deprecated("use NewFunct() instead")]] void OldFunct()
+{
+    // questa funzione non verrà più utilizzata utilizzata
+}
+```
+
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### Le direttive
+
+</div>
 
 In C++ le direttive sono istruzioni che vengono valutate dal **preprocessore**, che modifica il codice secondo le istruzioni e lo fornisce al compilatore.
 
@@ -1842,12 +2184,22 @@ La direttiva ```#pragma``` è la più complessa, ne esistono molte varianti, ad 
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### Le macro
+
+</div>
 
 In C++ le macro vengono dichiarata con la direttiva ```#define```, e servono a definire simboli che vengono sostituiti dal preprocessore.  
 **#define *\<nome\>* *\<espressione\>***
 
+<div style="text-align: center;">
+
 #### ***Macro come costanti***
+
+</div>
 
 Esempio di macro:
 
@@ -1857,7 +2209,11 @@ Esempio di macro:
 
 Ogni volta che il preprocessore trova ```M_PI``` nel codice lo sostituirà con 3.14159265358979323.
 
+<div style="text-align: center;">
+
 #### ***Macro come funzioni***
+
+</div>
 
 Le macro possono anche accettare degli argomenti:
 
@@ -1882,7 +2238,11 @@ SQUARE(1 + 2);
 SQUARE(1 + 2);
 ```
 
+<div style="text-align: center;">
+
 #### ***Operatori***
+
+</div>
 
 Con le macro è possibile utilizzare l'operatore ```##``` per concatenare due simboli:
 
@@ -1899,7 +2259,11 @@ Se una macro è molto lunga la si può mandare a capo con un backslash:
 int __##x{}
 ```
 
+<div style="text-align: center;">
+
 #### ***Esempi***
+
+</div>
 
 Esistono alcune macro predefinite del preprocessore:
 
@@ -1913,7 +2277,13 @@ Altre macro sono definite esternamente, un esempio è **```_STD```** che si espa
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### Le enumerazioni
+
+</div>
 
 In C++ le enumerazioni sono un modo per rendere il codice più leggibile, dove invece di dichiarare un elenco di macro in questo modo:
 
@@ -1927,7 +2297,11 @@ In C++ le enumerazioni sono un modo per rendere il codice più leggibile, dove i
 #define SUNDAY    7
 ```
 
+<div style="text-align: center;">
+
 #### ***```enum```***
+
+</div>
 
 Si può dichiarare un enum:
 
@@ -1957,6 +2331,7 @@ enum Day
     saturday ,
     sunday
 };
+
 int main()
 {
     int Day = monday;
@@ -1964,14 +2339,18 @@ int main()
     // oppure
     ::Day day = Day::monday;
 
-    // il primo operatore di risoluzione è usato solo
+    // il primo operatore di risoluzione dell'ambito è usato solo
     // perché c'è una variabile che ha lo stesso nome dell'enum
 
     return 0;
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***```enum class```***
+
+</div>
 
 Due enum non possono avere nessun elemento in comune, tuttavia questo si può risolvere rendendoli classi:
 
@@ -2010,7 +2389,13 @@ Gli enum e gli enum class sono due modi di definire dei datatype secondari.
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### Le strutture
+
+</div>
 
 In C++ esiste sono un modo per raggruppare più variabili di datatype non necessariamente uguali, sotto lo stesso nome, il nome della struttura, che diventa un datatype secondario, un esempio è la struttura **```_COORD```** di **```<Windows.h>```** che si definisce così:
 
@@ -2054,7 +2439,13 @@ int main()
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### Le unioni
+
+</div>
 
 In C++ Le unioni sono simili alle strutture, tuttavia ogni variabile ha la stessa regione in memoria, questo significa che modificando una variabile, tutte le altre cambiano, questo è utile quando bisogna effettuare operazioni di conversione oppure operazioni di modulo.
 
@@ -2083,6 +2474,8 @@ int main()
 ```
 
 In questo esempio tutte e due le variabili di ```variable``` sono state modificate.
+
+<div style="page-break-after: always;"></div>
 
 Esempio: conversione tra ```int``` e ```short```
 
@@ -2114,12 +2507,22 @@ Quando si converte da ```int``` a ```short```, il numero 65537 è troppo grande 
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### Gli array
+
+</div>
 
 In C++ gli array sono degli insiemi di lunghezza costante che contengono valori dello stesso datatype, possono essere statici (allocati nella **stack**) oppure dinamici (allocati nell'**heap**), Per ora vedremo solo come creare array statici.  
 __*\<datatype\>* *\<nome\>* [*\<dimensione\>*];__
 
+<div style="text-align: center;">
+
 #### ***Inizializzazione di un array***
+
+</div>
 
 Esempio: array di 1024 elementi
 
@@ -2142,7 +2545,11 @@ int main()
 
 Infatti in questo esempio, ```std::fill``` imposta a 1 tutti gli elementi di ```Array``` dall'indice 0 all'indice 1023.
 
+<div style="text-align: center;">
+
 #### ***Accesso agli elementi***
+
+</div>
 
 Per accedere a un elemento di un array si usa l'**operatore ```[]```** (Il primo elemento si trova alla posizione 0):
 
@@ -2161,7 +2568,13 @@ int main()
 }
 ```
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 #### ***Dimensione***
+
+</div>
 
 Per calcolare la dimensione di un array si usa **```sizeof```**, che calcola la dimensione in byte di una certa variabile o di un certo datatype:
 
@@ -2183,7 +2596,11 @@ int main()
 
 Infatti la dimensione in byte di un array è pari al numero degli elementi moltiplicato per la dimensione in byte di uno qualsiasi degli elementi.
 
+<div style="text-align: center;">
+
 #### ***Passare un array a una funzione***
+
+</div>
 
 Per passare un array a una funzione bisogna aggiungere ```[]``` davanti al nome del parametro nella funzione, e bisogna fornire anche la dimensione, infatti quando si passa un'array a una funzione viene in realtà passato un **puntatore** al primo elemento dell'array, cioè una variabile che contiene l'indirizzo del primo elemento dell'array, ma questo significa che non si può più calcolare la dimensione dell'array con ```sizeof``` ed è necessario passare la dimensione come parametro.
 
@@ -2211,7 +2628,11 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Il ciclo FOREACH***
+
+</div>
 
 Un ciclo **foreach** è un for che itera su ogni elemento di un array in ordine crescente.
 
@@ -2233,7 +2654,11 @@ Esempio:
 
 Questo ciclo riempie l'array di numeri interi consecutivi a partire da 0, viene usata la parola chiave **```auto```** come datatype, ed è presente l'**operatore di indirizzo ```&```** a indicare che la modificando la variabile, viene modificato anche l'array, in un foreach si può anche usare **```const```**, che indica che la variabile del ciclo non può essere modificata.
 
+<div style="text-align: center;">
+
 #### ***Array multidimensionali***
+
+</div>
 
 Un array multidimensionale è un array che ha come elementi degli altri array, e lo si dichiara così:
 
@@ -2254,9 +2679,19 @@ E supponiamo di avere anche due indici ```i``` e ```j```, ```Arr[i]``` è un arr
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### Algoritmi degli array
 
+</div>
+
+<div style="text-align: center;">
+
 #### ***Algoritmi di ordinamento***
+
+</div>
 
 + **Bubble Sort**  
 Il Bubble Sort confonta ogni coppia di elementi adiacenti e li scambia se sono nell'ordine sbagliato.
@@ -2354,6 +2789,9 @@ static void Heapify(int arr[], int n, int i)
     }
 }
 
+
+
+
 static void HeapSort(int arr[], int size)
 {
     for (int i = size / 2 - 1; i >= 0; --i)
@@ -2367,7 +2805,11 @@ static void HeapSort(int arr[], int size)
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Algoritmi di ricerca***
+
+</div>
 
 + Ricerca lineare:  
 Si controlla per ogni indice dell'array se l'elemento corrisponde, funziona con ogni tipo di array.
@@ -2405,11 +2847,21 @@ static int BinarySearch(const int arr[], int size, int element)
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### I puntatori
+
+</div>
 
 In C++ un **puntatore** è una variabile il cui valore è l'indirizzo di un'altra variabile.  
 
+<div style="text-align: center;">
+
 #### ***Sintassi di base***
+
+</div>
 
 ***\<datatype\>*\* *\<nome\>* = nullptr;**
 
@@ -2430,7 +2882,11 @@ Per ottenere il valore della variabile a cui punta il puntatore si usa l'**opera
     int NewVariable = *pointer;
 ```
 
+<div style="text-align: center;">
+
 #### ***Puntatori che puntano a un array \ struttura***
+
+</div>
 
 Se un puntatore punta a un array, sta in realtà puntando al primo elemento di quell'array, e incrementando il puntatore si accede agli altri elementi dell'array:
 
@@ -2462,7 +2918,11 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Puntatori nell'heap***
+
+</div>
 
 Per dichiarare un puntatore nell'**heap** si usa l'operatore **```new```**:
 
@@ -2489,7 +2949,11 @@ Quando un puntatore non serve più deve essere deallocato:
     Ptr = nullptr
 ```
 
+<div style="text-align: center;">
+
 #### ***Le eccezioni di ```<stdexcept>```***
+
+</div>
 
 E' buona pratica, ogni volta che si crea un puntatore nell'heap, di controllare se il puntatore è nullo, in questo caso si può sollevare un'eccezione, che ferma in automatico il programma quando si verifica un errore:
 
@@ -2535,7 +2999,11 @@ int main()
 
 Ogni istruzione ```try``` deve avere almeno un'istruzione ```catch```.
 
+<div style="text-align: center;">
+
 #### ***Puntatori intelligenti***
+
+</div>
 
 In C++ l'utilizzo dei puntatori è facilitato dai puntatori intelligenti (necessario includere **```<memory>```**): **```std::unique_ptr```**, **```std::shared_ptr```** e **```std::weak_ptr```**:
 
@@ -2597,6 +3065,8 @@ Tuttavia se ci sono due oggetti che puntano l'uno all'altro (riferimento circola
 
 Esempio:
 
+<div style="page-break-after: always;"></div>
+
 ```cpp
 #include <iostream>
 #include <memory>
@@ -2651,7 +3121,13 @@ int main()
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### ```Windows.h```
+
+</div>
 
 **```<Windows.h>```** è un file header utilizzato per accedere alle API (Application Programming Interface) di Windows, per utilizzarle serve un **handle** (puntatore void) alla console, in questo modo:
 
@@ -2660,7 +3136,11 @@ int main()
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 ```
 
+<div style="text-align: center;">
+
 #### ***Cambiare l'attributo della console***
+
+</div>
 
 Per cambiare il colore del testo e dello sfondo della console si utilizza la funzione **```SetConsoleTextAttribute```**, esempio:
 
@@ -2684,7 +3164,11 @@ Le macro utilizzate sono queste:
 
 Queste macro vengono combinate utilizzando l'**operatore bitwise or**.
 
+<div style="text-align: center;">
+
 #### ***Riposizionare il cursore***
+
+</div>
 
 Per cambiare la posizione del cursore si utilizza la funzione **```SetConsoleCursorPosition```**.  
 Esempio:
@@ -2695,7 +3179,13 @@ Esempio:
 
 Qui il cursore viene riposizionato alla coordinata (0, 10) sulla console, il ```COORD``` prima delle parentesi graffe è un **type cast**.
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 #### ***Ottenere i dati della console***
+
+</div>
 
 Per ottenere dati come la posizione del cursore o la dimensione del buffer della console c'è un'unica funzione che si chiama **```GetConsoleScreenBufferInfo```**:
 
@@ -2726,7 +3216,11 @@ int main()
 
 Notare che il ```CONSOLE_SCREEN_BUFFER_INFO``` ```csbi``` viene passato per riferimento.
 
+<div style="text-align: center;">
+
 #### ***Nascondere il cursore***
+
+</div>
 
 Si possono cambiare le informazioni del cursore con la funzione **```SetConsoleCursorInfo```**:
 
@@ -2747,7 +3241,11 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Pulire un'area dello schermo***
+
+</div>
 
 Per riempire una linea dello schermo esistono queste funzioni:  
 ```FillConsoleOutputCharacterA```, ```FillConsoleOutputCharacterW``` e ```FillConsoleOutputAttribute```.
@@ -2791,7 +3289,13 @@ La differenza tra **```FillConsoleOutputCharacterA```** e **```FillConsoleOutput
 
 Si può utilizzare ```system("cls")``` per cancellare tutto ciò che è stato scritto sulla console.
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 #### ***Inviare un input utente***
+
+</div>
 
 Si usa la funzione SendInput: il primo parametro indica quanti input inviare, il secondo è un array di ```INPUT``` e il terzo è ```sizeof(INPUT)```.
 
@@ -2835,7 +3339,13 @@ Per impostare il tipo di tasto da premere, si usano i caratteri della lettera ma
 + da ```VK_F1``` a ```VK_F24```
 + ...
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 #### ***```MessageBox```***
+
+</div>
 
 ```MessageBox``` è una funzione che crea una finestra di messaggio, ad esempio:
 
@@ -2869,11 +3379,21 @@ Il valore restituito dalla funzione indica il tasto che l'utente ha premuto, che
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### Le stringhe
+
+</div>
 
 In C++ la classe ```std::string``` e la classe ```std::wstring``` rappresentano un **array di caratteri**, e ci sono molti metodi utili per gestire queste stringhe.
 
+<div style="text-align: center;">
+
 #### ***Ottenere la dimensione di una stringa***
+
+</div>
 
 Si usa il **metodo ```size```** oppure la **funzione ```std::size```**:
 
@@ -2895,7 +3415,11 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Capire se una stringa è vuota***
+
+</div>
 
 Si può controllare se la dimensione è 0 ma esiste anche il metodo **```empty```**:
 
@@ -2917,7 +3441,13 @@ int main()
 }
 ```
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 #### ***Accesso agli elementi di una stringa***
+
+</div>
 
 Si usa il metodo **```at```** oppure l'operatore **```[]```**:
 
@@ -2941,7 +3471,11 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Convertire una stringa in un numero***
+
+</div>
 
 Se la stringa non è convertibile, la funzione di conversione solleverà un'eccezione **```invalid_argument```**, ci sono parecchie funzioni:
 
@@ -2955,6 +3489,8 @@ Se la stringa non è convertibile, la funzione di conversione solleverà un'ecce
 + **```std::stoull```** converte in ```unsigned long long```
 
 Esempio d'uso:
+
+<div style="page-break-after: always;"></div>
 
 ```cpp
 #include <iostream>
@@ -2970,7 +3506,11 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Convertire un numero in una stringa***
+
+</div>
 
 Si utilizza **```std::to_string```** per le stringhe normali e **```std::to_wstring```** per quelle wide.  
 Questo è molto utile, per esempio, per calcolare la somma delle cifre di un numero:
@@ -2995,7 +3535,11 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Trovare un carattere in una stringa***
+
+</div>
 
 Si usa il metodo ```find```, che trova la prima occorrenza:
 
@@ -3016,10 +3560,13 @@ int main()
     std::wcout << '\n';
 
     int pos = string.find(c);
-    if (pos == wstring::npos) {
+    if (pos == std::wstring::npos) {
         std::wcout << L"il carattere non è presente in quella stringa";
         return 0;
     }
+
+
+
 
     std::wcout << L"la prima occorrenza del carattere " << c;
     std::wcout << L"è alla posizione " << pos << L'\n';
@@ -3027,9 +3574,13 @@ int main()
 }
 ```
 
-Se il carattere non è presente, il metodo ```find``` restituisce ```string::npos``` o ```wstring::npos```.
+Se il carattere non è presente, il metodo ```find``` restituisce ```std::string::npos``` o ```std::wstring::npos```.
+
+<div style="text-align: center;">
 
 #### ***Inserire un carattere in una stringa***
+
+</div>
 
 Si usa il metodo **```insert```**:
 
@@ -3069,7 +3620,11 @@ int main()
 
 Il metodo ```begin``` ritorna un **iteratore** al primo elemento della stringa, il metodo ```end``` ritorna un iteratore all'ultimo elemento, e si possono utilizzare gli operatori ```+``` e ```-``` per incrementare \ decrementare l'elemento dell'iteratore
 
+<div style="text-align: center;">
+
 #### ***Tagliare una stringa***
+
+</div>
 
 Si usa il metodo **```erase```**, che ha 4 varianti:
 
@@ -3103,7 +3658,13 @@ Per cancellare l'ultimo carattere di una stringa si può usare il metodo **```po
     str.pop_back();
 ```
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 #### ***Aggiungere un carattere a una stringa***
+
+</div>
 
 Ci sono due modi per aggiungere un carattere a una stringa: con il metodo **```push_back```** e con l'**operatore ```+```**:
 
@@ -3111,9 +3672,7 @@ Ci sono due modi per aggiungere un carattere a una stringa: con il metodo **```p
 #include <conio.h>
 #include <iostream>
 #include <string>
-
-int main()
-{
+int main() {
     setlocale(0, "");
 
     std::wstring string;
@@ -3131,18 +3690,20 @@ int main()
 }
 ```
 
-Qui si può anche usare l'**operatore ```+=```**.
+Qui si poteva usare anche l'**operatore ```+=```**.
+
+<div style="text-align: center;">
 
 #### ***Concatenare due stringhe***
+
+</div>
 
 Ci sono due modi per concatenare due stringhe: con il metodo **```append```** e con l'**operatore ```+```**:
 
 ```cpp
 #include <iostream>
 #include <string>
-
-int main()
-{
+int main() {
     setlocale(0, "");
 
     std::wstring A, B;
@@ -3160,7 +3721,11 @@ int main()
 
 Anche qui si poteva usare l'**operatore ```+=```**.
 
+<div style="text-align: center;">
+
 #### ***Creare una sottostringa***
+
+</div>
 
 Si usa il metodo **```substr```**:
 
@@ -3176,14 +3741,24 @@ La stessa cosa si può fare in questo modo con ```erase```:
     part.erase(0, FirstIndex);
 ```
 
+<div style="text-align: center;">
+
 #### ***Altro***
+
+</div>
 
 Esistono sono gli operatori ```=``` per assegnare a una stringa, e ```==``` per eguagliare due stringhe
 
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### Gli stringstream
+
+</div>
 
 In C++ gli **```stringstream```** (necessario includere **```<sstream>```**) sono degli oggetti che ricreano il funzionamento di ```cout``` e ```cin``` ma senza avere accesso alla console, ne esistono molte varianti,
 
@@ -3194,7 +3769,11 @@ In C++ gli **```stringstream```** (necessario includere **```<sstream>```**) son
 + **```wostringstream```** esegue operazioni di output wide
 + **```wistringstream```** esegue operazioni di input wide
 
+<div style="text-align: center;">
+
 #### ***Ottenere la stringa di uno stringstream***
+
+</div>
 
 Si usa il metodo **```str```**:
 
@@ -3217,7 +3796,11 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Gli stringstream di input***
+
+</div>
 
 Con i **```wistringstream```** si possono eseguire solo operazioni di input dallo stringstream.  
 Esempio:
@@ -3283,7 +3866,13 @@ int main()
 }
 ```
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 #### ***Gli stringstream di output***
+
+</div>
 
 Con i **```wostringstream```** si possono eseguire solo operazioni di output dallo stringstream, esempio:
 
@@ -3309,7 +3898,11 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***La manipolazione dell'input***
+
+</div>
 
 I ```wostringstream``` sono utili quando bisogna usare le funzioni del file header **```<iomanip>```** (input output manipulator), con dei dati, vediamo i principali:
 
@@ -3320,15 +3913,13 @@ Si usa ```boolalpha``` per visualizzare le variabili booleane come il loro valor
 #include <iomanip>
 #include <iostream>
 #include <sstream>
-
-int main()
-{
+int main() {
     setlocale(0, "");
 
     std::wostringstream stream;
     bool Alpha = true;
 
-    stream << boolalpha   << Alpha;  // stream.str() = true
+    stream << boolalpha   <<  Alpha; // stream.str() = true
     stream << noboolalpha << !Alpha; // stream.str() = true0
 
     std::wcout << L"lo stringstream è " << stream.str();
@@ -3351,7 +3942,7 @@ int main()
     std::wostringstream stream;
     int number = 40;
 
-    stream << number << L' ';
+    stream             << number << L' ';
     stream << std::oct << number << L' '; // 40 in base 8  è 50
     stream << std::hex << number << L' '; // 40 in base 16 è 28
     stream << std::setbase(10);           // reset della base
@@ -3414,7 +4005,13 @@ int main()
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### Le espressioni regolari
+
+</div>
 
 In C++ le classi **```std::regex```** e **```std::wregex```** (necessario includere **```<regex>```**) sono un modo per controllare se una stringa rispetta una qualche condizione.  
 Ecco un esempio di regex
@@ -3424,7 +4021,11 @@ Ecco un esempio di regex
 std::wregex rgx(L"[1-3]");
 ```
 
+<div style="text-align: center;">
+
 #### ***Le funzioni di ricerca***
+
+</div>
 
 Esistono tre funzioni importanti riguardanti la ricerca con le regex:
 
@@ -3527,7 +4128,11 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Le regole delle regex***
+
+</div>
 
 Per indicare la presenza di un carattere bisogna aggiungere un backslash (```\\```) solo se il carattere è tra questi (metacarattere):
 
@@ -3563,6 +4168,8 @@ Esempio:
 std::wregex(L"n{3}"); // corrisponde a L"nnn"
 std::wregex(L"n{3,}"); // corrisponde a L"nnn", L"nnnn", ...
 ```
+
+<div style="page-break-after: always;"></div>
 
 Esistono delle **escape sequence** per le regex (escape con ```\\```):
 
@@ -3603,11 +4210,21 @@ std::wregex(L"(abc)|(123)"); // corrisponde a L"123" o L"abc"
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### I vettori
+
+</div>
 
 In C++ la classe **```std::vector```** (necessario includere **```<vector>```**) viene utilizzata per creare degli array che possono essere estesi o contratti.
 
+<div style="text-align: center;">
+
 #### ***Inizializzare un vettore***
+
+</div>
 
 + Inizializzazione con **lista di inizializzazione**, esempio completo:
 
@@ -3651,13 +4268,19 @@ std::vector<int> part{ vect.begin() + 1, vect.end() - 1 };
 std::vector<int> vect(5); // vect ha 5 elementi non inizializzati
 ```
 
+<div style="page-break-after: always;"></div>
+
 + Inizializzazione con dimensione fissa e valore:
 
 ```cpp
 std::vector<int> vect(5, 0) // vect ha 5 elementi di valore 0
 ```
 
+<div style="text-align: center;">
+
 #### ***Metodi***
+
+</div>
 
 Tra i metodi in comune con le stringhe ci sono:
 
@@ -3719,12 +4342,20 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 ### ```queue``` e ```deque```
+
+</div>
 
 Oltre a ```std::vector``` ci sono altre due classi simili in C++:
 **```std::queue```** (includi **```<queue>```**) e **```std::deque```** (includi **```<deque>```**).
 
+<div style="text-align: center;">
+
 #### ***```std::queue```***
+
+</div>
 
 ```std::queue``` ha tre metodi nuovi oltre a ```size``` ed ```empty```:
 
@@ -3734,7 +4365,11 @@ Oltre a ```std::vector``` ci sono altre due classi simili in C++:
 
 Non ha metodi per accedere a elementi al centro
 
+<div style="text-align: center;">
+
 #### ***```std::vector``` e ```std::deque```***
+
+</div>
 
 ```std::deque``` aggiunge questi due metodi a ```std::vector```:
 
@@ -3746,11 +4381,21 @@ Tuttavia è preferibile usare ```std::vector``` quando possibile perché ```std:
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### Le mappe
+
+</div>
 
 In C++ le classi **```std::map```** e **```std::unordered_map```** servono per creare oggetti che associano a ogni elemento una chiave unica, le chiavi vengono messe in ordine crescente o alfabetico solo in ```std::map```.
 
+<div style="text-align: center;">
+
 #### ***Dichiarazione***
+
+</div>
 
 Esempio di dichiarazione di una mappa:
 
@@ -3768,7 +4413,11 @@ Esempio di dichiarazione di una mappa non ordinata:
 std::unordered_map<std::wstring, int> Map;
 ```
 
+<div style="text-align: center;">
+
 #### ***Inserimento***
+
+</div>
 
 Si usa il metodo **```insert```** o l'operatore **```=```**
 
@@ -3776,12 +4425,9 @@ Si usa il metodo **```insert```** o l'operatore **```=```**
 #include <map>
 #include <string>
 
-int main()
-{
-
+int main() {
     // le chiavi vengono ordinate in ordine alfabetico
-    std::map<std::wstring, int> ordinals
-    {
+    std::map<std::wstring, int> ordinals {
         { L"one"  , 1 },
         { L"two"  , 2 },
         { L"three", 3 },
@@ -3793,17 +4439,18 @@ int main()
         { L"nine" , 9 }
     };
 
-    // primo modo di inserire un elemento
+    // primo e secondo modo di inserire un elemento
     map.insert({ L"ten", 10 });
-
-    // secondo modo di inserire un elemento
     map[L"eleven"] = 11;
-
     return 0;
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Eliminazione***
+
+</div>
 
 Si usa il metodo **```erase```**:
 
@@ -3811,8 +4458,7 @@ Si usa il metodo **```erase```**:
 #include <map>
 #include <string>
 
-int main()
-{
+int main() {
     std::map<std::wstring, int> ordinals
     {
         { L"one"  , 1 },
@@ -3821,20 +4467,22 @@ int main()
     };
 
     map.erase(L"one");
-
     return 0;
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Capire se la mappa contiene l'elemento***
+
+</div>
 
 ```cpp
 #include <iostream>
 #include <map>
 #include <string>
 
-int main()
-{
+int main() {
     setlocale(0, "");
 
     std::map<std::wstring, int> ordinals
@@ -3849,7 +4497,6 @@ int main()
         { L"eight", 8 },
         { L"nine" , 9 }
     };
-
     std::wstring ordinal;
     std::wcout << L"Inserisci una stringa\n"
     std::wcin >> ordinal;
@@ -3866,7 +4513,11 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Iterare su ogni elemento***
+
+</div>
 
 Ogni elemento di una mappa accede alla chiave con **```first```** e al valore con **```second```**.
 
@@ -3875,8 +4526,7 @@ Ogni elemento di una mappa accede alla chiave con **```first```** e al valore co
 #include <map>
 #include <string>
 
-int main()
-{
+int main() {
     setlocale(0, "");
 
     std::map<std::wstring, int> ordinals
@@ -3900,16 +4550,30 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Differenze***
+
+</div>
 
 ```std::unordered_map``` differisce da ```std::map``` perché non ordina le chiavi e usa una **tabella hash** per accedere agli elementi (tempo di O(1))
 
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### Misurare il tempo
 
+</div>
+
+<div style="text-align: center;">
+
 #### ***Utilizzo di ```std::chrono```***
+
+</div>
 
 Ci sono tre tipi di clock:
 
@@ -3944,7 +4608,11 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Utilizzo delle API di Windows***
+
+</div>
 
 ```cpp
 #include <iostream>
@@ -3970,7 +4638,11 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Utilizzo di ```GetTickCount```***
+
+</div>
 
 Queste funzioni contano i millisecondi dall'accensione del sistema, tuttavia la precisione è limitata.
 
@@ -3997,9 +4669,15 @@ int main()
 
 Viene utilizzato ```GetTickCount64``` al posto di ```GetTickCount``` perché ```GetTickCount``` va in overflow dopo circa 50 giorni.
 
+<div style="text-align: center;">
+
 #### ***Utilizzo di ```clock```***
 
-Questa è una funzione definita nell'header **```<ctime>```**, che su Windows ha una precisione pressoché uguale a ```GetTickCount```, definita dalla macro ```CLOCKS_PER_SEC```. Non è un approccio adatto alla misurazione del tempo reale, perché misura il numero di clock ticks della CPU del computer
+</div>
+
+Questa è una funzione definita nell'header **```<ctime>```**, che su Windows ha una precisione pressoché uguale a ```GetTickCount```, definita dalla macro ```CLOCKS_PER_SEC```. Non è un approccio adatto alla misurazione del tempo reale, perché misura il numero di clock ticks della CPU del computer.
+
+<div style="page-break-after: always;"></div>
 
 Esempio:
 
@@ -4029,9 +4707,19 @@ int main()
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### Generare dei numeri casuali
 
+</div>
+
+<div style="text-align: center;">
+
 #### ***Con la funzione ```rand```***
+
+</div>
 
 L'utilizzo di ```rand``` è limitato perché il massimo è di solito impostato a 32767.
 
@@ -4050,7 +4738,11 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Con i ```random_device```***
+
+</div>
 
 Questo è un metodo che genera numeri casuali di alta qualità, tuttavia è lento, esempio:
 
@@ -4069,9 +4761,15 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Con il mersenne twister***
 
+</div>
+
 Questo metodo è più veloce rispetto ai ```random_device``` perché il numero casuale viene calcolato una sola volta per impostare il seme, e a partire da esso si usa un generatore pseudo-casuale per generare degli altri numeri casuali.
+
+<div style="page-break-after: always;"></div>
 
 Esempio:
 
@@ -4116,11 +4814,21 @@ int main()
 ---
 ---
 
-## **Livello Avanzato**
+<div style="page-break-after: always;"></div>
 
 ---
 
+<h2 style="text-align: center;"><b>Livello Advanced</b></h2>
+
+---
+
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### Le classi
+
+</div>
 
 In C++ una classe è una struttura che può contenere dei **metodi**, cioè delle funzioni, oltre alle variabili.
 
@@ -4187,11 +4895,21 @@ La parola chiave **public** denota quali membri sono pubblici, per rendere dei m
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### I costruttori e il distruttore
+
+</div>
 
 In una classe in C++ un **costruttore** si distingue da un metodo perché ha lo stesso nome della classe, possono esistere più costruttori, ma devono avere firme diverse, anche il **distruttore** ha lo stesso nome della classe, ma deve essere preceduto da un carattere ```~``` (premere ALT + 126 dal tastierino numerico, num lock deve essere disattivato).
 
+<div style="text-align: center;">
+
 #### ***Sintassi dei costruttori***
+
+</div>
 
 Esempio:
 
@@ -4228,9 +4946,15 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Sintassi del distruttore***
 
+</div>
+
 Ecco un esempio di come si può implementare il distruttore con la classe ```Circle```:
+
+<div style="page-break-after: always;"></div>
 
 ```cpp
 #include <iostream>
@@ -4284,7 +5008,11 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Il costruttore di copia***
+
+</div>
 
 Quando un oggetto viene passato a una funzione per valore, una funzione ritorna un oggetto, o un oggetto viene inizializzato con un altro oggetto della stessa classe, viene chiamato il **costruttore di copia**:
 
@@ -4332,7 +5060,13 @@ int main()
 }
 ```
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 #### ***Il costruttore di spostamento***
+
+</div>
 
 Quando un oggetto viene spostato (con **```std::move```**) si chiama il **costruttore di spostamento**:
 
@@ -4385,7 +5119,11 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Costruttore con ```std::initializer_list```***
+
+</div>
 
 **```std::initializer_list```** è una classe utilizzata nei costruttori di classi più complesse (come ```std::vector```), ha il metodo ```size```.
 
@@ -4435,11 +5173,21 @@ Qui si utilizza ```const``` dopo ```print()``` per indicare che il metodo non pu
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### L'ereditarietà
+
+</div>
 
 In C++ una classe può **ereditare** da un'altra classe, questo significa che avrà tutti i membri protetti e pubblici della classe base.
 
+<div style="text-align: center;">
+
 #### ***Derivare una classe***
+
+</div>
 
 Un membro si dice **protetto** (parola chiave **```protected```**) se è accessibile solo alla classe base e a eventuali classi **derivate** (cioè classi che ereditano dalla classe base).
 
@@ -4484,6 +5232,8 @@ public:
 };
 ```
 
+<div style="page-break-after: always;"></div>
+
 Questa classe aggiunge dei metodi a ```std::vector```, ma adesso il codice esterno non riesce ad accedere ai membri di ```std::vector``` da ```vector_t```, questo perché quando una classe eredita da un'altra, tutti i membri ereditati sono **privati**, per risolvere questo problema bisogna aggiungere ```public``` prima del nome della classe base:
 
 ```cpp
@@ -4498,7 +5248,11 @@ class vector_t : public std::vector<int>
 };
 ```
 
+<div style="text-align: center;">
+
 #### ***Ereditare i costruttori***
+
+</div>
 
 Quando si deriva una classe, essa non eredita i costruttori, tuttavia ciò si risolve facilmente con ```using```, esempio:
 
@@ -4515,7 +5269,11 @@ class vector_t : public std::vector<int>
 };
 ```
 
+<div style="text-align: center;">
+
 #### ***Sovrascrivere un metodo***
+
+</div>
 
 Una classe derivata può **sovrascrivere** un metodo della classe base con la parola chiave **```override```** solo se la classe base ha dichiarato il metodo come **```virtual```**, in questo modo la classe derivata eseguirà sempre la sua versione sovrascritta del metodo invece di quella originaria:
 
@@ -4543,7 +5301,11 @@ class Derived : public Base
 };
 ```
 
+<div style="text-align: center;">
+
 #### ***Il puntatore ```this```***
+
+</div>
 
 Quando un paramtero in una classe ha lo stesso nome di un campo, è possibile usare il **puntatore ```this```** per accedere al campo, esso è un puntatore che viene passato implicitamente a tutti i metodi non statici di una classe, si può dereferenziare ```this``` per ottenere l'oggetto su cui è stato chiamato il metodo.
 
@@ -4580,7 +5342,11 @@ public:
 };
 ```
 
+<div style="text-align: center;">
+
 #### ***Costruttori e distruttori***
+
+</div>
 
 Il costruttore della classe base viene chiamato prima di quello della classe derivata, mentre il distruttore della classe derivata viene chiamato prima di quello della classe base.
 
@@ -4630,6 +5396,8 @@ public:
     }
 };
 
+
+
 class Derived : public Base
 {
 public:
@@ -4643,7 +5411,11 @@ public:
 };
 ```
 
+<div style="text-align: center;">
+
 #### ***Distruttore virtuale***
+
+</div>
 
 Quando si distrugge con ```delete``` un oggetto di una classe derivata tramite un puntatore alla classe base, se il distruttore non è virtuale verrà chiamato solo quello della classe base, causando potenziali perdite di memoria:
 
@@ -4672,6 +5444,8 @@ int main()
 }
 ```
 
+<div style="page-break-after: always;"></div>
+
 In questi casi si rende il distruttore virtuale:
 
 ```cpp
@@ -4695,11 +5469,21 @@ public:
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### Il sovraccarico degli operatori
+
+</div>
 
 In una classe in C++ si possono definire degli operatori con il **sovraccarico**, si scrive una funzione il cui nome è ```operator``` seguito dall'operatore, qui ne vedremo alcuni.
 
+<div style="text-align: center;">
+
 #### ***Sovraccarico dell'operatore ```=```***
+
+</div>
 
 Vediamo come si può sovraccaricare l'operatore di assegnazione di questa classe ```coord```:
 
@@ -4742,11 +5526,14 @@ int main()
     coord c_one{ 1, 2 }, c_two, c_three, c_four, c_five;
     cfive = cfour = cthree = ctwo = cone;
 
+
+
     std::wcout << c_one.str()   << L'\n';
     std::wcout << c_two.str()   << L'\n';
     std::wcout << c_three.str() << L'\n';
     std::wcout << c_four.str()  << L'\n';
     std::wcout << c_five.str()  << L'\n';
+
 
     return 0;
 }
@@ -4754,7 +5541,11 @@ int main()
 
 Spiegazione: quando si esegue ```c_two = c_one```, a ```c_two``` viene assegnato il valore di ```c_one```, ma l'operatore restituisce ```*this``` cioè il risultato, di conseguenza a ```c_three``` viene assegnato il valore del risultato, e così via.
 
+<div style="text-align: center;">
+
 #### ***Sovraccarico degli operatori logici e di confronto***
+
+</div>
 
 Esempi:
 
@@ -4804,7 +5595,11 @@ bool operator>=(const coord other) const
 
 In questo caso confrontiamo i moduli delle due coordinate (le distanze da {0, 0}), che si calcolano con il teorema di pitagora (```std::hypot```).
 
+<div style="text-align: center;">
+
 #### ***Sovraccarico degli operatori aritmetici***
+
+</div>
 
 ```cpp
 coord operator+(const coord other) const
@@ -4835,7 +5630,13 @@ Il riferimento (```&```) si trova solo sul tipo restituito dagli operatori ```+=
 
 L'operatore ```++``` post-fisso si distingue da quello pre-fisso perché accetta un parametro di tipo ```int```, ma esso non viene mai usato.
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 #### ***Sovraccarico degli operatori speciali***
+
+</div>
 
 + Operatore ```->```  
 
@@ -4881,11 +5682,21 @@ int main()
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### I template
+
+</div>
 
 In C++ i **template** permettono di creare codice generico, utilizzabile con diversi datatype allo stesso modo.
 
+<div style="text-align: center;">
+
 #### ***Funzioni template***
+
+</div>
 
 Vediamo alcuni esempi di funzioni template:
 
@@ -4916,7 +5727,11 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Template doppi***
+
+</div>
 
 E' possibile scrivere una funzione con più di un template come in questo esempio:
 
@@ -4926,6 +5741,8 @@ template<class T, class U> T subtract(T A, U B) { return A - B; }
 ```
 
 Per usare funzioni di questo genere è buona pratica specificare i template nella chiamata di funzione (per prevenire errori di compilazione):
+
+<div style="page-break-after: always;"></div>
 
 ```cpp
 int main()
@@ -4942,7 +5759,11 @@ int main()
 }
 ```
 
-#### ***Classi Template***
+<div style="text-align: center;">
+
+#### ***Classi template***
+
+</div>
 
 Anche le strutture possono essere template, ma il ragionamento è analogo; le classi template si distinguono dalle funzioni template perché bisogna sempre specificare il template (anche se è uno solo).
 
@@ -4968,11 +5789,21 @@ La sintassi infatti è molto simile a classi come ```std::vector``` o ```std::qu
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### Tecniche avanzate dei template
+
+</div>
 
 In C++ i template hanno un sacco di utilizzi, qui vedremo quelli avanzati.
 
+<div style="text-align: center;">
+
 #### ***Template facoltativi e alias***
+
+</div>
 
 Per definire un alias di una classe template la sintassi cambia leggermente rispetto a un alias normale.
 
@@ -5003,7 +5834,11 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Template con valori costanti***
+
+</div>
 
 I template possono accettare parametri che non sono tipi (ma devono essere integrali, puntatori o riferimenti), esempio:
 
@@ -5019,7 +5854,11 @@ template<typename T, int size> static void BubbleSort(T arr[])
 
 Viene passato un parametro integrale ```size``` al template, non alla funzione (ma cambia solo la sintassi della chiamata di funzione, per il resto la logica è la stessa).
 
+<div style="text-align: center;">
+
 #### ***La specializzazione di un template***
+
+</div>
 
 Si utilizza questa tecnica quando si vuole creare un'altra versione di un blocco di codice solo per un template particolare.
 
@@ -5059,6 +5898,8 @@ int main()
 
 Questa era una **specializzazione totale**, si parla di **specializzazione parziale** quando la versione specializzata ha un template che dipende da quello della versione base, esempio:
 
+<div style="page-break-after: always;"></div>
+
 ```cpp
 #include <iostream>
 
@@ -5092,7 +5933,11 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Template variadici***
+
+</div>
 
 I template variadici consentono di accettare un numero variabile di parametri di tipo:
 
@@ -5136,7 +5981,11 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***```<type_traits>```***
+
+</div>
 
 Il file header ```<type_traits>``` contiene alcune classi importanti per controllare di quale datatype è un template, vediamo i principali:
 
@@ -5157,6 +6006,8 @@ if constexpr (std::is_same_v<T, int>)
     // codice da eseguire se T è un intero
 }
 ```
+
+<div style="page-break-after: always;"></div>
 
 + **```std::is_integral```**:
 
@@ -5205,7 +6056,13 @@ template<Integral T> T add(T a, T b)  { return a + b;        }
 
 La differenza è che nel secondo codice avviene un errore di compilazione se la condizione non è rispettata invece di disattivare il codice.
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 #### ***Metaprogrammazione***
+
+</div>
 
 La **metaprogrammazione** consiste nel fare calcoli a tempo di compilazione, e ciò si può fare con i template, come in questo esempio:
 
@@ -5236,7 +6093,13 @@ Poiché la variabile ```value``` è statica, essa matiene il suo valore tra le d
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### La parola chiave ```friend```
+
+</div>
 
 In C++ si dice che una funzione o una classe è amica di un'altra classe se ha accesso alle sue variabili private e protette pur trovandosi all'esterno di quest'ultima.
 
@@ -5350,7 +6213,13 @@ int main()
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### I thread
+
+</div>
 
 In C++ un **thread** è un processo, si possono quindi creare più processi per eseguire diversi compiti allo stesso momento.
 
@@ -5368,7 +6237,11 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Thread con una funzione***
+
+</div>
 
 Per utilizzare un thread bisogna assegnargli una funzione:
 
@@ -5391,7 +6264,13 @@ int main()
 
 Il thread chiamante (quello che esegue l'intero programma) attiva il thread secondario dichiarato con **```std::thread```**, quindi aspetta il suo termine con ```join``` (importante l'utilizzo di ```joinable``` perché altrimenti il programma potrebbe andare in crash), prima di continuare la sua esecuzione.
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 #### ***Thread con una lambda***
+
+</div>
 
 Un thread può anche essere attivato senza una funzione, per fare ciò si utilizza una **funzione lambda**:
 
@@ -5413,7 +6292,11 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Passare parametri a un thread di una lambda***
+
+</div>
 
 Le lambda possono catturare delle variabili dall'ambiente, se per valore o per riferimento si descrive fra le parentesi quadre:
 
@@ -5478,7 +6361,11 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Thread di funzione membro***
+
+</div>
 
 Per eseguire un thread di una funzione membro di una classe bisogna passare anche il puntatore a ```this```, in questo modo:
 
@@ -5510,7 +6397,11 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***Passare parametri a un thread di una funzione***
+
+</div>
 
 Se la funzione di un thread ha degli argomenti, è possibile passare questi argomenti direttamente al thread:
 
@@ -5518,8 +6409,7 @@ Se la funzione di un thread ha degli argomenti, è possibile passare questi argo
 #include <iostream>
 #include <thread>
 
-void funct(int param1, int& param2)
-{
+void funct(int param1, int& param2) {
     std::wcout << L"parametro 1: " << param1 << L'\n';
     std::wcout << L"parametro 2: " << param2 << L'\n';
 
@@ -5547,9 +6437,22 @@ int main()
 
 Si utilizza **```std::ref```** quando bisogna passare un parametro per riferimento a un thread.
 
+---
+---
+
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### Classi importanti con i thread
 
+</div>
+
+<div style="text-align: center;">
+
 #### ***```std::mutex```***
+
+</div>
 
 Un **mutex** è una classe utilizzata per prevenire situazioni di **race-condition** tra i thread, dove più di un thread accede a risorse condivise provocando il crash del programma, per gestire un mutex si utilizzano **```std::lock_guard```** e **```std::unique_lock```**.
 
@@ -5591,7 +6494,13 @@ Si può anche untilizzare ```unique_lock```, in questo caso esiste un metodo **`
 
 I template di ```lock_guard``` e ```unique_lock``` esistono per via di un altro tipo di mutex detto ```shared_mutex```, che consente a più thread di accedere a una risorsa in lettura ma non in scrittura.
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 #### ***```std::condition_variable```***
+
+</div>
 
 Una variabile condizionale è molto utile quando diversi thread devono interagire, vediamo un esempio dove un thread sta aspettando che un altro thread finisca il calcolo prima di procedere:
 
@@ -5639,6 +6548,8 @@ int main()
     return 0;
 }
 ```
+
+<div style="page-break-after: always;"></div>
 
 In questo codice vengono avviati due thread, il primo viene fermato dalla variabile condizionale, importante l'utilizzo del mutex, il secondo thread esegue un calcolo, poi utilizza un mutex per modificare la variabile globale ```ready```, importante l'uso delle parentesi graffe per rilasciare il mutex, si esegue la notifica, il thread in attesa si sblocca perché ```ready == true```.
 
@@ -5688,7 +6599,11 @@ cv.notify_one();
 cv.notify_all();
 ```
 
+<div style="text-align: center;">
+
 #### ***```std::future``` e ```std::promise```***
+
+</div>
 
 ```std::promise``` viene utilizzato per impostare un risultato che verrà poi recuperato da ```std::future```, il tutto in un thread separato
 
@@ -5731,11 +6646,17 @@ int main()
 }
 ```
 
+<div style="text-align: center;">
+
 #### ***```std::atomic```***
+
+</div>
 
 Con l'espressione **variabile atomica** si intende una variabile in grado di effettuare **operazioni atomiche**, cioè operazioni sicure anche se la variabile è condivisa (un'alternativa ai mutex).
 
 Questo funziona solo se il datatype è primitivo oppure un typedef\alias di un tipo primitivo.
+
+<div style="page-break-after: always;"></div>
 
 I metodi di ```std::atomic``` includono:
 
@@ -5770,9 +6691,19 @@ In questo caso viene usato ```std::atomic_int``` al posto di ```std::atomic<int>
 ---
 ---
 
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center;">
+
 ### La parallelizzazione del codice
 
+</div>
+
+<div style="text-align: center;">
+
 #### ***Con ```<execution>```***
+
+</div>
 
 In C++ è possibile dividere il lavoro di una porzione di codice fra più thread con le funzioni dell'header **```execution```**, ecco un esempio:
 
@@ -5817,11 +6748,17 @@ int main()
 
 La funzione **```std::for_each```** esegue il codice contenuto nella lambda in parallelo, dove ```n``` è un elemento del vettore (questo il motivo del riferimento ```&```), mentre la funzione **```std::sort```** ordina il vettore con un calcolo in parallelo.
 
+<div style="page-break-after: always;"></div>
+
 + ```std::execution::seq``` esegue il codice in sequenza
 + ```std::execution::par``` esegue il codice in parallelo mantenendo comunque un certo ordine
 + ```std::execution::par_unseq``` esegue il codice in parallelo senza alcun ordine
 
+<div style="text-align: center;">
+
 #### ***Con ```Concurrency```***
+
+</div>
 
 Se invece si intende parallelizzare un semplice ciclo for invece di un foreach si può utilizzare **```Concurrency::parallel_for```**:
 
@@ -5853,4 +6790,6 @@ int main()
 ---
 ---
 
-## FINE
+<div style="page-break-after: always;"></div>
+
+<h1 style="text-align: center;"><b>FINE</b></h1>
