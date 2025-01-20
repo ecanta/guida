@@ -3730,14 +3730,14 @@ Anche qui si poteva usare l'**operatore ```+=```**.
 Si usa il metodo **```substr```**:
 
 ```cpp
-    std::wstring part = str.substr(FirstIndex, LastIndex);
+    std::wstring part = str.substr(FirstIndex, Amount);
 ```
 
 La stessa cosa si può fare in questo modo con ```erase```:
 
 ```cpp
     std::wstring part = str;
-    part.erase(LastIndex + 1);
+    part.erase(FirstIndex + Amount + 1);
     part.erase(0, FirstIndex);
 ```
 
